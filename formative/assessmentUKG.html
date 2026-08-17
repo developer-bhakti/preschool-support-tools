@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Formative Assessment Tool</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f8ff;
+      color: #1e293b;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* =====================================
+       PRINT BUTTON
+    ===================================== */
+
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+
+      border: none;
+      outline: none;
+
+      padding: 13px 25px;
+
+      border-radius: 50px;
+
+      background: linear-gradient(
+        135deg,
+        #059669,
+        #047857
+      );
+
+      color: #ffffff;
+
+      font-size: 16px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.15);
+
+      transition: all 0.3s ease;
+    }
+
+    .print-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* =====================================
+       TITLE
+    ===================================== */
+
+    .page-title {
+      text-align: center;
+
+      font-size: 48px;
+      line-height: 1.2;
+
+      font-weight: 800;
+
+      color: #0f172a;
+
+      margin: 20px 0 40px;
+    }
+
+    /* =====================================
+       STUDENT INFORMATION
+    ===================================== */
+
+    .student-info {
+      background: #ffffff;
+
+      border-radius: 30px;
+
+      padding: 32px;
+
+      margin-bottom: 40px;
+
+      box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .student-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 20px;
+    }
+
+    .form-group label {
+      display: block;
+
+      margin-bottom: 10px;
+
+      font-size: 16px;
+
+      font-weight: 600;
+
+      color: #1e293b;
+    }
+
+    .form-group input {
+      width: 100%;
+
+      padding: 15px 16px;
+
+      border: 1px solid #cbd5e1;
+
+      border-radius: 16px;
+
+      background: #f8fafc;
+
+      color: #1e293b;
+
+      font-size: 16px;
+
+      outline: none;
+
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-color: #2563eb;
+
+      background: #ffffff;
+
+      box-shadow:
+        0 0 0 3px rgba(
+          37,
+          99,
+          235,
+          0.10
+        );
+    }
+
+    /* =====================================
+       SKILL SECTION
+    ===================================== */
+
+    .skill-section {
+      background: #ffffff;
+
+      border-radius: 30px;
+
+      overflow: hidden;
+
+      margin-bottom: 36px;
+
+      box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .skill-header {
+      background:
+        linear-gradient(
+          135deg,
+          #2563eb,
+          #1d4ed8
+        );
+
+      color: #ffffff;
+
+      padding: 25px 32px;
+    }
+
+    .skill-header h2 {
+      font-size: 30px;
+
+      line-height: 1.3;
+
+      font-weight: 700;
+    }
+
+    /* =====================================
+       QUESTION
+    ===================================== */
+
+    .question {
+      padding: 30px;
+
+      border-bottom:
+        1px solid #e2e8f0;
+    }
+
+    .question:last-of-type {
+      border-bottom: none;
+    }
+
+    .question-text {
+      font-size: 18px;
+
+      line-height: 1.8;
+
+      font-weight: 600;
+
+      color: #1e293b;
+
+      margin-bottom: 24px;
+    }
+
+    /* =====================================
+       OPTIONS
+    ===================================== */
+
+    .options {
+      display: flex;
+
+      flex-direction: row;
+
+      gap: 20px;
+    }
+
+    .option {
+      flex: 1;
+
+      min-height: 125px;
+
+      border: 2px solid transparent;
+
+      border-radius: 20px;
+
+      padding: 20px;
+
+      background: #f8fafc;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .option:hover {
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 8px 18px
+        rgba(0, 0, 0, 0.06);
+    }
+
+    .option-number {
+      width: 44px;
+      height: 44px;
+
+      border-radius: 50%;
+
+      border: 2px solid #cbd5e1;
+
+      background: #ffffff;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      margin: 0 auto 15px;
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+      color: #334155;
+
+      transition: all 0.3s ease;
+    }
+
+    .option-text {
+      text-align: center;
+
+      font-size: 15px;
+
+      line-height: 1.5;
+
+      font-weight: 600;
+    }
+
+    /* =====================================
+       OPTION COLORS
+    ===================================== */
+
+    .option.perfect {
+      color: #047857;
+    }
+
+    .option.perfect.active {
+      background: #ecfdf5;
+
+      border-color: #10b981;
+
+      box-shadow:
+        0 5px 15px
+        rgba(16, 185, 129, 0.12);
+    }
+
+    .option.perfect.active
+    .option-number {
+      background: #10b981;
+
+      border-color: #10b981;
+
+      color: #ffffff;
+    }
+
+    .option.ok {
+      color: #a16207;
+    }
+
+    .option.ok.active {
+      background: #fefce8;
+
+      border-color: #eab308;
+
+      box-shadow:
+        0 5px 15px
+        rgba(234, 179, 8, 0.12);
+    }
+
+    .option.ok.active
+    .option-number {
+      background: #eab308;
+
+      border-color: #eab308;
+
+      color: #ffffff;
+    }
+
+    .option.need {
+      color: #b91c1c;
+    }
+
+    .option.need.active {
+      background: #fef2f2;
+
+      border-color: #ef4444;
+
+      box-shadow:
+        0 5px 15px
+        rgba(239, 68, 68, 0.12);
+    }
+
+    .option.need.active
+    .option-number {
+      background: #ef4444;
+
+      border-color: #ef4444;
+
+      color: #ffffff;
+    }
+
+    /* =====================================
+       SKILL SCORE
+    ===================================== */
+
+    .skill-score {
+      margin: 24px;
+
+      padding: 20px;
+
+      border-radius: 24px;
+
+      background: #eff6ff;
+
+      color: #1e40af;
+
+      font-size: 24px;
+
+      font-weight: 700;
+    }
+
+    /* =====================================
+       CALCULATE BUTTON
+    ===================================== */
+
+    .calculate-btn {
+      width: 100%;
+
+      border: none;
+
+      outline: none;
+
+      border-radius: 24px;
+
+      padding: 20px;
+
+      margin:
+        10px 0 40px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #2563eb,
+          #1d4ed8
+        );
+
+      color: #ffffff;
+
+      font-size: 24px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 8px 20px
+        rgba(37, 99, 235, 0.15);
+
+      transition: all 0.3s ease;
+    }
+
+    .calculate-btn:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 12px 25px
+        rgba(37, 99, 235, 0.22);
+    }
+
+    /* =====================================
+       RESULT SECTION
+    ===================================== */
+
+    .result-section {
+      background: #ffffff;
+
+      border-radius: 30px;
+
+      padding: 32px;
+
+      margin-bottom: 50px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.08);
+
+      overflow-x: auto;
+    }
+
+    .result-title {
+      font-size: 30px;
+
+      font-weight: 800;
+
+      margin-bottom: 25px;
+
+      color: #0f172a;
+    }
+
+    /* =====================================
+       TABLE
+    ===================================== */
+
+    .result-table {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      min-width: 600px;
+    }
+
+    .result-table th {
+      background: #2563eb;
+
+      color: #ffffff;
+
+      padding: 20px;
+
+      font-size: 20px;
+
+      text-align: left;
+    }
+
+    .result-table th:last-child {
+      text-align: center;
+    }
+
+    .result-table td {
+      border:
+        1px solid #e2e8f0;
+
+      padding: 20px;
+
+      font-weight: 600;
+
+      font-size: 16px;
+    }
+
+    .result-table td:last-child {
+      text-align: center;
+
+      font-size: 18px;
+
+      font-weight: 700;
+    }
+
+    /* =====================================
+       FINAL SCORE
+    ===================================== */
+
+    .final-score {
+      margin-top: 40px;
+
+      padding: 30px;
+
+      border-radius: 35px;
+
+      border:
+        2px solid #fbcfe8;
+
+      background: #fdf2f8;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content:
+        space-between;
+
+      gap: 25px;
+    }
+
+    .final-score-content {
+      display: flex;
+
+      align-items: center;
+
+      flex-wrap: wrap;
+
+      gap: 15px;
+
+      font-size: 28px;
+
+      font-weight: 700;
+    }
+
+    .score-calculation {
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+    }
+
+    .total-score {
+      padding:
+        5px 12px;
+
+      border-bottom:
+        3px solid #0f172a;
+
+      font-size: 18px;
+
+      font-weight: 600;
+    }
+
+    .score-divider {
+      margin-top: 8px;
+
+      font-size: 24px;
+
+      font-weight: 700;
+    }
+
+    .final-percentage {
+      width: 140px;
+
+      height: 100px;
+
+      border:
+        3px solid #0f172a;
+
+      background: #ffffff;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 38px;
+
+      font-weight: 800;
+    }
+
+    /* =====================================
+       ANIMATION
+    ===================================== */
+
+    .highlight-result {
+      animation:
+        resultHighlight 0.8s ease;
+    }
+
+    @keyframes resultHighlight {
+
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.03);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+
+    }
+
+    /* =====================================
+       RESPONSIVE
+    ===================================== */
+
+    @media (max-width: 950px) {
+
+      .student-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .options {
+        flex-direction: column;
+      }
+
+      .page-title {
+        font-size: 40px;
+      }
+
+      .final-score {
+        flex-direction: column;
+
+        align-items:
+          flex-start;
+      }
+
+      .final-percentage {
+        align-self: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      body {
+        padding: 10px;
+      }
+
+      .print-btn {
+        top: 12px;
+        right: 12px;
+
+        padding: 10px 16px;
+
+        font-size: 13px;
+      }
+
+      .page-title {
+        font-size: 30px;
+
+        margin-top: 60px;
+
+        margin-bottom: 30px;
+      }
+
+      .student-info {
+        padding: 20px;
+
+        border-radius: 22px;
+      }
+
+      .skill-section {
+        border-radius: 22px;
+      }
+
+      .skill-header {
+        padding: 20px;
+      }
+
+      .skill-header h2 {
+        font-size: 23px;
+      }
+
+      .question {
+        padding: 20px;
+      }
+
+      .question-text {
+        font-size: 16px;
+
+        line-height: 1.7;
+      }
+
+      .option {
+        min-height: auto;
+
+        padding: 18px;
+      }
+
+      .skill-score {
+        margin: 18px;
+
+        font-size: 20px;
+      }
+
+      .calculate-btn {
+        font-size: 20px;
+      }
+
+      .result-section {
+        padding: 20px;
+
+        border-radius: 22px;
+      }
+
+      .result-title {
+        font-size: 25px;
+      }
+
+      .final-score {
+        padding: 20px;
+
+        border-radius: 25px;
+      }
+
+      .final-score-content {
+        font-size: 21px;
+      }
+
+      .final-percentage {
+        width: 120px;
+
+        height: 85px;
+
+        font-size: 30px;
+      }
+    }
+
+    /* =====================================
+       PRINT
+    ===================================== */
+
+    @media print {
+
+      body {
+        background: #ffffff;
+
+        padding: 0;
+      }
+
+      .print-btn,
+      .calculate-btn {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100%;
+      }
+
+      .student-info,
+      .skill-section,
+      .result-section {
+        box-shadow: none;
+
+        break-inside: avoid;
+      }
+
+      .question {
+        break-inside: avoid;
+      }
+
+      .options {
+        flex-direction: row;
+      }
+
+      .option {
+        break-inside: avoid;
+      }
+
+      .final-score {
+        break-inside: avoid;
+      }
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      color: #5d5be3;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      gap: 14px;
+    }
+
+    @media print {
+      .back-link {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================
+       PRINT BUTTON
+  ====================================== -->
+
+  <button
+    class="print-btn"
+    onclick="printToPDF()"
+  >
+    🖨️ Print as PDF
+  </button>
+
+
+  <div class="container">
+
+    <a class="back-link" href="months.html?class=ukg">
+      ← Back to UKG months
+    </a>
+
+    <!-- =====================================
+         TITLE
+    ====================================== -->
+
+    <h1 class="page-title">
+      Formative Assessment Tool
+    </h1>
+
+    <h2 style="text-align: center; color: #5d5be3; font-size: 28px; margin-bottom: 40px; font-weight: 700;">
+      📅 1 Month Assessment
+    </h2>
+
+
+    <!-- =====================================
+         STUDENT INFORMATION
+    ====================================== -->
+
+    <div class="student-info">
+
+      <div class="student-grid">
+
+        <div class="form-group">
+
+          <label for="studentName">
+            Student Name
+          </label>
+
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Enter Student Name"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="className">
+            Class
+          </label>
+
+          <input
+            type="text"
+            id="className"
+            placeholder="Enter Class"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="schoolName">
+            School Name
+          </label>
+
+          <input
+            type="text"
+            id="schoolName"
+            placeholder="Enter School Name"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================
+         ASSESSMENT
+    ====================================== -->
+
+    <div id="assessmentContainer"></div>
+
+
+    <!-- =====================================
+         CALCULATE BUTTON
+    ====================================== -->
+
+    <button
+      class="calculate-btn"
+      onclick="calculateFinalScore()"
+    >
+      Calculate Final Score
+    </button>
+
+
+    <!-- =====================================
+         RESULT
+    ====================================== -->
+
+    <div class="result-section">
+
+      <h2 class="result-title">
+        Assessment Result
+      </h2>
+
+
+      <table class="result-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              SKILL
+            </th>
+
+            <th>
+              SCORE
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr>
+
+            <td>
+              Language & Communication Skill
+            </td>
+
+            <td id="languageResult">
+              0%
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Cognitive Skill
+            </td>
+
+            <td id="cognitiveResult">
+              0%
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Social and Emotional Skill
+            </td>
+
+            <td id="socialResult">
+              0%
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Environmental Skill
+            </td>
+
+            <td id="environmentResult">
+              0%
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Movement and Physical Skill
+            </td>
+
+            <td id="movementResult">
+              0%
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+      <!-- =====================================
+           FINAL SCORE
+      ====================================== -->
+
+      <div
+        class="final-score"
+        id="finalScoreBox"
+      >
+
+        <div class="final-score-content">
+
+          <span>
+            My Child's Score this month =
+          </span>
+
+
+          <div class="score-calculation">
+
+            <div class="total-score">
+
+              Total Calculated Score
+              (<span id="totalMarks">0</span>)
+
+            </div>
+
+
+            <div class="score-divider">
+              25
+            </div>
+
+          </div>
+
+
+          <span>
+            × 100 =
+          </span>
+
+        </div>
+
+
+        <div
+          class="final-percentage"
+          id="overallScore"
+        >
+          0%
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* ==========================================
+       ASSESSMENT DATA
+    ========================================== */
+
+    const skillData = {
+
+      language: {
+
+        title:
+          "1. Language & Communication Skill",
+
+        questions: [
+
+          "The Child is able to say at least 4 objects that starts with the sound of all the English alphabet letters from Ato Z",
+
+          "The child is able to write Hindi alphabet by copying it without any difficulty",
+
+          "The Child is able to write both capital and small letters in 5 line note book as per the lines given in the syllabus book",
+
+          "The child is able to recognise the capital and small letters randomly",
+
+          "The child is able to write the corresponding small or capital letter of a given letter",
+
+          "The child is able to remember and sing favourite Rhymes easily (Check-'Hot crush buns', 'Chidiya')"
+
+        ]
+
+      },
+
+
+      cognitive: {
+
+        title:
+          "2. Cognitive Skill",
+
+        questions: [
+
+          "The child easily identifies all seven colours of rainbow VIBGYOR",
+
+          "The child is able to count number of objects up to 20 quite easily.",
+
+          "The child is able to identify the numbers from 1 to 50",
+
+          "The child recites numbers 1 to 50",
+
+          "The child writes the number up to 50 and can say the number after writing it"
+
+        ]
+
+      },
+
+
+      social: {
+
+        title:
+          "3. Social & Emotional Skill",
+
+        questions: [
+
+          "The child is able to do the self-introduction by saying his/her name and gender, age, if possible date of birth and their weight and height",
+
+          "The child understands, and names the Internalbody parts",
+
+          "The child understands, identifies and names the parts of the hand",
+
+          "The child names and shows all the organs on our face"
+
+        ]
+
+      },
+
+
+      environment: {
+
+        title:
+          "4. Environmental Skill",
+
+        questions: [
+
+          "The child can speak 3-5 sentence about the house we live",
+
+          "The child understands, identifies and names at least 5-6 objects you can find in school",
+
+          "The child understands and tells few sentences about the activities at school"
+
+        ]
+
+      },
+
+
+      movement: {
+
+        title:
+          "5. Movement & Physical Skill",
+
+        questions: [
+
+          "The child is able to draw all pattern of lines",
+
+          "The child is able to use scissor in a more safe manner",
+
+          "The child is able to cut a paper through a given line",
+
+          "The child is able to colour different objects more neatly",
+
+          "The child is able to paste a piece of paper by using glue stick",
+
+          "The child is able to mash his/her own food",
+
+          "The child is able to copy all the pictures having multiple patterns"
+
+        ]
+
+      }
+
+    };
+
+
+    /* ==========================================
+       ANSWERS
+    ========================================== */
+
+    const answers = {
+
+      language: [],
+
+      cognitive: [],
+
+      social: [],
+
+      environment: [],
+
+      movement: []
+
+    };
+
+
+    /* ==========================================
+       INITIALIZE ANSWERS
+    ========================================== */
+
+    Object.keys(skillData).forEach(
+      skill => {
+
+        answers[skill] =
+          new Array(
+            skillData[skill]
+              .questions.length
+          ).fill(null);
+
+      }
+    );
+
+
+    /* ==========================================
+       GENERATE ASSESSMENT
+    ========================================== */
+
+    function generateAssessment() {
+
+      const container =
+        document.getElementById(
+          "assessmentContainer"
+        );
+
+
+      Object.keys(skillData).forEach(
+        skillKey => {
+
+          const skill =
+            skillData[skillKey];
+
+
+          const section =
+            document.createElement(
+              "div"
+            );
+
+
+          section.className =
+            "skill-section";
+
+
+          /* HEADER */
+
+          const header =
+            document.createElement(
+              "div"
+            );
+
+
+          header.className =
+            "skill-header";
+
+
+          const heading =
+            document.createElement(
+              "h2"
+            );
+
+
+          heading.textContent =
+            skill.title;
+
+
+          header.appendChild(
+            heading
+          );
+
+
+          section.appendChild(
+            header
+          );
+
+
+          /* QUESTIONS */
+
+          skill.questions.forEach(
+            (question, index) => {
+
+              const questionDiv =
+                document.createElement(
+                  "div"
+                );
+
+
+              questionDiv.className =
+                "question";
+
+
+              const questionText =
+                document.createElement(
+                  "div"
+                );
+
+
+              questionText.className =
+                "question-text";
+
+
+              questionText.textContent =
+                `${index + 1}. ${question}`;
+
+
+              questionDiv.appendChild(
+                questionText
+              );
+
+
+              /* OPTIONS */
+
+              const optionsDiv =
+                document.createElement(
+                  "div"
+                );
+
+
+              optionsDiv.className =
+                "options";
+
+
+              /* PERFECT */
+
+              optionsDiv.appendChild(
+                createOption(
+                  skillKey,
+                  index,
+                  2,
+                  "perfect",
+                  1,
+                  "✔ The child is perfect in this"
+                )
+              );
+
+
+              /* SOMEWHAT OK */
+
+              optionsDiv.appendChild(
+                createOption(
+                  skillKey,
+                  index,
+                  1,
+                  "ok",
+                  2,
+                  "✔ The child is somewhat OK"
+                )
+              );
+
+
+              /* NEED IMPROVEMENT */
+
+              optionsDiv.appendChild(
+                createOption(
+                  skillKey,
+                  index,
+                  0,
+                  "need",
+                  3,
+                  "✔ Needs improvement"
+                )
+              );
+
+
+              questionDiv.appendChild(
+                optionsDiv
+              );
+
+
+              section.appendChild(
+                questionDiv
+              );
+
+            }
+          );
+
+
+          /* SKILL SCORE */
+
+          const scoreBox =
+            document.createElement(
+              "div"
+            );
+
+
+          scoreBox.className =
+            "skill-score";
+
+
+          const scoreName =
+            skill.title
+              .replace(
+                /^\d+\.\s/,
+                ""
+              )
+              .replace(
+                "Skill",
+                "Score"
+              );
+
+
+          scoreBox.innerHTML = `
+
+            ${scoreName}:
+
+            <span
+              id="${skillKey}Score"
+            >
+              0%
+            </span>
+
+          `;
+
+
+          section.appendChild(
+            scoreBox
+          );
+
+
+          container.appendChild(
+            section
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ==========================================
+       CREATE OPTION
+    ========================================== */
+
+    function createOption(
+      skill,
+      questionIndex,
+      score,
+      type,
+      number,
+      label
+    ) {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type = "button";
+
+      button.className =
+        `option ${type}`;
+
+
+      button.dataset.skill =
+        skill;
+
+      button.dataset.question =
+        questionIndex;
+
+      button.dataset.score =
+        score;
+
+
+      button.innerHTML = `
+
+        <div class="option-number">
+          ${number}
+        </div>
+
+        <div class="option-text">
+          ${label}
+        </div>
+
+      `;
+
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          selectOption(
+            skill,
+            questionIndex,
+            score,
+            button
+          );
+
+        }
+      );
+
+
+      return button;
+
+    }
+
+
+    /* ==========================================
+       SELECT OPTION
+    ========================================== */
+
+    function selectOption(
+      skill,
+      questionIndex,
+      score,
+      selectedButton
+    ) {
+
+      answers[skill][questionIndex] =
+        score;
+
+
+      const question =
+        selectedButton
+          .closest(".question");
+
+
+      const options =
+        question
+          .querySelectorAll(
+            ".option"
+          );
+
+
+      options.forEach(
+        option => {
+
+          option.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+
+      selectedButton.classList.add(
+        "active"
+      );
+
+
+      updateSkillScore(
+        skill
+      );
+
+      updateResultTable();
+
+    }
+
+
+    /* ==========================================
+       GET PERCENTAGE
+    ========================================== */
+
+    function getPercentage(
+      skill
+    ) {
+
+      const values =
+        answers[skill];
+
+
+      const total =
+        values.reduce(
+          (sum, value) => {
+
+            return sum +
+              (value === null
+                ? 0
+                : value);
+
+          },
+          0
+        );
+
+
+      const max =
+        skillData[skill]
+          .questions.length * 2;
+
+
+      return max
+        ? Math.round(
+            (total / max) * 100
+          )
+        : 0;
+
+    }
+
+
+    /* ==========================================
+       UPDATE SKILL SCORE
+    ========================================== */
+
+    function updateSkillScore(
+      skill
+    ) {
+
+      const percentage =
+        getPercentage(
+          skill
+        );
+
+
+      const scoreElement =
+        document.getElementById(
+          skill + "Score"
+        );
+
+
+      scoreElement.textContent =
+        percentage + "%";
+
+    }
+
+
+    /* ==========================================
+       CALCULATE FINAL SCORE
+    ========================================== */
+
+    function calculateFinalScore() {
+
+      const language =
+        getPercentage(
+          "language"
+        );
+
+
+      const cognitive =
+        getPercentage(
+          "cognitive"
+        );
+
+
+      const social =
+        getPercentage(
+          "social"
+        );
+
+
+      const environment =
+        getPercentage(
+          "environment"
+        );
+
+
+      const movement =
+        getPercentage(
+          "movement"
+        );
+
+
+      /* UPDATE RESULT TABLE */
+
+      document.getElementById(
+        "languageResult"
+      ).textContent =
+        language + "%";
+
+
+      document.getElementById(
+        "cognitiveResult"
+      ).textContent =
+        cognitive + "%";
+
+
+      document.getElementById(
+        "socialResult"
+      ).textContent =
+        social + "%";
+
+
+      document.getElementById(
+        "environmentResult"
+      ).textContent =
+        environment + "%";
+
+
+      document.getElementById(
+        "movementResult"
+      ).textContent =
+        movement + "%";
+
+
+      /* TOTAL */
+
+      const totalMarks =
+        language +
+        cognitive +
+        social +
+        environment +
+        movement;
+
+
+      /* OVERALL */
+
+      const overallScore =
+        Math.round(
+          totalMarks / 5
+        );
+
+
+      document.getElementById(
+        "totalMarks"
+      ).textContent =
+        totalMarks;
+
+
+      document.getElementById(
+        "overallScore"
+      ).textContent =
+        overallScore + "%";
+
+      // Show next month button
+      const nextMonthBtn =
+        document.querySelector(
+          ".next-month-btn"
+        );
+
+      if (nextMonthBtn) {
+        nextMonthBtn.classList.add("show");
+      }
+
+      /* HIGHLIGHT */
+
+      const resultBox =
+        document.getElementById(
+          "finalScoreBox"
+        );
+
+
+      resultBox.classList.remove(
+        "highlight-result"
+      );
+
+
+      void resultBox.offsetWidth;
+
+
+      resultBox.classList.add(
+        "highlight-result"
+      );
+
+
+      /* SCROLL */
+
+      resultBox.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+    }
+
+    /* =========================
+       NEXT MONTH REDIRECT
+    ========================= */
+
+    function goToMonth2() {
+      window.location.href = 'https://worksheets.adiuvaretfoundation.com/';
+    }
+
+
+    /* ==========================================
+       PRINT
+    ========================================== */
+
+    function printToPDF() {
+
+      window.print();
+
+    }
+
+
+    /* ==========================================
+       LIVE RESULTS
+       Keeps the result table at the bottom in
+       sync while the assessment is being
+       filled in
+    ========================================== */
+
+    function updateResultTable() {
+
+      const skills =
+        Object.keys(answers);
+
+      let totalMarks = 0;
+
+      skills.forEach(skill => {
+
+        const percentage =
+          getPercentage(skill);
+
+        totalMarks += percentage;
+
+        const cell =
+          document.getElementById(
+            skill + "Result"
+          );
+
+        if (cell) {
+          cell.textContent =
+            percentage + "%";
+        }
+
+      });
+
+
+      document.getElementById(
+        "totalMarks"
+      ).textContent =
+        totalMarks;
+
+
+      document.getElementById(
+        "overallScore"
+      ).textContent =
+        Math.round(
+          totalMarks / skills.length
+        ) + "%";
+
+    }
+
+
+    /* ==========================================
+       START APPLICATION
+    ========================================== */
+
+    generateAssessment();
+
+  </script>
+
+</body>
+</html>

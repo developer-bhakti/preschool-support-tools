@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formative Assessment</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(to bottom, #f8f9ff, #eef2ff);
+      color: #333;
+    }
+
+    .assessment-section {
+      padding: 80px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* TITLE */
+    .main-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .main-title h1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: #5d5be3;
+      font-size: 42px;
+      font-weight: 800;
+    }
+
+    .calendar-icon {
+      font-size: 42px;
+    }
+
+    /* CLASS CARDS */
+    .level-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+
+    .level-card {
+      background: #fff;
+      border-radius: 28px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .level-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+    }
+
+    .level-image {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin: 0 auto 25px;
+      display: block;
+    }
+
+    .level-card h2 {
+      font-size: 30px;
+      margin-bottom: 22px;
+      color: #333;
+    }
+
+    .assessment-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #059669;
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 24px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .assessment-btn:hover {
+      background: #047857;
+      transform: scale(1.05);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1000px) {
+      .level-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .assessment-section {
+        padding: 50px 15px;
+      }
+
+      .main-title h1 {
+        font-size: 30px;
+      }
+
+      .calendar-icon {
+        font-size: 30px;
+      }
+
+      .level-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .level-card {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="assessment-section">
+
+    <div class="container">
+
+      <!-- TITLE -->
+      <div class="main-title">
+        <h1>
+          <span class="calendar-icon">📅</span>
+          Month Formative Assessment
+        </h1>
+      </div>
+
+
+      <!-- CLASS CARDS -->
+      <div class="level-grid">
+
+        <!-- PG -->
+        <div class="level-card">
+
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png"
+            alt="PG"
+            class="level-image"
+          />
+
+          <h2>PG</h2>
+
+          <a
+            href="./assessmentPg.html"
+            class="assessment-btn"
+          >
+            💻 Do It Online
+          </a>
+
+        </div>
+
+
+        <!-- NURSERY -->
+        <div class="level-card">
+
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2436/2436874.png"
+            alt="Nursery"
+            class="level-image"
+          />
+
+          <h2>Nursery</h2>
+
+          <a
+            href="./assessmentNursery.html"
+            class="assessment-btn"
+          >
+            💻 Do It Online
+          </a>
+
+        </div>
+
+
+        <!-- LKG -->
+        <div class="level-card">
+
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
+            alt="LKG"
+            class="level-image"
+          />
+
+          <h2>LKG</h2>
+
+          <a
+            href="./assessmentLKG.html"
+            class="assessment-btn"
+          >
+            💻 Do It Online
+          </a>
+
+        </div>
+
+
+        <!-- UKG -->
+        <div class="level-card">
+
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2784/2784445.png"
+            alt="UKG"
+            class="level-image"
+          />
+
+          <h2>UKG</h2>
+
+          <a
+            href="./assessmentUKG.html"
+            class="assessment-btn"
+          >
+            💻 Do It Online
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</body>
+</html>
