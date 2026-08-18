@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formative Assessment - PG to UKG</title>
+
+  <!--
+    =========================================================
+    ALL-IN-ONE FORMATIVE ASSESSMENT PAGE
+    =========================================================
+
+    Everything lives in this single file:
+
+      1. Class selection   - PG, Nursery, LKG, UKG
+      2. Month selection   - the same 12 months for every class
+      3. Assessment        - Month 1 is the free trial and opens
+                             the full assessment for that class
+      4. Months 2 to 12    - locked, they send the parent to the
+                             subscription page
+
+    TO USE THIS ON SHOPIFY
+    ----------------------
+    Shopify strips <html>, <head> and <body> from page content,
+    so do not paste the whole file. Copy everything between the
+    two markers below instead:
+
+        SHOPIFY COPY START
+        SHOPIFY COPY END
+
+    Paste that block into the page editor in HTML mode
+    (Online Store > Pages > Add page > "<>" Show HTML).
+
+    All CSS is scoped under #fa-app and all JavaScript runs
+    inside a closure, so nothing here can clash with your
+    Shopify theme.
+    =========================================================
+  -->
+</head>
+
+<body>
+
+<!-- ============ SHOPIFY COPY START ============ -->
+
+<style>
+
+  #fa-app,
+  #fa-app * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  #fa-app {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to bottom, #f8f9ff, #eef2ff);
+    color: #333;
+    padding: 60px 20px 80px;
+  }
+
+  #fa-app .fa-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Only one view is visible at a time */
+  #fa-app .fa-view {
+    display: none;
+  }
+
+  #fa-app .fa-view.fa-active {
+    display: block;
+  }
+
+  /* ---------- BACK LINK ---------- */
+  #fa-app .fa-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 26px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #5d5be3;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #fa-app .fa-back:hover {
+    gap: 14px;
+  }
+
+  /* ---------- TITLES ---------- */
+  #fa-app .fa-title {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  #fa-app .fa-title h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    color: #5d5be3;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+
+  #fa-app .fa-icon {
+    font-size: 42px;
+  }
+
+  #fa-app .fa-subtitle {
+    max-width: 640px;
+    margin: 0 auto 50px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #64748b;
+  }
+
+  /* ---------- CLASS CARDS ---------- */
+  #fa-app .fa-level-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+
+  #fa-app .fa-level-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+    border-radius: 28px;
+    padding: 35px 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  #fa-app .fa-level-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+  }
+
+  #fa-app .fa-level-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 0 auto 25px;
+    display: block;
+  }
+
+  #fa-app .fa-level-card h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  #fa-app .fa-level-age {
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #94a3b8;
+  }
+
+  /* ---------- GREEN BUTTON ---------- */
+  #fa-app .fa-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: auto;
+    padding: 13px 24px;
+    border: none;
+    border-radius: 12px;
+    background: #059669;
+    color: #fff;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #fa-app .fa-btn:hover {
+    background: #047857;
+    transform: scale(1.05);
+  }
+
+  /* ---------- PURPLE BUTTON ---------- */
+  #fa-app .fa-btn-purple {
+    background: #5d5be3;
+  }
+
+  #fa-app .fa-btn-purple:hover {
+    background: #4a48c9;
+  }
+
+  /* ---------- MONTH CARDS ---------- */
+  #fa-app .fa-month-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+  }
+
+  #fa-app .fa-month-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+    border-radius: 28px;
+    padding: 34px 22px 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  #fa-app .fa-month-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+  }
+
+  #fa-app .fa-month-number {
+    width: 84px;
+    height: 84px;
+    margin-bottom: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, #059669, #047857);
+    box-shadow: 0 10px 22px rgba(5, 150, 105, 0.28);
+  }
+
+  #fa-app .fa-month-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  #fa-app .fa-badge {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #ecfdf5;
+    color: #047857;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  #fa-app .fa-note {
+    margin-bottom: 18px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  #fa-app .fa-month-card .fa-btn {
+    width: 100%;
+    padding: 13px 20px;
+  }
+
+  /* ---------- LOCKED MONTH ---------- */
+  #fa-app .fa-month-card.fa-locked {
+    background: #fbfbff;
+  }
+
+  #fa-app .fa-month-card.fa-locked .fa-month-number {
+    background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+    box-shadow: 0 10px 22px rgba(148, 163, 184, 0.28);
+  }
+
+  #fa-app .fa-month-card.fa-locked h3 {
+    color: #64748b;
+  }
+
+  #fa-app .fa-month-card.fa-locked .fa-badge {
+    background: #f1f5f9;
+    color: #64748b;
+  }
+
+  #fa-app .fa-lock-mark {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 20px;
+    opacity: 0.55;
+  }
+
+  /* ---------- UNLOCK PANEL ---------- */
+  #fa-app .fa-unlock {
+    margin-top: 50px;
+    padding: 30px;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+
+  #fa-app .fa-unlock h3 {
+    font-size: 22px;
+    color: #5d5be3;
+    margin-bottom: 10px;
+  }
+
+  #fa-app .fa-unlock p {
+    max-width: 700px;
+    margin: 0 auto 22px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #64748b;
+  }
+
+  #fa-app .fa-unlock .fa-btn {
+    padding: 14px 30px;
+  }
+
+  /* ---------- STUDENT INFO ---------- */
+  #fa-app .fa-student {
+    background: #fff;
+    border-radius: 30px;
+    padding: 32px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  #fa-app .fa-student-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  #fa-app .fa-field label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  #fa-app .fa-field input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    background: #f8fafc;
+    outline: none;
+    font-family: inherit;
+    font-size: 16px;
+  }
+
+  #fa-app .fa-field input:focus {
+    border-color: #2563eb;
+    background: #fff;
+  }
+
+  /* ---------- SKILL SECTION ---------- */
+  #fa-app .fa-skill {
+    background: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 35px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  #fa-app .fa-skill-header {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    padding: 25px 32px;
+  }
+
+  #fa-app .fa-skill-header h3 {
+    font-size: 30px;
+  }
+
+  #fa-app .fa-question {
+    padding: 30px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  #fa-app .fa-question-text {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.7;
+    margin-bottom: 22px;
+  }
+
+  /* ---------- OPTIONS ---------- */
+  #fa-app .fa-options {
+    display: flex;
+    gap: 20px;
+  }
+
+  #fa-app .fa-option {
+    flex: 1;
+    border: 2px solid transparent;
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #fa-app .fa-option:hover {
+    transform: translateY(-4px);
+  }
+
+  #fa-app .fa-option-number {
+    width: 45px;
+    height: 45px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    border: 2px solid #cbd5e1;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  #fa-app .fa-option-text {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  #fa-app .fa-option.fa-perfect .fa-option-text {
+    color: #047857;
+  }
+
+  #fa-app .fa-option.fa-perfect.fa-on {
+    background: #ecfdf5;
+    border-color: #10b981;
+  }
+
+  #fa-app .fa-option.fa-perfect.fa-on .fa-option-number {
+    background: #10b981;
+    border-color: #10b981;
+    color: #fff;
+  }
+
+  #fa-app .fa-option.fa-ok .fa-option-text {
+    color: #a16207;
+  }
+
+  #fa-app .fa-option.fa-ok.fa-on {
+    background: #fefce8;
+    border-color: #eab308;
+  }
+
+  #fa-app .fa-option.fa-ok.fa-on .fa-option-number {
+    background: #eab308;
+    border-color: #eab308;
+    color: #fff;
+  }
+
+  #fa-app .fa-option.fa-need .fa-option-text {
+    color: #b91c1c;
+  }
+
+  #fa-app .fa-option.fa-need.fa-on {
+    background: #fef2f2;
+    border-color: #ef4444;
+  }
+
+  #fa-app .fa-option.fa-need.fa-on .fa-option-number {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #fff;
+  }
+
+  /* ---------- SKILL SCORE ---------- */
+  #fa-app .fa-skill-score {
+    margin: 24px;
+    padding: 20px;
+    background: #eff6ff;
+    border-radius: 24px;
+    color: #1e40af;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  /* ---------- CALCULATE ---------- */
+  #fa-app .fa-calculate {
+    width: 100%;
+    border: none;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    font-family: inherit;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+    margin: 10px 0 40px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #fa-app .fa-calculate:hover {
+    transform: translateY(-2px);
+  }
+
+  /* ---------- RESULT ---------- */
+  #fa-app .fa-result {
+    background: #fff;
+    border-radius: 30px;
+    padding: 32px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+  }
+
+  #fa-app .fa-result table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  #fa-app .fa-result th {
+    background: #2563eb;
+    color: #fff;
+    padding: 20px;
+    font-size: 20px;
+  }
+
+  #fa-app .fa-result td {
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    font-weight: 600;
+  }
+
+  #fa-app .fa-result td:last-child {
+    text-align: center;
+  }
+
+  /* ---------- FINAL SCORE ---------- */
+  #fa-app .fa-final {
+    margin-top: 40px;
+    background: #fdf2f8;
+    border: 2px solid #fbcfe8;
+    border-radius: 35px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  #fa-app .fa-final-text {
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  #fa-app .fa-final-calc {
+    text-align: center;
+  }
+
+  #fa-app .fa-final-total {
+    border-bottom: 3px solid #0f172a;
+    padding: 5px 12px;
+    font-size: 18px;
+  }
+
+  #fa-app .fa-final-divisor {
+    margin-top: 8px;
+    font-size: 24px;
+  }
+
+  #fa-app .fa-final-percent {
+    width: 140px;
+    height: 100px;
+    border: 3px solid #0f172a;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    font-weight: 800;
+  }
+
+  /* ---------- ACTION ROW UNDER THE ASSESSMENT ---------- */
+  #fa-app .fa-actions {
+    text-align: center;
+  }
+
+  #fa-app .fa-actions .fa-note {
+    margin-bottom: 16px;
+    font-size: 17px;
+    color: #5d5be3;
+  }
+
+  #fa-app .fa-action-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  /* ---------- PRINT BUTTON ---------- */
+  #fa-app .fa-print {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    float: right;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #059669, #047857);
+    color: #fff;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: 0.3s;
+  }
+
+  #fa-app .fa-print:hover {
+    transform: scale(1.05);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1000px) {
+
+    #fa-app .fa-level-grid,
+    #fa-app .fa-month-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 900px) {
+
+    #fa-app .fa-student-grid {
+      grid-template-columns: 1fr;
+    }
+
+    #fa-app .fa-options {
+      flex-direction: column;
+    }
+
+    #fa-app .fa-final {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 760px) {
+
+    #fa-app .fa-level-grid,
+    #fa-app .fa-month-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+
+    #fa-app {
+      padding: 40px 15px 60px;
+    }
+
+    #fa-app .fa-title h1 {
+      font-size: 28px;
+    }
+
+    #fa-app .fa-icon {
+      font-size: 28px;
+    }
+
+    #fa-app .fa-subtitle {
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    #fa-app .fa-level-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    #fa-app .fa-month-grid {
+      gap: 18px;
+    }
+
+    #fa-app .fa-level-card {
+      padding: 30px 20px;
+    }
+
+    #fa-app .fa-month-card {
+      padding: 26px 16px 22px;
+    }
+
+    #fa-app .fa-month-number {
+      width: 68px;
+      height: 68px;
+      font-size: 28px;
+    }
+
+    #fa-app .fa-month-card h3 {
+      font-size: 20px;
+    }
+
+    #fa-app .fa-student,
+    #fa-app .fa-result {
+      padding: 20px;
+    }
+
+    #fa-app .fa-question {
+      padding: 20px;
+    }
+
+    #fa-app .fa-skill-header {
+      padding: 20px;
+    }
+
+    #fa-app .fa-skill-header h3 {
+      font-size: 23px;
+    }
+
+    #fa-app .fa-final-text {
+      font-size: 22px;
+    }
+  }
+
+  /* ---------- PRINT ---------- */
+  @media print {
+
+    #fa-app {
+      background: #fff;
+      padding: 0;
+    }
+
+    #fa-app .fa-back,
+    #fa-app .fa-calculate,
+    #fa-app .fa-actions,
+    #fa-app .fa-print {
+      display: none !important;
+    }
+
+    #fa-app .fa-skill,
+    #fa-app .fa-student,
+    #fa-app .fa-result {
+      box-shadow: none;
+      break-inside: avoid;
+    }
+
+    #fa-app .fa-option {
+      break-inside: avoid;
+    }
+  }
+</style>
+
+<div id="fa-app">
+
+  <!-- =====================================================
+       VIEW 1 - CHOOSE THE CLASS (PG to UKG)
+  ====================================================== -->
+  <section class="fa-view fa-active" data-view="classes">
+
+    <div class="fa-container">
+
+      <div class="fa-title">
+        <h1>
+          <span class="fa-icon">&#128197;</span>
+          Month Formative Assessment
+        </h1>
+      </div>
+
+      <p class="fa-subtitle">
+        Choose your child's class to begin. Every class has the same
+        12 monthly assessments, and Month 1 is free for everyone.
+      </p>
+
+      <div class="fa-level-grid">
+
+        <div class="fa-level-card">
+          <img
+            class="fa-level-image"
+            src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png"
+            alt="PG"
+          />
+          <h2>PG</h2>
+          <p class="fa-level-age">Play Group</p>
+          <button class="fa-btn" data-open-class="pg">
+            &#128187; Do It Online
+          </button>
+        </div>
+
+        <div class="fa-level-card">
+          <img
+            class="fa-level-image"
+            src="https://cdn-icons-png.flaticon.com/512/2436/2436874.png"
+            alt="Nursery"
+          />
+          <h2>Nursery</h2>
+          <p class="fa-level-age">Pre-Primary</p>
+          <button class="fa-btn" data-open-class="nursery">
+            &#128187; Do It Online
+          </button>
+        </div>
+
+        <div class="fa-level-card">
+          <img
+            class="fa-level-image"
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
+            alt="LKG"
+          />
+          <h2>LKG</h2>
+          <p class="fa-level-age">Lower Kindergarten</p>
+          <button class="fa-btn" data-open-class="lkg">
+            &#128187; Do It Online
+          </button>
+        </div>
+
+        <div class="fa-level-card">
+          <img
+            class="fa-level-image"
+            src="https://cdn-icons-png.flaticon.com/512/2784/2784445.png"
+            alt="UKG"
+          />
+          <h2>UKG</h2>
+          <p class="fa-level-age">Upper Kindergarten</p>
+          <button class="fa-btn" data-open-class="ukg">
+            &#128187; Do It Online
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       VIEW 2 - THE 12 MONTHS (same for every class)
+  ====================================================== -->
+  <section class="fa-view" data-view="months">
+
+    <div class="fa-container">
+
+      <button class="fa-back" data-go="classes">
+        &#8592; Back to Classes
+      </button>
+
+      <div class="fa-title">
+        <h1>
+          <span class="fa-icon">&#128197;</span>
+          <span id="fa-months-title">12 Month Formative Assessment</span>
+        </h1>
+      </div>
+
+      <p class="fa-subtitle">
+        Month 1 is free for every class. Complete it to see where your child
+        stands, then subscribe to our Preschool Support to unlock the
+        remaining 11 months and track progress across the full year.
+      </p>
+
+      <div class="fa-month-grid" id="fa-month-grid"></div>
+
+      <div class="fa-unlock">
+        <h3>&#128275; Unlock all 12 months</h3>
+        <p>
+          To continue beyond the free trial, subscribe to our Preschool
+          Support. You get every monthly assessment for this class, plus the
+          matching worksheets and activities, in one plan.
+        </p>
+        <a class="fa-btn fa-btn-purple" id="fa-unlock-link" href="#">
+          &#128275; Subscribe to Unlock
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       VIEW 3 - THE MONTH 1 ASSESSMENT (free trial)
+  ====================================================== -->
+  <section class="fa-view" data-view="assessment">
+
+    <div class="fa-container">
+
+      <button class="fa-print" data-print="1">
+        &#128424; Print as PDF
+      </button>
+
+      <button class="fa-back" data-go="months">
+        &#8592; Back to months
+      </button>
+
+      <div class="fa-title">
+        <h1>
+          <span class="fa-icon">&#128221;</span>
+          <span id="fa-assessment-title">Formative Assessment Tool</span>
+        </h1>
+      </div>
+
+      <p class="fa-subtitle" id="fa-assessment-subtitle">
+        Month 1 &#183; Free Trial
+      </p>
+
+      <!-- STUDENT INFORMATION -->
+      <div class="fa-student">
+        <div class="fa-student-grid">
+
+          <div class="fa-field">
+            <label for="fa-student-name">Student Name</label>
+            <input
+              type="text"
+              id="fa-student-name"
+              placeholder="Enter Student Name"
+            />
+          </div>
+
+          <div class="fa-field">
+            <label for="fa-class-name">Class</label>
+            <input
+              type="text"
+              id="fa-class-name"
+              placeholder="Enter Class"
+            />
+          </div>
+
+          <div class="fa-field">
+            <label for="fa-school-name">School Name</label>
+            <input
+              type="text"
+              id="fa-school-name"
+              placeholder="Enter School Name"
+            />
+          </div>
+
+        </div>
+      </div>
+
+      <!-- THE QUESTIONS ARE BUILT HERE -->
+      <div id="fa-assessment-body"></div>
+
+      <button class="fa-calculate" data-calculate="1">
+        Calculate Final Score
+      </button>
+
+      <!-- RESULT -->
+      <div class="fa-result">
+
+        <table>
+          <thead>
+            <tr>
+              <th>SKILL</th>
+              <th>SCORE</th>
+            </tr>
+          </thead>
+          <tbody id="fa-result-body"></tbody>
+        </table>
+
+        <div class="fa-final">
+
+          <div class="fa-final-text">
+
+            <span>My Child's Score this month =</span>
+
+            <div class="fa-final-calc">
+              <div class="fa-final-total">
+                Total of all skill scores
+                (<span id="fa-total-marks">0</span>)
+              </div>
+              <div class="fa-final-divisor" id="fa-divisor">5</div>
+            </div>
+
+            <span>=</span>
+
+          </div>
+
+          <div class="fa-final-percent" id="fa-overall-score">0%</div>
+
+        </div>
+
+      </div>
+
+      <!-- WHAT COMES NEXT -->
+      <div class="fa-actions">
+
+        <p class="fa-note">
+          This was your free Month 1 trial. To continue with Month 2 to 12,
+          subscribe to our Preschool Support.
+        </p>
+
+        <div class="fa-action-buttons">
+          <button class="fa-btn" data-go="months">
+            &#128197; See all 12 months
+          </button>
+          <a class="fa-btn fa-btn-purple" id="fa-subscribe-link" href="#">
+            &#128275; Unlock Month 2 &#8211; 12
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* =========================================================
+     SETTINGS - change these two lines if anything moves
+  ========================================================= */
+
+  /* Where every locked month sends the parent */
+  var UNLOCK_LINK = "https://worksheets.adiuvaretfoundation.com/";
+
+  /* The same 12 months are offered for every class,
+     and the first month is the free trial */
+  var TOTAL_MONTHS = 12;
+  var FREE_MONTHS  = 1;
+
+
+  /* =========================================================
+     ALL FOUR CLASSES AND EVERY MONTH 1 QUESTION
+     PG - Nursery - LKG - UKG
+  ========================================================= */
+
+  var CLASSES = {
+    pg: {
+      name: "PG",
+      label: "Play Group",
+      skills:
+    {
+    
+          language: {
+            title: "1. Language & Communication Skill",
+            questions: [
+              "The child is able to imitate different familiar sounds like Crow, Dog, Cat etc.",
+              "The child is able to imitate other unfamiliar sounds like Vehicles etc.",
+              "The child shows interest in various pictures and points finger at the pictures.",
+              "The child is able say the names of familiar objects.",
+              "The child is able to identify and point at letters A, B, C."
+            ]
+          },
+    
+          cognitive: {
+            title: "2. Cognitive Skill",
+            questions: [
+              "The child repeats numbers 1, 2 while being taught.",
+              "The child is able to follow simple instructions like sit down, stand up, close the door etc.",
+              "The child shows interest and explores various objects at home and outside"
+            ]
+          },
+    
+          social: {
+            title: "3. Social & Emotional Skill",
+            questions: [
+              "The child is able to drink water or milk in a cup or glass.",
+              "The child does not show resistance to play with other children.",
+              "The child understands and differentiates between the edible and non-edible items.",
+              "The child signals to go to the toilet."
+            ]
+          },
+    
+          environment: {
+            title: "4. Environmental Skill",
+            questions: [
+              "The child shows interest in pictures of family members.",
+              "The child identifies an Auto in the surrounding.",
+              "The child identifies and names few Vegetables."
+            ]
+          },
+    
+          movement: {
+            title: "5. Movement & Physical Skill",
+            questions: [
+              "The child is able to mark with pencil, crayon or chalk.",
+              "The child is able to transfer objects from one place to another.",
+              "The child is able to overcome simple obstacles.",
+              "The child is able to eat with own his/her hands foods like biscuits, breads etc.",
+              "The child is able to walk upstairs.",
+              "The child attempts to eat with the help of a spoon."
+            ]
+          }
+    
+    }
+    },
+
+    nursery: {
+      name: "Nursery",
+      label: "Pre-Primary",
+      skills:
+    {
+    
+          language: {
+    
+            title:
+              "1. Language & Communication Skill",
+    
+            questions: [
+    
+              "The child pronounces the letters A to Z without any difficulty - Phonemes skill for English Alphabets",
+    
+              "The child identifies the Letter `A` to `T` without any difficulty",
+    
+              "The child is able to understand and tell the sound of the letters from `A` to `T`",
+    
+              "The child speaks at least one word as per the sound of each letter from `A` to `T`.",
+    
+              "The child is able to remember and sing at least one favourite Rhyme i.e Twinkle, Twinkle little star"
+    
+            ]
+    
+          },
+    
+    
+          cognitive: {
+    
+            title:
+              "2. Cognitive Skill",
+    
+            questions: [
+    
+              "The child names the common things used in daily life and its use e.g. Mobile, Spoon, Newspaper, Book, Shoe, Watch, Food etc.)",
+    
+              "The child understands make believe games. (Feeds the dolls,instructs the doll etc.)",
+    
+              "The child initiates the right action in a given situation through make believe games e.g what to do if the doll is hungry, the teddy is feeling cold etc.)",
+    
+              "The child scribbles well by using a pencil or crayon and tries to create a picture of her/his choice"
+    
+            ]
+    
+          },
+    
+    
+          social: {
+    
+            title:
+              "3. Social & Emotional Skill",
+    
+            questions: [
+    
+              "The child drinks water or milk from a cup or glass, unassisted",
+    
+              "Loves and is ready to Play with other children",
+    
+              "Signals to go to toilet and always prefers to use toilet",
+    
+              "Knows how to deal with people around",
+    
+              "The child avoids talking to strangers and going close to them",
+    
+              "The child understands the hazardous objects and does not often play with them",
+    
+              "The child knows the basic safety rules e.g do not touch fire, do not play with sharp objects etc.",
+    
+              "The child concentrates when you say something and repeats it if you ask him/her to do so",
+    
+              "The child shows concern for others in difficult situations"
+    
+            ]
+    
+          },
+    
+    
+          environment: {
+    
+            title:
+              "4. Environmental Skill",
+    
+            questions: [
+    
+              "The child understands different rooms in house and their uses",
+    
+              "The child understands, identifies and names different fruits and vegetables.",
+    
+              "The child is able to draw sleeping lines without any difficulty",
+    
+              "The child is able to draw standing lines without any difficulty"
+    
+            ]
+    
+          },
+    
+    
+          movement: {
+    
+            title:
+              "5. Movement & Physical Skill",
+    
+            questions: [
+    
+              "The child holds and grips the pencil and crayon well",
+    
+              "The child moves objects from one place to other place in the house.",
+    
+              "The child overcomes simple obstacles like jumping over a pillow, pulls a heavy blanket or pillow etc",
+    
+              "The child eats with own hands.",
+    
+              "The child walks upstairs unassisted",
+    
+              "The child unwraps sweets or chocolates",
+    
+              "The child initiates her/his play by gathering all of his/her play items/objects"
+    
+            ]
+    
+          }
+    
+    }
+    },
+
+    lkg: {
+      name: "LKG",
+      label: "Lower Kindergarten",
+      skills:
+    {
+    
+          language: {
+    
+            title:
+              "1. Language & Communication Skill",
+    
+            questions: [
+    
+              "The child writes capital and small English letters A(a) to L (I) by tracing the letters and also without tracing it - (Writing skill)",
+    
+              "The child is able to write Hindi alphabets `Aa` and `Oou` by tracing over it and without tracing over it",
+    
+              "The child speaks at least 4 words as per the sound of each letter from Ato L when asked for a random letter",
+    
+              "The child remembers and sings Rhymes easily 1. Hindi rhyme-`Mor` The child remembers and sings Rhymes easily 2. English Rhyme- `Rain Rain Go Away`",
+    
+              "The child can identify and point out the picture as described Example: There are pictures including an apple. If it is said that `this fruit is in red colour and very sweet`, then the child should be able to identify the apple and show it. Check for all objects from A to L",
+    
+              "The child is able to identify the pictures and say some aspects of the picture"
+    
+            ]
+    
+          },
+    
+    
+          cognitive: {
+    
+            title:
+              "2. Cognitive Skill",
+    
+            questions: [
+    
+              "The child identifies 5-6 colours easily",
+    
+              "The child is able to count number of objects fo r more than 10 objects",
+    
+              "The child is able to identify the numbers from 11 to 20",
+    
+              "The child writes the number up to 12 by tracing it a nd can say the number after writing i",
+    
+              "The child has extended attention span (the child spends more time in counting and observing pictures and other objects)",
+    
+              "The child is able to collect exact number of objects as instructed (please refer the month 2 teaching/activities)"
+    
+            ]
+    
+          },
+    
+    
+          social: {
+    
+            title:
+              "3. Social & Emotional Skill",
+    
+            questions: [
+    
+              "The child is able to name at least 2 friends",
+    
+              "The child is able to name and relate all the family members",
+    
+              "The child understands, identifies and names the sensory organs",
+    
+              "The child is able to show the sensory organs when asked",
+    
+              "The child can understand and identify the `reasons` for being happy",
+    
+              "The child can understand and identify the `reasons` for the family members being happy",
+    
+              "The child cares for self in the toilet"
+    
+            ]
+    
+          },
+    
+    
+          environment: {
+    
+            title:
+              "4. Environmental Skill",
+    
+            questions: [
+    
+              "The child understands the difference between the indoor and outdoor games and can name a few games",
+    
+              "The child understands and can tell the use of `park` in the surrounding area",
+    
+              "The child understands, identifies and narrates various food we eat",
+    
+              "The child is able to prepare some food like Bhelpuri/Sandwich",
+    
+              "The child understands, identifies and can speak about all the people who help us"
+    
+            ]
+    
+          },
+    
+    
+          movement: {
+    
+            title:
+              "5. Movement & Physical Skill",
+    
+            questions: [
+    
+              "The child is able to crawl under obstacles",
+    
+              "The child is able to throw a ball to the bin from a shorter distance",
+    
+              "The child loves to hop and jump as a part of different games",
+    
+              "The child is able to catch an 'one drop ball' more frequently",
+    
+              "The child is able to walk backwards on toes and heels",
+    
+              "The child is able to wash hands unassisted",
+    
+              "The child is able to copy all the pictures having straight lines and curved strokes"
+    
+            ]
+    
+          }
+    
+    }
+    },
+
+    ukg: {
+      name: "UKG",
+      label: "Upper Kindergarten",
+      skills:
+    {
+    
+          language: {
+    
+            title:
+              "1. Language & Communication Skill",
+    
+            questions: [
+    
+              "The Child is able to say at least 4 objects that starts with the sound of all the English alphabet letters from Ato Z",
+    
+              "The child is able to write Hindi alphabet by copying it without any difficulty",
+    
+              "The Child is able to write both capital and small letters in 5 line note book as per the lines given in the syllabus book",
+    
+              "The child is able to recognise the capital and small letters randomly",
+    
+              "The child is able to write the corresponding small or capital letter of a given letter",
+    
+              "The child is able to remember and sing favourite Rhymes easily (Check-'Hot crush buns', 'Chidiya')"
+    
+            ]
+    
+          },
+    
+    
+          cognitive: {
+    
+            title:
+              "2. Cognitive Skill",
+    
+            questions: [
+    
+              "The child easily identifies all seven colours of rainbow VIBGYOR",
+    
+              "The child is able to count number of objects up to 20 quite easily.",
+    
+              "The child is able to identify the numbers from 1 to 50",
+    
+              "The child recites numbers 1 to 50",
+    
+              "The child writes the number up to 50 and can say the number after writing it"
+    
+            ]
+    
+          },
+    
+    
+          social: {
+    
+            title:
+              "3. Social & Emotional Skill",
+    
+            questions: [
+    
+              "The child is able to do the self-introduction by saying his/her name and gender, age, if possible date of birth and their weight and height",
+    
+              "The child understands, and names the Internalbody parts",
+    
+              "The child understands, identifies and names the parts of the hand",
+    
+              "The child names and shows all the organs on our face"
+    
+            ]
+    
+          },
+    
+    
+          environment: {
+    
+            title:
+              "4. Environmental Skill",
+    
+            questions: [
+    
+              "The child can speak 3-5 sentence about the house we live",
+    
+              "The child understands, identifies and names at least 5-6 objects you can find in school",
+    
+              "The child understands and tells few sentences about the activities at school"
+    
+            ]
+    
+          },
+    
+    
+          movement: {
+    
+            title:
+              "5. Movement & Physical Skill",
+    
+            questions: [
+    
+              "The child is able to draw all pattern of lines",
+    
+              "The child is able to use scissor in a more safe manner",
+    
+              "The child is able to cut a paper through a given line",
+    
+              "The child is able to colour different objects more neatly",
+    
+              "The child is able to paste a piece of paper by using glue stick",
+    
+              "The child is able to mash his/her own food",
+    
+              "The child is able to copy all the pictures having multiple patterns"
+    
+            ]
+    
+          }
+    
+    }
+    }
+
+  };
+
+
+  /* =========================================================
+     SHORT HELPERS
+  ========================================================= */
+
+  var app = document.getElementById("fa-app");
+
+  if (!app) {
+    return;
+  }
+
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+  function esc(text) {
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  /* The class currently being worked on, plus the
+     answer sheet for the open assessment */
+  var state = {
+    classKey: "pg",
+    answers: {}
+  };
+
+  /* Stays false until the first screen is on the page, so
+     opening the page never yanks the browser down to it */
+  var booted = false;
+
+
+  function showView(name) {
+
+    var views = app.querySelectorAll(".fa-view");
+
+    for (var i = 0; i < views.length; i++) {
+
+      var isTarget =
+        views[i].getAttribute("data-view") === name;
+
+      if (isTarget) {
+        views[i].classList.add("fa-active");
+      } else {
+        views[i].classList.remove("fa-active");
+      }
+    }
+
+    if (booted) {
+      app.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  }
+
+
+  function renderMonths(classKey) {
+
+    state.classKey = classKey;
+
+    var cls = CLASSES[classKey];
+
+    el("fa-months-title").textContent =
+      cls.name + " Formative Assessment";
+
+    el("fa-unlock-link").href = UNLOCK_LINK;
+
+    var grid = el("fa-month-grid");
+
+    grid.innerHTML = "";
+
+    for (var month = 1; month <= TOTAL_MONTHS; month++) {
+
+      var isFree = month <= FREE_MONTHS;
+
+      var card = document.createElement("div");
+
+      card.className =
+        isFree
+          ? "fa-month-card"
+          : "fa-month-card fa-locked";
+
+      card.innerHTML =
+
+        (isFree
+          ? ""
+          : '<span class="fa-lock-mark">&#128274;</span>') +
+
+        '<div class="fa-month-number">' + month + "</div>" +
+
+        "<h3>Month " + month + "</h3>" +
+
+        '<span class="fa-badge">' +
+          (isFree ? "Free Trial" : "Locked") +
+        "</span>" +
+
+        (isFree
+          ? '<p class="fa-note">Your free 1 month trial for ' +
+              esc(cls.name) + "</p>"
+          : '<p class="fa-note">Subscribe to our Preschool Support ' +
+              "to unlock this month</p>") +
+
+        (isFree
+          ? '<button class="fa-btn" data-open-month="' + month + '">' +
+              "&#128187; Do It Online</button>"
+          : '<a class="fa-btn fa-btn-purple" href="' + UNLOCK_LINK + '">' +
+              "&#128275; Unlock</a>");
+
+      grid.appendChild(card);
+    }
+
+    showView("months");
+  }
+
+
+  function renderAssessment(classKey) {
+
+    state.classKey = classKey;
+    state.answers = {};
+
+    var cls = CLASSES[classKey];
+
+    el("fa-assessment-title").textContent =
+      cls.name + " Formative Assessment";
+
+    el("fa-assessment-subtitle").textContent =
+      "Month 1 of " + TOTAL_MONTHS +
+      " · Free Trial · " + cls.label;
+
+    el("fa-class-name").value = cls.name;
+
+    el("fa-subscribe-link").href = UNLOCK_LINK;
+
+    var body = el("fa-assessment-body");
+    var resultBody = el("fa-result-body");
+
+    body.innerHTML = "";
+    resultBody.innerHTML = "";
+
+    var skillKeys = Object.keys(cls.skills);
+
+    skillKeys.forEach(function (skillKey) {
+
+      var skill = cls.skills[skillKey];
+
+      /* Nothing answered yet */
+      state.answers[skillKey] = [];
+
+      var section = document.createElement("div");
+
+      section.className = "fa-skill";
+
+      var html =
+        '<div class="fa-skill-header">' +
+          "<h3>" + esc(skill.title) + "</h3>" +
+        "</div>";
+
+      skill.questions.forEach(function (question, index) {
+
+        state.answers[skillKey].push(null);
+
+        html +=
+          '<div class="fa-question">' +
+
+            '<div class="fa-question-text">' +
+              (index + 1) + ". " + esc(question) +
+            "</div>" +
+
+            '<div class="fa-options">' +
+
+              buildOption(skillKey, index, 2, "fa-perfect", 1,
+                "&#10004; The child is perfect in this") +
+
+              buildOption(skillKey, index, 1, "fa-ok", 2,
+                "&#10004; The child is somewhat OK") +
+
+              buildOption(skillKey, index, 0, "fa-need", 3,
+                "&#10004; Needs improvement") +
+
+            "</div>" +
+
+          "</div>";
+      });
+
+      html +=
+        '<div class="fa-skill-score">' +
+          esc(scoreLabel(skill.title)) + ": " +
+          '<span data-skill-score="' + skillKey + '">0%</span>' +
+        "</div>";
+
+      section.innerHTML = html;
+
+      body.appendChild(section);
+
+      /* One row in the result table per skill */
+      var row = document.createElement("tr");
+
+      row.innerHTML =
+        "<td>" + esc(scoreLabel(skill.title)) + "</td>" +
+        '<td data-skill-result="' + skillKey + '">0%</td>';
+
+      resultBody.appendChild(row);
+    });
+
+    /* The overall score is the average of the skill scores,
+       so the divisor is simply how many skills there are */
+    el("fa-divisor").textContent = skillKeys.length;
+
+    updateResults();
+
+    showView("assessment");
+  }
+
+
+  function buildOption(skillKey, index, score, tone, number, text) {
+
+    return '' +
+      '<div class="fa-option ' + tone + '"' +
+        ' data-skill="' + skillKey + '"' +
+        ' data-index="' + index + '"' +
+        ' data-score="' + score + '">' +
+
+        '<div class="fa-option-number">' + number + "</div>" +
+        '<div class="fa-option-text">' + text + "</div>" +
+
+      "</div>";
+  }
+
+
+  /* "1. Language & Communication Skill" -> "Language & Communication Score" */
+  function scoreLabel(title) {
+
+    return title
+      .replace(/^\d+\.\s*/, "")
+      .replace(/Skill$/, "Score");
+  }
+
+
+  function getPercentage(skillKey) {
+
+    var values = state.answers[skillKey] || [];
+
+    var total = 0;
+
+    values.forEach(function (value) {
+      if (value !== null) {
+        total += value;
+      }
+    });
+
+    var max = values.length * 2;
+
+    if (!max) {
+      return 0;
+    }
+
+    return Math.round((total / max) * 100);
+  }
+
+
+  function updateResults() {
+
+    var skillKeys = Object.keys(state.answers);
+
+    if (!skillKeys.length) {
+      return;
+    }
+
+    var totalMarks = 0;
+
+    skillKeys.forEach(function (skillKey) {
+
+      var percentage = getPercentage(skillKey);
+
+      totalMarks += percentage;
+
+      var scoreCell =
+        app.querySelector('[data-skill-score="' + skillKey + '"]');
+
+      if (scoreCell) {
+        scoreCell.textContent = percentage + "%";
+      }
+
+      var resultCell =
+        app.querySelector('[data-skill-result="' + skillKey + '"]');
+
+      if (resultCell) {
+        resultCell.textContent = percentage + "%";
+      }
+    });
+
+    el("fa-total-marks").textContent = totalMarks;
+
+    el("fa-overall-score").textContent =
+      Math.round(totalMarks / skillKeys.length) + "%";
+  }
+
+
+  function selectOption(option) {
+
+    var skillKey = option.getAttribute("data-skill");
+    var index = parseInt(option.getAttribute("data-index"), 10);
+    var score = parseInt(option.getAttribute("data-score"), 10);
+
+    state.answers[skillKey][index] = score;
+
+    var siblings =
+      option.parentElement.querySelectorAll(".fa-option");
+
+    for (var i = 0; i < siblings.length; i++) {
+      siblings[i].classList.remove("fa-on");
+    }
+
+    option.classList.add("fa-on");
+
+    updateResults();
+  }
+
+
+  app.addEventListener("click", function (event) {
+
+    var target = event.target;
+
+    /* Choose a class */
+    var classBtn = target.closest("[data-open-class]");
+
+    if (classBtn) {
+      renderMonths(classBtn.getAttribute("data-open-class"));
+      return;
+    }
+
+    /* Open the free month */
+    var monthBtn = target.closest("[data-open-month]");
+
+    if (monthBtn) {
+      renderAssessment(state.classKey);
+      return;
+    }
+
+    /* Back links */
+    var goBtn = target.closest("[data-go]");
+
+    if (goBtn) {
+
+      var destination = goBtn.getAttribute("data-go");
+
+      if (destination === "months") {
+        renderMonths(state.classKey);
+      } else {
+        showView("classes");
+      }
+
+      return;
+    }
+
+    /* Answer an assessment question */
+    var option = target.closest(".fa-option");
+
+    if (option) {
+      selectOption(option);
+      return;
+    }
+
+    /* Calculate - the table is already live, so this just
+       confirms the score and scrolls down to it */
+    if (target.closest("[data-calculate]")) {
+
+      updateResults();
+
+      app.querySelector(".fa-result").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      return;
+    }
+
+    /* Print */
+    if (target.closest("[data-print]")) {
+      window.print();
+    }
+  });
+
+
+  function start() {
+
+    var params =
+      new URLSearchParams(window.location.search);
+
+    var requested =
+      (params.get("class") || "").trim().toLowerCase();
+
+    el("fa-unlock-link").href = UNLOCK_LINK;
+    el("fa-subscribe-link").href = UNLOCK_LINK;
+
+    if (!CLASSES[requested]) {
+      showView("classes");
+      booted = true;
+      return;
+    }
+
+    var month =
+      parseInt(params.get("month"), 10);
+
+    if (month === 1) {
+      renderAssessment(requested);
+    } else {
+      renderMonths(requested);
+    }
+
+    booted = true;
+  }
+
+  start();
+
+})();
+</script>
+
+<!-- ============ SHOPIFY COPY END ============ -->
+
+</body>
+</html>
