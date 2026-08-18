@@ -1,0 +1,879 @@
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+<style>
+
+.act-curriculum{
+    background:#f4f7ff;
+    padding:60px 20px;
+    font-family:'Baloo 2', sans-serif;
+    color:#1f2937;
+}
+
+.act-curriculum *{
+    box-sizing:border-box;
+}
+
+.act-curriculum .act-wrap{
+    max-width:1400px;
+    margin:0 auto;
+}
+
+/* ===== PAGE TITLE ===== */
+
+.act-curriculum .act-title{
+    text-align:center;
+    margin-bottom:15px;
+    font-size:52px;
+    font-weight:800;
+    color:#111827;
+}
+
+.act-curriculum .act-subtitle{
+    text-align:center;
+    color:#6b7280;
+    font-size:18px;
+    margin-bottom:14px;
+}
+
+.act-curriculum .trial-note{
+    text-align:center;
+    color:#4f46e5;
+    background:#eef2ff;
+    display:block;
+    width:fit-content;
+    margin:0 auto 45px;
+    padding:10px 26px;
+    border-radius:40px;
+    font-size:16px;
+    font-weight:600;
+}
+
+/* ===== CLASS CARDS ===== */
+
+.act-curriculum .class-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:32px;
+}
+
+.act-curriculum .class-card{
+    background:#fff;
+    border-radius:32px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+    transition:.3s ease;
+}
+
+.act-curriculum .class-card:hover{
+    transform:translateY(-8px);
+}
+
+.act-curriculum .class-card img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    display:block;
+}
+
+.act-curriculum .class-body{
+    padding:28px;
+}
+
+.act-curriculum .class-body h2{
+    font-size:36px;
+    font-weight:700;
+    margin:0 0 14px;
+}
+
+.act-curriculum .class-body p{
+    color:#6b7280;
+    line-height:1.8;
+    margin:0 0 24px;
+}
+
+.act-curriculum .explore-btn{
+    width:100%;
+    height:56px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(to right,#4f46e5,#6366f1);
+    color:#fff;
+    font-family:inherit;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.act-curriculum .explore-btn:hover{
+    background:linear-gradient(to right,#4338ca,#4f46e5);
+}
+
+/* ===== MONTH VIEW HEADER ===== */
+
+.act-curriculum .month-head{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    margin-bottom:40px;
+}
+
+.act-curriculum .back-btn{
+    width:190px;
+    height:56px;
+    border:none;
+    border-radius:16px;
+    background:#111827;
+    color:#fff;
+    font-family:inherit;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.act-curriculum .back-btn:hover{
+    background:#374151;
+}
+
+.act-curriculum .month-head h2{
+    font-size:42px;
+    font-weight:800;
+    margin:0;
+}
+
+/* ===== MONTH CARDS ===== */
+
+.act-curriculum .month-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+    gap:32px;
+}
+
+.act-curriculum .month-card{
+    background:#fff;
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+}
+
+.act-curriculum .month-image-wrap{
+    position:relative;
+    overflow:hidden;
+}
+
+.act-curriculum .month-card img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+    display:block;
+}
+
+.act-curriculum .month-body{
+    padding:28px;
+}
+
+.act-curriculum .month-tag{
+    display:inline-block;
+    padding:8px 20px;
+    border-radius:40px;
+    background:#eef2ff;
+    color:#4f46e5;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:18px;
+}
+
+.act-curriculum .month-body h3{
+    font-size:28px;
+    font-weight:700;
+    margin:0 0 12px;
+}
+
+.act-curriculum .month-body > p{
+    color:#6b7280;
+    line-height:1.8;
+    margin:0 0 22px;
+}
+
+/* ===== FREE TRIAL BADGE ===== */
+
+.act-curriculum .trial-badge{
+    position:absolute;
+    top:16px;
+    left:16px;
+    background:#16a34a;
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    padding:8px 16px;
+    border-radius:30px;
+}
+
+/* ===== DROPDOWN BUTTONS ===== */
+
+.act-curriculum .drop-btn{
+    width:100%;
+    height:56px;
+    border:none;
+    border-radius:16px;
+    color:#fff;
+    font-family:inherit;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+    margin-bottom:16px;
+}
+
+.act-curriculum .drop-btn.weekly{
+    background:linear-gradient(to right,#4f46e5,#6366f1);
+}
+
+.act-curriculum .drop-btn.weekly:hover{
+    background:linear-gradient(to right,#4338ca,#4f46e5);
+}
+
+.act-curriculum .drop-btn.skills{
+    background:linear-gradient(to right,#059669,#10b981);
+    margin-bottom:0;
+}
+
+.act-curriculum .drop-btn.skills:hover{
+    background:linear-gradient(to right,#047857,#059669);
+}
+
+.act-curriculum .drop-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.act-curriculum .drop-list.skills-list{
+    margin:16px 0 0;
+}
+
+/* ===== PDF ROWS ===== */
+
+.act-curriculum .pdf-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    padding:14px;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    background:#f9fafb;
+    color:#1f2937;
+    text-decoration:none;
+    transition:.25s ease;
+}
+
+.act-curriculum a.pdf-row:hover{
+    background:#4f46e5;
+    color:#fff;
+    border-color:#4f46e5;
+}
+
+.act-curriculum .pdf-left{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    text-align:left;
+}
+
+.act-curriculum .pdf-icon{
+    width:52px;
+    height:52px;
+    border-radius:14px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    flex-shrink:0;
+}
+
+.act-curriculum .pdf-row h4{
+    margin:0 0 2px;
+    font-size:17px;
+    font-weight:600;
+}
+
+.act-curriculum .pdf-row .pdf-sub{
+    margin:0;
+    font-size:13px;
+    opacity:.75;
+}
+
+.act-curriculum .pdf-arrow{
+    font-size:18px;
+    flex-shrink:0;
+}
+
+/* COMING SOON ROW */
+
+.act-curriculum .pdf-row.soon{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+/* ===== LOCKED MONTH ===== */
+
+.act-curriculum .month-card.locked img{
+    filter:blur(5px) grayscale(35%);
+    transform:scale(1.06);
+}
+
+.act-curriculum .lock-overlay{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:rgba(17,24,39,.55);
+    color:#fff;
+}
+
+.act-curriculum .lock-icon{
+    font-size:38px;
+    line-height:1;
+}
+
+.act-curriculum .lock-label{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.act-curriculum .locked-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:22px;
+}
+
+.act-curriculum .locked-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 16px;
+    border-radius:14px;
+    background:#f3f4f6;
+    color:#9ca3af;
+    font-size:15px;
+}
+
+.act-curriculum .unlock-btn{
+    display:block;
+    width:100%;
+    height:56px;
+    line-height:56px;
+    text-align:center;
+    border-radius:16px;
+    background:linear-gradient(to right,#f59e0b,#f97316);
+    color:#fff;
+    text-decoration:none;
+    font-size:17px;
+    font-weight:700;
+}
+
+.act-curriculum .unlock-btn:hover{
+    background:linear-gradient(to right,#d97706,#ea580c);
+    color:#fff;
+}
+
+/* ===== SUBSCRIBE BANNER ===== */
+
+.act-curriculum .subscribe-banner{
+    margin-top:45px;
+    padding:40px 25px;
+    border-radius:28px;
+    text-align:center;
+    background:linear-gradient(135deg,#4f46e5,#6366f1);
+    color:#fff;
+}
+
+.act-curriculum .subscribe-banner h3{
+    font-size:30px;
+    font-weight:700;
+    margin:0 0 12px;
+}
+
+.act-curriculum .subscribe-banner p{
+    font-size:17px;
+    line-height:1.7;
+    margin:0 auto 26px;
+    max-width:640px;
+    opacity:.95;
+}
+
+.act-curriculum .subscribe-cta{
+    display:inline-block;
+    background:#fff;
+    color:#4f46e5;
+    text-decoration:none;
+    padding:15px 38px;
+    border-radius:14px;
+    font-size:18px;
+    font-weight:700;
+}
+
+.act-curriculum .subscribe-cta:hover{
+    background:#eef2ff;
+    color:#4338ca;
+}
+
+.act-curriculum .hidden{
+    display:none;
+}
+
+@media(max-width:768px){
+
+    .act-curriculum .act-title{
+        font-size:34px;
+    }
+
+    .act-curriculum .month-head h2{
+        font-size:28px;
+    }
+
+    .act-curriculum .back-btn{
+        width:100%;
+    }
+
+    .act-curriculum .subscribe-banner h3{
+        font-size:24px;
+    }
+
+}
+
+</style>
+
+<div class="act-curriculum">
+
+    <div class="act-wrap">
+
+        <!-- TITLE -->
+
+        <h1 class="act-title">ACT Curriculum</h1>
+
+        <p class="act-subtitle">
+            Preschool curriculum with weekly and skill based PDF learning
+        </p>
+
+        <span class="trial-note">
+            Month 1 is a free trial. Subscribe to unlock Month 2 &amp; Month 3.
+        </span>
+
+        <!-- CLASS GRID -->
+
+        <div class="class-grid" id="classGrid"></div>
+
+        <!-- MONTH VIEW -->
+
+        <div id="monthView" class="hidden">
+
+            <div class="month-head">
+
+                <button class="back-btn" id="backBtn">
+                    &larr; Back To Classes
+                </button>
+
+                <h2 id="monthHeading"></h2>
+
+            </div>
+
+            <div class="month-grid" id="monthGrid"></div>
+
+            <div class="subscribe-banner">
+
+                <h3>Unlock the full curriculum</h3>
+
+                <p>
+                    Month 1 is free for every class. Subscribe to get Month 2 and Month 3 —
+                    all weekly plans, skill based PDFs, worksheets and online activities.
+                </p>
+
+                <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="subscribe-cta">
+                    Subscribe Now
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+(function(){
+
+    var SUBSCRIBE_URL = "https://worksheets.adiuvaretfoundation.com";
+
+    var classes = [
+        {
+            name: "Nursery",
+            image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&auto=format&fit=crop",
+            description: "Fun phonics, tracing worksheets, playful activities and preschool curriculum."
+        },
+        {
+            name: "LKG",
+            image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop",
+            description: "Interactive classroom learning, alphabet practice and creative activities."
+        },
+        {
+            name: "UKG",
+            image: "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop",
+            description: "Reading, writing, phonics and advanced preschool learning curriculum."
+        }
+    ];
+
+    /*
+      Month 1 = FREE TRIAL, so it carries its real PDF links.
+      Month 2 and Month 3 are locked, so their PDF links are deliberately
+      NOT included here — otherwise anyone could read them from the page source.
+      To unlock a month later: paste its weeks/skills arrays back in and set free:true.
+    */
+
+    var curriculumData = {
+
+        Nursery: [
+            {
+                id: 1,
+                free: true,
+                image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop",
+                title: "Month 1 Curriculum",
+                description: "Weekly curriculum and skill-based learning resources for Month 1.",
+                weeks: [
+                    { title: "Week 1", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/Nursery-M1-W1.pdf?v=1781682062" },
+                    { title: "Week 2", pdf: "" },
+                    { title: "Week 3", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/Nursery-M1-W3.pdf?v=1781682060" },
+                    { title: "Week 4", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/Nursery-M1-W4.pdf?v=1781682062" }
+                ],
+                skills: [
+                    { title: "Language & Communication Skill", icon: "🧠", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/Nursery-M-1-language.pdf?v=1781689757" },
+                    { title: "Cognitive Skill", icon: "🎨", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/Nursery-M-1-cognative.pdf?v=1781689757" },
+                    { title: "Social & Emotional Skill", icon: "🌍", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/Nursery-M-1-social.pdf?v=1781689757" },
+                    { title: "Environmental Skill", icon: "🌱", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/Nursery-M-1-EVS.pdf?v=1781689756" },
+                    { title: "Movement & Physical Skill", icon: "🏃", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/Nursery-M-1-physical.pdf?v=1781689756" }
+                ]
+            },
+            {
+                id: 2,
+                free: false,
+                image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&auto=format&fit=crop",
+                title: "Month 2 Curriculum",
+                description: "Creative worksheets, tracing practice and classroom learning."
+            },
+            {
+                id: 3,
+                free: false,
+                image: "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop",
+                title: "Month 3 Curriculum",
+                description: "Reading, writing and advanced preschool learning curriculum."
+            }
+        ],
+
+        LKG: [
+            {
+                id: 1,
+                free: true,
+                image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop",
+                title: "Month 1 Curriculum",
+                description: "Alphabet recognition, phonics practice and interactive worksheets for LKG.",
+                weeks: [
+                    { title: "Week 1", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/LKG-M1-W1.pdf?v=1781681815" },
+                    { title: "Week 2", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/LKG-M1-W2.pdf?v=1781687399" },
+                    { title: "Week 3", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/LKG-M1-W3.pdf?v=1781687398" },
+                    { title: "Week 4", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/LKG-M1-W4.pdf?v=1781687399" }
+                ],
+                skills: [
+                    { title: "Language & Communication Skill", icon: "🧠", pdf: "" },
+                    { title: "Cognitive Skill", icon: "🎨", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/LKG-M1-cognative-compressed.pdf?v=1781770939" },
+                    { title: "Social & Emotional Skill", icon: "🌍", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/LKG-M1-social_1.pdf?v=1781772167" },
+                    { title: "Environmental Skill", icon: "🌱", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/LKG-M1-EVS.pdf?v=1781771925" },
+                    { title: "Movement & Physical Skill", icon: "🏃", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/LKG-M1-physical.pdf?v=1781772336" }
+                ]
+            },
+            {
+                id: 2,
+                free: false,
+                image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&auto=format&fit=crop",
+                title: "Month 2 Curriculum",
+                description: "Word building, creative activities and skill-based learning for LKG."
+            },
+            {
+                id: 3,
+                free: false,
+                image: "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop",
+                title: "Month 3 Curriculum",
+                description: "Reading practice, writing skills and advanced LKG curriculum."
+            }
+        ],
+
+        UKG: [
+            {
+                id: 1,
+                free: true,
+                image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop",
+                title: "Month 1 Curriculum",
+                description: "Reading fluency, writing practice and structured worksheets for UKG.",
+                weeks: [
+                    { title: "Week 1", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/UKG-M1-W1.pdf?v=1781681779" },
+                    { title: "Week 2", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/UKG-M1-W2.pdf?v=1781681779" },
+                    { title: "Week 3", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/UKG-M1-W3.pdf?v=1781681778" },
+                    { title: "Week 4", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/UKG-M1-W4.pdf?v=1781681778" }
+                ],
+                skills: [
+                    { title: "Language & Communication Skill", icon: "🧠", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/UKG-M1-language_1.pdf?v=1781779903" },
+                    { title: "Cognitive Skill", icon: "🎨", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/UKG-M1-cognative_1.pdf?v=1781779661" },
+                    { title: "Social & Emotional Skill", icon: "🌍", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/UKG-M1-social.pdf?v=1781779483" },
+                    { title: "Environmental Skill", icon: "🌱", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/UKG-M1-EVS.pdf?v=1781779484" },
+                    { title: "Movement & Physical Skill", icon: "🏃", pdf: "https://cdn.shopify.com/s/files/1/0632/7307/4847/files/UKG-M1-physical.pdf?v=1781779479" }
+                ]
+            },
+            {
+                id: 2,
+                free: false,
+                image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&auto=format&fit=crop",
+                title: "Month 2 Curriculum",
+                description: "Grammar basics, creative writing and skill-based learning for UKG."
+            },
+            {
+                id: 3,
+                free: false,
+                image: "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop",
+                title: "Month 3 Curriculum",
+                description: "Advanced reading, writing and exam-ready curriculum for UKG."
+            }
+        ]
+
+    };
+
+    var selectedClass = null;
+    var openDropdowns = {};
+
+    var classGrid   = document.getElementById("classGrid");
+    var monthView   = document.getElementById("monthView");
+    var monthGrid   = document.getElementById("monthGrid");
+    var monthHeading = document.getElementById("monthHeading");
+
+    function escapeHtml(text){
+        return String(text)
+            .replace(/&/g,"&amp;")
+            .replace(/</g,"&lt;")
+            .replace(/>/g,"&gt;")
+            .replace(/"/g,"&quot;");
+    }
+
+    /* ===== CLASS CARDS ===== */
+
+    function renderClasses(){
+
+        var html = "";
+
+        classes.forEach(function(item){
+            html += ''
+                + '<div class="class-card">'
+                +   '<img src="' + item.image + '" alt="' + escapeHtml(item.name) + '">'
+                +   '<div class="class-body">'
+                +     '<h2>' + escapeHtml(item.name) + '</h2>'
+                +     '<p>' + escapeHtml(item.description) + '</p>'
+                +     '<button class="explore-btn" data-class="' + escapeHtml(item.name) + '">'
+                +       'Explore Curriculum'
+                +     '</button>'
+                +   '</div>'
+                + '</div>';
+        });
+
+        classGrid.innerHTML = html;
+    }
+
+    /* ===== PDF ROW ===== */
+
+    function pdfRow(icon, title, pdf){
+
+        var ready = pdf && pdf.indexOf("http") === 0;
+
+        if(!ready){
+            return ''
+                + '<div class="pdf-row soon">'
+                +   '<div class="pdf-left">'
+                +     '<div class="pdf-icon">' + icon + '</div>'
+                +     '<div>'
+                +       '<h4>' + escapeHtml(title) + '</h4>'
+                +       '<p class="pdf-sub">Coming Soon</p>'
+                +     '</div>'
+                +   '</div>'
+                + '</div>';
+        }
+
+        return ''
+            + '<a href="' + pdf + '" target="_blank" rel="noopener noreferrer" class="pdf-row">'
+            +   '<div class="pdf-left">'
+            +     '<div class="pdf-icon">' + icon + '</div>'
+            +     '<div>'
+            +       '<h4>' + escapeHtml(title) + '</h4>'
+            +       '<p class="pdf-sub">Open PDF File</p>'
+            +     '</div>'
+            +   '</div>'
+            +   '<span class="pdf-arrow">&#10148;</span>'
+            + '</a>';
+    }
+
+    /* ===== FREE MONTH CARD ===== */
+
+    function freeMonthCard(month){
+
+        var weeklyKey = "weekly-" + selectedClass + "-" + month.id;
+        var skillsKey = "skills-" + selectedClass + "-" + month.id;
+
+        var html = ''
+            + '<div class="month-card">'
+            +   '<div class="month-image-wrap">'
+            +     '<img src="' + month.image + '" alt="">'
+            +     '<span class="trial-badge">FREE TRIAL</span>'
+            +   '</div>'
+            +   '<div class="month-body">'
+            +     '<span class="month-tag">MONTH ' + month.id + '</span>'
+            +     '<h3>' + escapeHtml(month.title) + '</h3>'
+            +     '<p>' + escapeHtml(month.description) + '</p>'
+            +     '<button class="drop-btn weekly" data-drop="' + weeklyKey + '">'
+            +       '📚 Weekly Curriculum'
+            +     '</button>';
+
+        if(openDropdowns[weeklyKey]){
+
+            html += '<div class="drop-list">';
+
+            month.weeks.forEach(function(week){
+                html += pdfRow("📄", week.title, week.pdf);
+            });
+
+            html += '</div>';
+        }
+
+        html += ''
+            +     '<button class="drop-btn skills" data-drop="' + skillsKey + '">'
+            +       '🎯 Skill Based Curriculum'
+            +     '</button>';
+
+        if(openDropdowns[skillsKey]){
+
+            html += '<div class="drop-list skills-list">';
+
+            month.skills.forEach(function(skill){
+                html += pdfRow(skill.icon, skill.title, skill.pdf);
+            });
+
+            html += '</div>';
+        }
+
+        html += '</div></div>';
+
+        return html;
+    }
+
+    /* ===== LOCKED MONTH CARD ===== */
+
+    function lockedMonthCard(month){
+
+        return ''
+            + '<div class="month-card locked">'
+            +   '<div class="month-image-wrap">'
+            +     '<img src="' + month.image + '" alt="">'
+            +     '<div class="lock-overlay">'
+            +       '<span class="lock-icon">&#128274;</span>'
+            +       '<span class="lock-label">Locked</span>'
+            +     '</div>'
+            +   '</div>'
+            +   '<div class="month-body">'
+            +     '<span class="month-tag">MONTH ' + month.id + '</span>'
+            +     '<h3>' + escapeHtml(month.title) + '</h3>'
+            +     '<p>' + escapeHtml(month.description) + '</p>'
+            +     '<div class="locked-list">'
+            +       '<div class="locked-item">🔒 4 Weekly Curriculum PDFs</div>'
+            +       '<div class="locked-item">🔒 5 Skill Based Curriculum PDFs</div>'
+            +     '</div>'
+            +     '<a href="' + SUBSCRIBE_URL + '" target="_blank" class="unlock-btn">'
+            +       'Subscribe to Unlock'
+            +     '</a>'
+            +   '</div>'
+            + '</div>';
+    }
+
+    /* ===== MONTH VIEW ===== */
+
+    function renderMonths(){
+
+        var months = curriculumData[selectedClass] || [];
+        var html = "";
+
+        months.forEach(function(month){
+            html += month.free ? freeMonthCard(month) : lockedMonthCard(month);
+        });
+
+        monthHeading.innerText = selectedClass + " Monthly Curriculum";
+        monthGrid.innerHTML = html;
+    }
+
+    function showClasses(){
+        selectedClass = null;
+        openDropdowns = {};
+
+        monthView.classList.add("hidden");
+        classGrid.classList.remove("hidden");
+
+        window.scrollTo({ top:0, behavior:"smooth" });
+    }
+
+    function showMonths(className){
+        selectedClass = className;
+        openDropdowns = {};
+
+        classGrid.classList.add("hidden");
+        monthView.classList.remove("hidden");
+
+        renderMonths();
+
+        window.scrollTo({ top:0, behavior:"smooth" });
+    }
+
+    /* ===== EVENTS ===== */
+
+    classGrid.addEventListener("click", function(e){
+
+        var btn = e.target.closest(".explore-btn");
+
+        if(btn){
+            showMonths(btn.getAttribute("data-class"));
+        }
+    });
+
+    monthGrid.addEventListener("click", function(e){
+
+        var btn = e.target.closest(".drop-btn");
+
+        if(btn){
+            var key = btn.getAttribute("data-drop");
+            openDropdowns[key] = !openDropdowns[key];
+            renderMonths();
+        }
+    });
+
+    document.getElementById("backBtn").addEventListener("click", showClasses);
+
+    renderClasses();
+
+})();
+</script>

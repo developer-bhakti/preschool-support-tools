@@ -547,6 +547,58 @@
       }
     }
 
+    /* SUBSCRIBE LINE ABOVE UNLOCK BUTTON */
+    .subscribe-line {
+      display: none;
+      margin: 30px 0 14px;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.6;
+      color: #5d5be3;
+    }
+
+    .subscribe-line.show {
+      display: block;
+    }
+
+    @media print {
+      .subscribe-line {
+        display: none !important;
+      }
+    }
+
+    /* UNLOCK NEXT MONTH BUTTON */
+    .next-month-btn {
+      display: none;
+      width: 100%;
+      border: none;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #5d5be3, #4a48c9);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 18px;
+      margin: 0 0 40px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .next-month-btn.show {
+      display: block;
+    }
+
+    .next-month-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(93, 91, 227, 0.3);
+    }
+
+    @media print {
+      .next-month-btn {
+        display: none !important;
+      }
+    }
+
     /* BACK LINK */
     .back-link {
       display: inline-flex;
@@ -801,6 +853,20 @@
       </div>
 
     </div>
+
+
+    <!-- UNLOCK NEXT MONTH -->
+
+    <p class="subscribe-line">
+      To continue with Month 2 to 12, subscribe to our Preschool Support.
+    </p>
+
+    <button
+      class="next-month-btn"
+      onclick="goToMonth2()"
+    >
+      🔓 Unlock Month 2 – 12 (Premium)
+    </button>
 
   </div>
 
@@ -1330,6 +1396,15 @@
 
       if (nextMonthBtn) {
         nextMonthBtn.classList.add("show");
+      }
+
+      const subscribeLine =
+        document.querySelector(
+          ".subscribe-line"
+        );
+
+      if (subscribeLine) {
+        subscribeLine.classList.add("show");
       }
 
       document

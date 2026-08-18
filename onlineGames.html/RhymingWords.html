@@ -1,0 +1,657 @@
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<style>
+.rhyming-game *{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Fredoka',sans-serif;
+}
+
+.rhyming-game{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
+  background-size:400% 400%;
+  animation:gradient 12s ease infinite;
+}
+
+@keyframes gradient{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.rhyming-game .container{
+  width:100%;
+  max-width:900px;
+  background:white;
+  padding:30px;
+  border-radius:30px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+  text-align:center;
+}
+
+.rhyming-game .title{
+  font-size:42px;
+  color:#ff6b6b;
+  margin-bottom:10px;
+}
+
+.rhyming-game .subtitle{
+  font-size:18px;
+  color:#666;
+  margin-bottom:20px;
+}
+
+.rhyming-game .top-bar{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.rhyming-game .score-box,
+.rhyming-game .star-box{
+  flex:1;
+  background:#4ecdc4;
+  color:white;
+  padding:15px;
+  border-radius:15px;
+  font-size:22px;
+  font-weight:600;
+}
+
+.rhyming-game .star-box{
+  background:#ffb703;
+}
+
+.rhyming-game .progress-container{
+  height:18px;
+  background:#ececec;
+  border-radius:50px;
+  overflow:hidden;
+  margin-bottom:25px;
+}
+
+.rhyming-game .progress{
+  height:100%;
+  width:0%;
+  background:linear-gradient(to right,#00c853,#64dd17);
+  transition:.5s;
+}
+
+.rhyming-game .question-card{
+  background:#fff8e1;
+  border:4px dashed #ffd54f;
+  padding:30px;
+  border-radius:25px;
+}
+
+.rhyming-game .question{
+  font-size:30px;
+  margin-bottom:25px;
+}
+
+.rhyming-game .word{
+  font-size:42px;
+  color:#ff5722;
+  display:block;
+  margin-top:10px;
+}
+
+.rhyming-game .speak-btn{
+  margin-top:15px;
+  padding:10px 20px;
+  border:none;
+  background:#2196f3;
+  color:white;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.rhyming-game .options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  margin-top:25px;
+}
+
+.rhyming-game .option-btn{
+  padding:18px;
+  border:none;
+  border-radius:18px;
+  background:#64b5f6;
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.rhyming-game .option-btn:hover{
+  transform:scale(1.08);
+}
+
+.rhyming-game .correct{
+  background:#4caf50 !important;
+}
+
+.rhyming-game .wrong{
+  background:#f44336 !important;
+}
+
+.rhyming-game .feedback{
+  font-size:26px;
+  font-weight:bold;
+  margin-top:20px;
+  min-height:40px;
+}
+
+.rhyming-game .next-btn{
+  margin-top:20px;
+  padding:15px 30px;
+  border:none;
+  border-radius:40px;
+  background:#ff9800;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+  display:none;
+}
+
+.rhyming-game .result{
+  display:none;
+}
+
+.rhyming-game .trophy{
+  font-size:100px;
+}
+
+.rhyming-game .result h2{
+  font-size:40px;
+  color:#4caf50;
+  margin:10px 0;
+}
+
+.rhyming-game .play-again{
+  padding:15px 35px;
+  font-size:20px;
+  border:none;
+  border-radius:40px;
+  background:#ff6b6b;
+  color:white;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+.rhyming-game .stars{
+  font-size:35px;
+  margin-top:10px;
+}
+
+/* ===== FREE ROUND BADGE ===== */
+
+.rhyming-game .free-tag{
+  display:inline-block;
+  background:#4caf50;
+  color:white;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.5px;
+  padding:6px 16px;
+  border-radius:30px;
+  margin-bottom:15px;
+}
+
+/* ===== SUBSCRIBE CARD (RESULT SCREEN) ===== */
+
+.rhyming-game .subscribe-card{
+  margin-top:30px;
+  padding:30px 25px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#ff6b6b,#ff9800);
+  color:white;
+}
+
+.rhyming-game .lock-big{
+  font-size:50px;
+  line-height:1;
+  margin-bottom:10px;
+}
+
+.rhyming-game .subscribe-card h3{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.rhyming-game .subscribe-card p{
+  font-size:17px;
+  line-height:1.6;
+  margin-bottom:22px;
+  opacity:.95;
+}
+
+.rhyming-game .subscribe-link{
+  display:inline-block;
+  background:white;
+  color:#ff5722;
+  text-decoration:none;
+  padding:14px 34px;
+  border-radius:40px;
+  font-size:19px;
+  font-weight:600;
+}
+
+.rhyming-game .subscribe-link:hover{
+  background:#fff3e0;
+  color:#e64a19;
+}
+
+/* ===== LOCKED LEVELS ===== */
+
+.rhyming-game .levels-strip{
+  margin-top:35px;
+  padding-top:25px;
+  border-top:3px dashed #ffd54f;
+}
+
+.rhyming-game .levels-title{
+  font-size:24px;
+  color:#ff6b6b;
+  margin-bottom:18px;
+}
+
+.rhyming-game .level-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
+
+.rhyming-game .level-card{
+  padding:20px 15px;
+  border-radius:20px;
+  background:#e3f2fd;
+  color:#1f2937;
+  text-decoration:none;
+  display:block;
+  transition:.3s;
+}
+
+.rhyming-game .level-card .level-name{
+  display:block;
+  font-size:19px;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.rhyming-game .level-card .level-state{
+  display:block;
+  font-size:14px;
+  opacity:.8;
+}
+
+.rhyming-game .level-card.playing{
+  background:#c8e6c9;
+  border:3px solid #4caf50;
+}
+
+.rhyming-game .level-card.locked{
+  background:#eceff1;
+  color:#78909c;
+}
+
+.rhyming-game .level-card.locked:hover{
+  background:#ffe0b2;
+  color:#e65100;
+  transform:scale(1.05);
+}
+
+/* ===== TIMED NUDGE BAR ===== */
+
+.rhyming-nudge{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:-140px;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+  padding:16px 20px;
+  background:linear-gradient(90deg,#ff6b6b,#ff9800);
+  color:white;
+  font-family:'Fredoka',sans-serif;
+  box-shadow:0 -6px 20px rgba(0,0,0,.2);
+  transition:bottom .5s ease;
+}
+
+.rhyming-nudge.show{
+  bottom:0;
+}
+
+.rhyming-nudge .nudge-text{
+  font-size:18px;
+  font-weight:500;
+}
+
+.rhyming-nudge .nudge-btn{
+  background:white;
+  color:#ff5722;
+  text-decoration:none;
+  padding:10px 26px;
+  border-radius:30px;
+  font-weight:600;
+  font-size:17px;
+}
+
+.rhyming-nudge .nudge-btn:hover{
+  background:#fff3e0;
+  color:#e64a19;
+}
+
+.rhyming-nudge .nudge-close{
+  background:rgba(255,255,255,.25);
+  color:white;
+  border:none;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.rhyming-nudge .nudge-close:hover{
+  background:rgba(255,255,255,.4);
+}
+
+@media(max-width:600px){
+  .rhyming-game .title{
+    font-size:30px;
+  }
+  .rhyming-game .question{
+    font-size:24px;
+  }
+  .rhyming-game .word{
+    font-size:32px;
+  }
+  .rhyming-game .option-btn{
+    font-size:18px;
+  }
+  .rhyming-game .subscribe-card h3{
+    font-size:22px;
+  }
+  .rhyming-nudge .nudge-text{
+    font-size:15px;
+  }
+}
+</style>
+
+<div class="rhyming-game">
+  <div class="container">
+
+    <h1 class="title">🎵 Rhyming Words Adventure 🎵</h1>
+
+    <p class="subtitle">
+      Choose the word that rhymes with the teacher's word.
+    </p>
+
+    <span class="free-tag">FREE ROUND &bull; LEVEL 1</span>
+
+    <div class="top-bar">
+      <div class="score-box">
+        ⭐ Score: <span id="score">0</span>
+      </div>
+
+      <div class="star-box">
+        🌟 Stars: <span id="stars">0</span>
+      </div>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <div id="gameArea">
+      <div class="question-card">
+        <div class="question" id="question"></div>
+
+        <button class="speak-btn" onclick="speakWord()">
+          🔊 Listen
+        </button>
+
+        <div class="options" id="options"></div>
+        <div class="feedback" id="feedback"></div>
+
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+          Next ➜
+        </button>
+      </div>
+    </div>
+
+    <div class="result" id="result">
+      <div class="trophy">🏆</div>
+      <h2>Wonderful!</h2>
+      <h3>Your Score: <span id="finalScore"></span>
+</h3>
+      <div class="stars" id="starRating"></div>
+
+      <button class="play-again" onclick="restartGame()">
+        🔄 Play Again
+      </button>
+
+      <div class="subscribe-card">
+        <div class="lock-big">🔒</div>
+
+        <h3>Want to play more?</h3>
+
+        <p>
+          You finished the free round! Subscribe to unlock all the rhyming levels,
+          more online games and activities for your little ones.
+        </p>
+
+        <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="subscribe-link">
+          ✨ Subscribe Now
+        </a>
+      </div>
+    </div>
+
+    <!-- LOCKED LEVELS -->
+    <div class="levels-strip">
+
+      <h4 class="levels-title">More Rhyming Levels &amp; Games</h4>
+
+      <div class="level-grid">
+
+        <div class="level-card playing">
+          <span class="level-name">Level 1</span>
+          <span class="level-state">✅ Free &bull; Playing now</span>
+        </div>
+
+        <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="level-card locked">
+          <span class="level-name">🔒 Level 2</span>
+          <span class="level-state">Subscribe Now</span>
+        </a>
+
+        <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="level-card locked">
+          <span class="level-name">🔒 Level 3</span>
+          <span class="level-state">Subscribe Now</span>
+        </a>
+
+        <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="level-card locked">
+          <span class="level-name">🔒 More Games</span>
+          <span class="level-state">Online activities</span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- TIMED SUBSCRIBE NUDGE -->
+<div class="rhyming-nudge" id="nudgeBar">
+
+  <span class="nudge-text">
+    🎉 Enjoying the game? Subscribe for more levels, games &amp; online activities!
+  </span>
+
+  <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="nudge-btn">
+    Subscribe
+  </a>
+
+  <button class="nudge-close" onclick="closeNudge()" aria-label="Close">
+    ✕
+  </button>
+
+</div>
+
+<script>
+const questions = [
+  {word:"Cat",emoji:"🐱",answer:"Hat",options:["Hat","Dog","Ball"]},
+  {word:"Sun",emoji:"☀️",answer:"Fun",options:["Fun","Tree","Book"]},
+  {word:"Ball",emoji:"⚽",answer:"Tall",options:["Tall","Fish","Pen"]},
+  {word:"Cake",emoji:"🎂",answer:"Bake",options:["Bake","Chair","Box"]},
+  {word:"Star",emoji:"⭐",answer:"Car",options:["Car","Apple","Duck"]},
+  {word:"Bee",emoji:"🐝",answer:"Tree",options:["Tree","House","Cup"]}
+];
+
+let current = 0;
+let score = 0;
+let stars = 0;
+let answered = false;
+
+function loadQuestion(){
+  answered = false;
+  const q = questions[current];
+
+  document.getElementById("question").innerHTML =
+    `Find a word that rhymes with <span class="word">${q.emoji} ${q.word}</span>`;
+
+  let html = "";
+
+  q.options.forEach(option=>{
+    html += `
+      <button class="option-btn"
+      onclick="checkAnswer(this,'${option}')">
+      ${option}
+      </button>`;
+  });
+
+  document.getElementById("options").innerHTML = html;
+  document.getElementById("feedback").innerHTML = "";
+  document.getElementById("nextBtn").style.display = "none";
+  updateProgress();
+}
+
+function speakWord(){
+  const q = questions[current];
+  const speech = new SpeechSynthesisUtterance(q.word);
+  speech.rate = 0.8;
+  speechSynthesis.speak(speech);
+}
+
+function checkAnswer(btn,selected){
+  if(answered) return;
+  answered = true;
+
+  const q = questions[current];
+  const buttons = document.querySelectorAll(".option-btn");
+
+  buttons.forEach(button=>button.disabled=true);
+
+  if(selected===q.answer){
+    btn.classList.add("correct");
+    score++;
+    stars++;
+    document.getElementById("feedback").innerHTML = "🎉 Excellent!";
+  }else{
+    btn.classList.add("wrong");
+
+    buttons.forEach(button=>{
+      if(button.innerText===q.answer){
+        button.classList.add("correct");
+      }
+    });
+
+    document.getElementById("feedback").innerHTML = "😊 Good Try!";
+  }
+
+  document.getElementById("score").innerText = score;
+  document.getElementById("stars").innerText = stars;
+  document.getElementById("nextBtn").style.display = "inline-block";
+}
+
+function nextQuestion(){
+  current++;
+
+  if(current < questions.length){
+    loadQuestion();
+  }else{
+    showResult();
+  }
+}
+
+function updateProgress(){
+  const percent = (current/questions.length)*100;
+  document.getElementById("progress").style.width = percent+"%";
+}
+
+function showResult(){
+  document.getElementById("gameArea").style.display = "none";
+  document.getElementById("result").style.display = "block";
+
+  document.getElementById("finalScore").innerText =
+    score + " / " + questions.length;
+
+  let rating = "⭐";
+
+  if(score>=2) rating="⭐⭐";
+  if(score>=4) rating="⭐⭐⭐";
+  if(score>=5) rating="⭐⭐⭐⭐";
+  if(score==6) rating="⭐⭐⭐⭐⭐";
+
+  document.getElementById("starRating").innerHTML = rating;
+  document.getElementById("progress").style.width = "100%";
+}
+
+function restartGame(){
+  current = 0;
+  score = 0;
+  stars = 0;
+
+  document.getElementById("score").innerText = 0;
+  document.getElementById("stars").innerText = 0;
+
+  document.getElementById("gameArea").style.display = "block";
+  document.getElementById("result").style.display = "none";
+
+  loadQuestion();
+}
+
+/* ===== SUBSCRIBE NUDGE ===== */
+
+const NUDGE_DELAY = 120000;   // show after 2 minutes of play
+let nudgeClosed = false;
+
+function showNudge(){
+  if(nudgeClosed) return;
+  document.getElementById("nudgeBar").classList.add("show");
+}
+
+function closeNudge(){
+  nudgeClosed = true;
+  document.getElementById("nudgeBar").classList.remove("show");
+}
+
+setTimeout(showNudge, NUDGE_DELAY);
+
+loadQuestion();
+</script>

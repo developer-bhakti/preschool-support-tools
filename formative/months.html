@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12 Month Formative Assessment</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(to bottom, #f8f9ff, #eef2ff);
+      color: #333;
+    }
+
+    .months-section {
+      padding: 60px 20px 80px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 30px;
+      color: #5d5be3;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      gap: 14px;
+    }
+
+    /* TITLE */
+    .main-title {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .main-title h1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: #5d5be3;
+      font-size: 42px;
+      font-weight: 800;
+      flex-wrap: wrap;
+    }
+
+    .calendar-icon {
+      font-size: 42px;
+    }
+
+    .subtitle {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 50px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #64748b;
+    }
+
+    /* MONTH CARDS */
+    .month-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+    }
+
+    .month-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      background: #fff;
+      border-radius: 28px;
+      padding: 34px 22px 28px;
+
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .month-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Number bubble */
+    .month-number {
+      width: 84px;
+      height: 84px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 34px;
+      font-weight: 800;
+      color: #fff;
+
+      background: linear-gradient(135deg, #059669, #047857);
+      box-shadow: 0 10px 22px rgba(5, 150, 105, 0.28);
+    }
+
+    .month-card h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    /* Status badge */
+    .badge {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 16px;
+      border-radius: 999px;
+
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+
+      background: #ecfdf5;
+      color: #047857;
+    }
+
+    /* Subscribe line shown on every locked month */
+    .subscribe-line {
+      margin-bottom: 18px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    /* Buttons */
+    .month-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      /* Keeps every button on the same line
+         even though free cards have less text */
+      margin-top: auto;
+
+      width: 100%;
+      padding: 13px 20px;
+      border-radius: 12px;
+
+      background: #059669;
+      color: #fff;
+      text-decoration: none;
+
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .month-btn:hover {
+      background: #047857;
+      transform: scale(1.05);
+    }
+
+    /* ---------- LOCKED STATE ---------- */
+    .month-card.locked {
+      background: #fbfbff;
+    }
+
+    .month-card.locked .month-number {
+      background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+      box-shadow: 0 10px 22px rgba(148, 163, 184, 0.28);
+    }
+
+    .month-card.locked h2 {
+      color: #64748b;
+    }
+
+    .month-card.locked .badge {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
+    .month-card.locked .month-btn {
+      background: #5d5be3;
+    }
+
+    .month-card.locked .month-btn:hover {
+      background: #4a48c9;
+    }
+
+    /* Lock icon in the corner */
+    .lock-mark {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      font-size: 20px;
+      opacity: 0.55;
+    }
+
+    /* ---------- FOOTER NOTE ---------- */
+    .unlock-note {
+      margin-top: 50px;
+      padding: 30px;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .unlock-note h3 {
+      font-size: 22px;
+      color: #5d5be3;
+      margin-bottom: 10px;
+    }
+
+    .unlock-note p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #64748b;
+      margin-bottom: 22px;
+    }
+
+    .unlock-note a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 30px;
+      border-radius: 12px;
+      background: #5d5be3;
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .unlock-note a:hover {
+      background: #4a48c9;
+      transform: scale(1.05);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 1000px) {
+      .month-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .month-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .months-section {
+        padding: 40px 15px 60px;
+      }
+
+      .main-title h1 {
+        font-size: 28px;
+      }
+
+      .calendar-icon {
+        font-size: 28px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+        margin-bottom: 36px;
+      }
+
+      .month-grid {
+        gap: 18px;
+      }
+
+      .month-card {
+        padding: 26px 16px 22px;
+      }
+
+      .month-number {
+        width: 68px;
+        height: 68px;
+        font-size: 28px;
+      }
+
+      .month-card h2 {
+        font-size: 20px;
+      }
+
+      .month-btn {
+        font-size: 15px;
+        padding: 12px 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="months-section">
+
+    <div class="container">
+
+      <a class="back-link" href="./formativeAssessment.html">
+        ← Back to Classes
+      </a>
+
+      <!-- TITLE -->
+      <div class="main-title">
+        <h1>
+          <span class="calendar-icon">📅</span>
+          <span id="pageTitle">12 Month Formative Assessment</span>
+        </h1>
+      </div>
+
+      <p class="subtitle">
+        Month 1 is free for every class. Complete it to see where your child
+        stands, then subscribe to our Preschool Support to unlock the
+        remaining 11 months and track progress across the full year.
+      </p>
+
+      <!-- MONTH CARDS -->
+      <div class="month-grid" id="monthGrid"></div>
+
+      <!-- FOOTER NOTE -->
+      <div class="unlock-note">
+        <h3>🔓 Unlock all 12 months</h3>
+        <p>
+          To continue beyond the free trial, subscribe to our Preschool
+          Support. You get every monthly assessment for this class, plus the
+          matching worksheets and activities, in one plan.
+        </p>
+        <a href="https://worksheets.adiuvaretfoundation.com/">
+          🔓 Subscribe to Unlock
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <script>
+
+    /* =====================================
+       CLASS CONFIGURATION
+       Month 1 of each class is the free
+       trial and opens the local assessment.
+    ===================================== */
+
+    const CLASSES = {
+      pg: {
+        name: "PG",
+        file: "./assessmentPg.html"
+      },
+      nursery: {
+        name: "Nursery",
+        file: "./assessmentNursery.html"
+      },
+      lkg: {
+        name: "LKG",
+        file: "./assessmentLKG.html"
+      },
+      ukg: {
+        name: "UKG",
+        file: "./assessmentUKG.html"
+      }
+    };
+
+    /* Where every locked month sends the parent */
+    const UNLOCK_LINK =
+      "https://worksheets.adiuvaretfoundation.com/";
+
+    /* How many months are free */
+    const FREE_MONTHS = 1;
+
+    const TOTAL_MONTHS = 12;
+
+
+    /* =====================================
+       READ THE CLASS FROM THE URL
+       e.g. months.html?class=nursery
+    ===================================== */
+
+    function getSelectedClass() {
+
+      const requested =
+        new URLSearchParams(window.location.search)
+          .get("class");
+
+      const key =
+        (requested || "").trim().toLowerCase();
+
+      return CLASSES[key]
+        ? key
+        : "pg";
+    }
+
+
+    /* =====================================
+       BUILD THE MONTH CARDS
+    ===================================== */
+
+    function renderMonths() {
+
+      const classKey =
+        getSelectedClass();
+
+      const selected =
+        CLASSES[classKey];
+
+      /* Title, tab name and back link all
+         follow the chosen class */
+
+      document.getElementById("pageTitle")
+        .textContent =
+          selected.name + " Formative Assessment";
+
+      document.title =
+        selected.name + " - 12 Month Formative Assessment";
+
+      const grid =
+        document.getElementById("monthGrid");
+
+      for (
+        let month = 1;
+        month <= TOTAL_MONTHS;
+        month++
+      ) {
+
+        const isFree =
+          month <= FREE_MONTHS;
+
+        const card =
+          document.createElement("div");
+
+        card.className =
+          isFree
+            ? "month-card"
+            : "month-card locked";
+
+        card.innerHTML = `
+
+          ${isFree ? "" : '<span class="lock-mark">🔒</span>'}
+
+          <div class="month-number">
+            ${month}
+          </div>
+
+          <h2>Month ${month}</h2>
+
+          <span class="badge">
+            ${isFree ? "Free Trial" : "Locked"}
+          </span>
+
+          ${isFree
+            ? ""
+            : '<p class="subscribe-line">Subscribe to our Preschool Support to unlock this month</p>'
+          }
+
+          <a
+            class="month-btn"
+            href="${isFree ? selected.file : UNLOCK_LINK}"
+          >
+            ${isFree ? "💻 Do It Online" : "🔓 Unlock"}
+          </a>
+        `;
+
+        grid.appendChild(card);
+      }
+    }
+
+
+    /* =====================================
+       INITIALIZE
+    ===================================== */
+
+    renderMonths();
+
+  </script>
+
+</body>
+</html>
