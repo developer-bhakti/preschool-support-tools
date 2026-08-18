@@ -1,0 +1,468 @@
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+<style>
+
+.assess-tools{
+    background:#f8fafc;
+    padding:64px 20px;
+    font-family:'Baloo 2', sans-serif;
+    color:#1e293b;
+}
+
+.assess-tools *{
+    box-sizing:border-box;
+}
+
+.assess-tools .at-wrap{
+    max-width:1150px;
+    margin:0 auto;
+}
+
+/* ===== HEADING ===== */
+
+.assess-tools .at-title{
+    text-align:center;
+    font-size:44px;
+    font-weight:800;
+    color:#1e293b;
+    margin:0 0 14px;
+}
+
+.assess-tools .at-subtitle{
+    text-align:center;
+    color:#64748b;
+    font-size:17px;
+    margin:0 0 16px;
+}
+
+.assess-tools .trial-note{
+    display:block;
+    width:fit-content;
+    margin:0 auto 48px;
+    padding:10px 26px;
+    border-radius:40px;
+    background:#e0f2fe;
+    color:#0369a1;
+    font-size:16px;
+    font-weight:600;
+}
+
+/* ===== GRID ===== */
+
+.assess-tools .at-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+    gap:32px;
+}
+
+/* ===== CARD ===== */
+
+.assess-tools .at-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:28px;
+    background:#fff;
+    box-shadow:0 12px 32px rgba(15,23,42,.08);
+    transition:.45s ease;
+}
+
+.assess-tools .at-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 26px 55px rgba(15,23,42,.16);
+}
+
+/* faint photo wash */
+
+.assess-tools .at-bg{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    opacity:.10;
+    transition:.45s ease;
+}
+
+.assess-tools .at-card:hover .at-bg{
+    opacity:.20;
+}
+
+/* decorative circle */
+
+.assess-tools .at-circle{
+    position:absolute;
+    top:-130px;
+    right:-130px;
+    width:290px;
+    height:290px;
+    border-radius:50%;
+    background:#e0f2fe;
+    opacity:.55;
+    transition:.45s ease;
+}
+
+.assess-tools .at-card:hover .at-circle{
+    background:#38bdf8;
+    opacity:.30;
+}
+
+.assess-tools .at-body{
+    position:relative;
+    z-index:2;
+    padding:32px;
+}
+
+/* icon bubble */
+
+.assess-tools .at-icon{
+    width:64px;
+    height:64px;
+    margin-bottom:24px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 6px 18px rgba(15,23,42,.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.assess-tools .at-icon svg{
+    width:32px;
+    height:32px;
+    stroke:#0ea5e9;
+}
+
+.assess-tools .at-card h3{
+    font-size:25px;
+    font-weight:700;
+    color:#1e293b;
+    margin:0 0 14px;
+    transition:.3s;
+}
+
+.assess-tools .at-card:hover h3{
+    color:#0284c7;
+}
+
+.assess-tools .at-card p{
+    color:#475569;
+    font-size:16px;
+    line-height:1.75;
+    margin:0 0 26px;
+}
+
+/* ===== BADGES ===== */
+
+.assess-tools .free-badge{
+    position:absolute;
+    top:20px;
+    right:20px;
+    z-index:3;
+    background:#16a34a;
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    padding:7px 15px;
+    border-radius:30px;
+}
+
+/* ===== BUTTONS ===== */
+
+.assess-tools .read-btn{
+    display:inline-block;
+    padding:13px 28px;
+    border-radius:14px;
+    background:linear-gradient(to right,#06b6d4,#0ea5e9);
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.assess-tools .read-btn:hover{
+    transform:scale(1.05);
+    color:#fff;
+}
+
+.assess-tools .unlock-btn{
+    display:inline-block;
+    padding:13px 28px;
+    border-radius:14px;
+    background:linear-gradient(to right,#f59e0b,#f97316);
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.assess-tools .unlock-btn:hover{
+    transform:scale(1.05);
+    color:#fff;
+}
+
+/* ===== LOCKED CARD ===== */
+
+.assess-tools .at-card.locked{
+    background:#f1f5f9;
+}
+
+.assess-tools .at-card.locked .at-bg{
+    filter:blur(4px) grayscale(60%);
+    opacity:.16;
+}
+
+.assess-tools .at-card.locked .at-circle{
+    background:#e2e8f0;
+}
+
+.assess-tools .at-card.locked:hover .at-circle{
+    background:#cbd5e1;
+    opacity:.5;
+}
+
+.assess-tools .at-card.locked .at-icon{
+    background:#fff;
+    font-size:28px;
+}
+
+.assess-tools .at-card.locked h3{
+    color:#475569;
+}
+
+.assess-tools .at-card.locked:hover h3{
+    color:#334155;
+}
+
+.assess-tools .lock-badge{
+    position:absolute;
+    top:20px;
+    right:20px;
+    z-index:3;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:#334155;
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    padding:7px 15px;
+    border-radius:30px;
+}
+
+/* ===== SUBSCRIBE BANNER ===== */
+
+.assess-tools .subscribe-banner{
+    margin-top:44px;
+    padding:42px 26px;
+    border-radius:28px;
+    text-align:center;
+    background:linear-gradient(135deg,#0ea5e9,#06b6d4);
+    color:#fff;
+}
+
+.assess-tools .subscribe-banner h3{
+    font-size:30px;
+    font-weight:700;
+    margin:0 0 12px;
+}
+
+.assess-tools .subscribe-banner p{
+    max-width:640px;
+    margin:0 auto 26px;
+    font-size:17px;
+    line-height:1.7;
+    color:rgba(255,255,255,.95);
+}
+
+.assess-tools .subscribe-cta{
+    display:inline-block;
+    padding:15px 38px;
+    border-radius:14px;
+    background:#fff;
+    color:#0284c7;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:700;
+}
+
+.assess-tools .subscribe-cta:hover{
+    background:#f0f9ff;
+    color:#0369a1;
+}
+
+@media(max-width:768px){
+
+    .assess-tools .at-title{
+        font-size:32px;
+    }
+
+    .assess-tools .at-body{
+        padding:26px 22px;
+    }
+
+    .assess-tools .subscribe-banner h3{
+        font-size:24px;
+    }
+
+}
+
+</style>
+
+
+<section class="assess-tools">
+
+    <div class="at-wrap">
+
+        <h1 class="at-title">Assessment Tools</h1>
+
+        <p class="at-subtitle">
+            Simple screening tools for parents and teachers
+        </p>
+
+        <span class="trial-note">
+            1 assessment is free to try. Subscribe to unlock the rest.
+        </span>
+
+        <div class="at-grid">
+
+            <!-- ============ 1. KIDS BEHAVIOUR SCALE — FREE ============ -->
+
+            <div class="at-card">
+
+                <div class="at-bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0632/7307/4847/files/test1.jpg?v=1714385215')"></div>
+
+                <div class="at-circle"></div>
+
+                <span class="free-badge">FREE</span>
+
+                <div class="at-body">
+
+                    <div class="at-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6M8 4h8a2 2 0 012 2v12a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z"/>
+                        </svg>
+                    </div>
+
+                    <h3>Kids Behaviour Scale</h3>
+
+                    <p>
+                        Check if your Kid's is Emotionally Regulated?
+                    </p>
+
+                    <a href="https://www.ourpreschool.in/pages/online-assessment-tools-for-parents-and-teachers-1" target="_blank" rel="noopener noreferrer" class="read-btn">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- ============ 2. SCREENING TOOL FOR ADHD — LOCKED ============ -->
+
+            <div class="at-card locked">
+
+                <div class="at-bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0632/7307/4847/files/test3.jpg?v=1714385225')"></div>
+
+                <div class="at-circle"></div>
+
+                <span class="lock-badge">&#128274; LOCKED</span>
+
+                <div class="at-body">
+
+                    <div class="at-icon">&#128274;</div>
+
+                    <h3>Screening Tool for ADHD</h3>
+
+                    <p>
+                        Check it through DSM 5 criteria
+                    </p>
+
+                    <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="unlock-btn">
+                        Subscribe Now
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- ============ 3. EXPERIENCE THERMOMETER — LOCKED ============ -->
+
+            <div class="at-card locked">
+
+                <div class="at-bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0632/7307/4847/files/test2.jpg?v=1714385220')"></div>
+
+                <div class="at-circle"></div>
+
+                <span class="lock-badge">&#128274; LOCKED</span>
+
+                <div class="at-body">
+
+                    <div class="at-icon">&#128274;</div>
+
+                    <h3>Experience Thermometer</h3>
+
+                    <p>
+                        Check if your Kid's learning intensity and future health?
+                    </p>
+
+                    <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="unlock-btn">
+                        Subscribe Now
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- ============ 4. OBESITY SCREENING TOOL — LOCKED ============ -->
+
+            <div class="at-card locked">
+
+                <div class="at-bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0632/7307/4847/files/test8.png?v=1714385230')"></div>
+
+                <div class="at-circle"></div>
+
+                <span class="lock-badge">&#128274; LOCKED</span>
+
+                <div class="at-body">
+
+                    <div class="at-icon">&#128274;</div>
+
+                    <h3>Obesity Screening Tool for Kids</h3>
+
+                    <p>
+                        Check it for your kid on CDC criteria
+                    </p>
+
+                    <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="unlock-btn">
+                        Subscribe Now
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ============ SUBSCRIBE BANNER ============ -->
+
+        <div class="subscribe-banner">
+
+            <h3>Unlock all assessment tools</h3>
+
+            <p>
+                Only the Kids Behaviour Scale is free to try. Subscribe to unlock every assessment,
+                plus all worksheets, curriculum PDFs, session plans and online activities.
+            </p>
+
+            <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="subscribe-cta">
+                Subscribe Now
+            </a>
+
+        </div>
+
+    </div>
+
+</section>

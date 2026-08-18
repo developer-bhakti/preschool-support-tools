@@ -1,0 +1,2114 @@
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= SESSION PLANNING APP ================= */
+
+.sp-app{
+    position:relative;
+    min-height:100vh;
+    padding:40px 20px 60px;
+    background:#0b1120;
+    background-image:linear-gradient(160deg,#0b1120 0%,#111827 45%,#1e1b4b 100%);
+    font-family:'Inter', sans-serif;
+    color:#fff;
+    overflow:hidden;
+}
+
+.sp-app *{
+    box-sizing:border-box;
+}
+
+/* AMBIENT BLOBS */
+
+.sp-blobs{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.sp-blob{
+    position:absolute;
+    width:380px;
+    height:380px;
+    border-radius:50%;
+    filter:blur(90px);
+}
+
+.sp-blob.one{
+    top:-90px;
+    left:-90px;
+    background:rgba(79,70,229,.35);
+}
+
+.sp-blob.two{
+    top:35%;
+    right:-90px;
+    background:rgba(192,38,211,.28);
+}
+
+.sp-blob.three{
+    bottom:-90px;
+    left:35%;
+    background:rgba(6,182,212,.25);
+}
+
+/* GLASS SURFACES */
+
+.sp-app .glass{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+
+.sp-app .glass-input{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#fff;
+}
+
+.sp-app .glass-input::placeholder{
+    color:rgba(255,255,255,.4);
+}
+
+.sp-app .glass-input:focus{
+    outline:none;
+    border-color:rgba(129,140,248,.7);
+    box-shadow:0 0 0 3px rgba(99,102,241,.25);
+}
+
+/* LAYOUT */
+
+.sp-app .sp-shell{
+    position:relative;
+    z-index:2;
+    max-width:1150px;
+    margin:0 auto;
+}
+
+.sp-app .sp-narrow{
+    max-width:560px;
+    margin:0 auto;
+}
+
+.sp-app .hidden{
+    display:none !important;
+}
+
+/* TRIAL BADGE */
+
+.sp-app .trial-strip{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:22px;
+}
+
+.sp-app .trial-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 18px;
+    border-radius:40px;
+    background:rgba(16,185,129,.16);
+    border:1px solid rgba(16,185,129,.35);
+    color:#6ee7b7;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.3px;
+}
+
+/* TOP BAR */
+
+.sp-app .top-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.sp-app .ghost-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 14px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.16);
+    background:transparent;
+    color:rgba(255,255,255,.72);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.sp-app .ghost-btn:hover{
+    background:rgba(255,255,255,.1);
+    color:#fff;
+}
+
+/* CARD */
+
+.sp-app .card{
+    border-radius:26px;
+    padding:36px 30px;
+}
+
+.sp-app .card-icon{
+    width:56px;
+    height:56px;
+    margin:0 auto 16px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    background:linear-gradient(135deg,#6366f1,#d946ef);
+    box-shadow:0 12px 30px rgba(79,70,229,.4);
+}
+
+.sp-app .card h1{
+    text-align:center;
+    font-size:28px;
+    font-weight:800;
+    margin:0 0 6px;
+    letter-spacing:-.5px;
+}
+
+.sp-app .card .card-sub{
+    text-align:center;
+    font-size:14px;
+    color:rgba(255,255,255,.6);
+    margin:0 0 28px;
+}
+
+/* FIELDS */
+
+.sp-app .field{
+    margin-bottom:18px;
+}
+
+.sp-app .field label{
+    display:block;
+    font-size:12px;
+    font-weight:500;
+    color:rgba(255,255,255,.6);
+    margin-bottom:7px;
+}
+
+.sp-app .text-input{
+    width:100%;
+    padding:13px 15px;
+    border-radius:12px;
+    font-family:inherit;
+    font-size:14px;
+}
+
+.sp-app input[type="date"].text-input{
+    color-scheme:dark;
+}
+
+.sp-app .err{
+    margin:7px 0 0;
+    font-size:12px;
+    color:#fb7185;
+}
+
+/* LOGO DROPZONE */
+
+.sp-app .dropzone{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:160px;
+    border-radius:14px;
+    border:1px dashed rgba(255,255,255,.28);
+    background:rgba(255,255,255,.05);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.sp-app .dropzone:hover{
+    border-color:rgba(129,140,248,.7);
+    background:rgba(255,255,255,.1);
+}
+
+.sp-app .dropzone .dz-icon{
+    font-size:28px;
+    margin-bottom:8px;
+    opacity:.6;
+}
+
+.sp-app .dropzone p{
+    margin:0;
+    font-size:13px;
+    color:rgba(255,255,255,.7);
+}
+
+.sp-app .dropzone .dz-hint{
+    margin-top:5px;
+    font-size:11px;
+    color:rgba(255,255,255,.4);
+}
+
+.sp-app .logo-preview{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px;
+    border-radius:14px;
+}
+
+.sp-app .logo-preview img{
+    width:62px;
+    height:62px;
+    border-radius:14px;
+    object-fit:cover;
+    box-shadow:0 0 0 2px rgba(255,255,255,.2);
+}
+
+.sp-app .logo-preview .lp-text{
+    flex:1;
+}
+
+.sp-app .logo-preview h4{
+    margin:0 0 2px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.sp-app .logo-preview p{
+    margin:0;
+    font-size:12px;
+    color:rgba(255,255,255,.5);
+}
+
+.sp-app .icon-btn{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    border:none;
+    background:rgba(255,255,255,.12);
+    color:rgba(255,255,255,.75);
+    font-size:14px;
+    cursor:pointer;
+}
+
+.sp-app .icon-btn:hover{
+    background:rgba(244,63,94,.3);
+    color:#fda4af;
+}
+
+/* PRIMARY BUTTONS */
+
+.sp-app .primary-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(to right,#6366f1,#d946ef);
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 14px 30px rgba(79,70,229,.35);
+    transition:.2s;
+}
+
+.sp-app .primary-btn:hover{
+    filter:brightness(1.12);
+}
+
+.sp-app .primary-btn:active{
+    transform:scale(.985);
+}
+
+.sp-app .green-btn{
+    background:linear-gradient(to right,#10b981,#14b8a6);
+    box-shadow:0 14px 30px rgba(16,185,129,.3);
+}
+
+/* HEADER OF STEP 2 / 3 */
+
+.sp-app .step-head{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    text-align:center;
+    margin:10px 0 28px;
+}
+
+.sp-app .step-head .school-logo{
+    width:64px;
+    height:64px;
+    border-radius:18px;
+    object-fit:cover;
+    box-shadow:0 0 0 2px rgba(255,255,255,.2);
+}
+
+.sp-app .step-head h1{
+    margin:0;
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:-.6px;
+}
+
+.sp-app .step-head .meta{
+    margin:5px 0 0;
+    font-size:14px;
+    color:rgba(255,255,255,.6);
+}
+
+/* TERMS PANEL */
+
+.sp-app .panel{
+    border-radius:26px;
+    padding:24px;
+}
+
+.sp-app .panel-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:22px;
+}
+
+.sp-app .panel-head h2{
+    margin:0;
+    font-size:19px;
+    font-weight:600;
+}
+
+.sp-app .panel-head .count{
+    margin:2px 0 0;
+    font-size:13px;
+    color:rgba(255,255,255,.5);
+}
+
+.sp-app .add-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:11px 18px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(to right,#6366f1,#d946ef);
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.sp-app .add-btn:hover{
+    filter:brightness(1.12);
+}
+
+.sp-app .add-btn.locked{
+    background:linear-gradient(to right,#f59e0b,#f97316);
+    text-decoration:none;
+}
+
+/* EMPTY STATE */
+
+.sp-app .empty{
+    padding:60px 20px;
+    border:1px dashed rgba(255,255,255,.16);
+    border-radius:18px;
+    text-align:center;
+}
+
+.sp-app .empty .em-icon{
+    font-size:34px;
+    opacity:.35;
+    margin-bottom:10px;
+}
+
+.sp-app .empty p{
+    margin:0;
+    color:rgba(255,255,255,.6);
+    font-size:15px;
+}
+
+.sp-app .empty .em-hint{
+    margin-top:5px;
+    font-size:13px;
+    color:rgba(255,255,255,.35);
+}
+
+/* TERM CARDS */
+
+.sp-app .term-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+    gap:20px;
+}
+
+.sp-app .term-card{
+    border-radius:20px;
+    padding:20px;
+}
+
+.sp-app .term-card-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:16px;
+}
+
+.sp-app .term-card-head h3{
+    margin:0;
+    font-size:16px;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.sp-app .term-pill{
+    padding:3px 9px;
+    border-radius:40px;
+    background:rgba(99,102,241,.25);
+    color:#c7d2fe;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+}
+
+.sp-app .term-dates{
+    margin:4px 0 0;
+    font-size:12px;
+    color:rgba(255,255,255,.5);
+}
+
+.sp-app .seg-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.sp-app .seg{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:9px 12px;
+    border-radius:10px;
+    border:1px solid;
+    font-size:12px;
+}
+
+.sp-app .seg .seg-name{
+    font-weight:500;
+}
+
+.sp-app .seg .seg-date{
+    white-space:nowrap;
+    opacity:.85;
+    font-size:11px;
+}
+
+.sp-app .seg.syllabus{
+    background:rgba(16,185,129,.16);
+    border-color:rgba(16,185,129,.3);
+    color:#a7f3d0;
+}
+
+.sp-app .seg.formative{
+    background:rgba(14,165,233,.16);
+    border-color:rgba(56,189,248,.3);
+    color:#bae6fd;
+}
+
+.sp-app .seg.summative{
+    background:rgba(249,115,22,.16);
+    border-color:rgba(251,146,60,.3);
+    color:#fed7aa;
+}
+
+.sp-app .seg.termend{
+    background:rgba(244,63,94,.16);
+    border-color:rgba(251,113,133,.3);
+    color:#fecdd3;
+}
+
+.sp-app .seg.vacation{
+    background:rgba(251,191,36,.16);
+    border-color:rgba(251,191,36,.3);
+    color:#fde68a;
+}
+
+/* LOCKED TERM CARD */
+
+.sp-app .term-card.locked-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:10px;
+    min-height:220px;
+    border-style:dashed;
+}
+
+.sp-app .term-card.locked-card .lock-ico{
+    font-size:34px;
+}
+
+.sp-app .term-card.locked-card h3{
+    margin:0;
+    font-size:17px;
+    font-weight:700;
+}
+
+.sp-app .term-card.locked-card p{
+    margin:0;
+    max-width:260px;
+    font-size:13px;
+    line-height:1.6;
+    color:rgba(255,255,255,.55);
+}
+
+.sp-app .unlock-link{
+    margin-top:6px;
+    display:inline-block;
+    padding:11px 24px;
+    border-radius:12px;
+    background:linear-gradient(to right,#f59e0b,#f97316);
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+}
+
+.sp-app .unlock-link:hover{
+    filter:brightness(1.1);
+    color:#fff;
+}
+
+/* FLOATING PREVIEW BUTTON */
+
+.sp-app .float-btn{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    z-index:30;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:14px 22px;
+    border:none;
+    border-radius:40px;
+    background:linear-gradient(to right,#10b981,#14b8a6);
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 18px 40px rgba(16,185,129,.35);
+}
+
+.sp-app .float-btn:hover{
+    filter:brightness(1.12);
+}
+
+/* MODAL */
+
+.sp-modal{
+    position:fixed;
+    inset:0;
+    z-index:60;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    background:rgba(2,6,23,.75);
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(5px);
+    font-family:'Inter', sans-serif;
+    color:#fff;
+}
+
+.sp-modal .modal-box{
+    width:100%;
+    max-width:540px;
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:26px;
+    padding:26px;
+    background:rgba(23,25,48,.96);
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 30px 70px rgba(0,0,0,.5);
+}
+
+.sp-modal .modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:22px;
+}
+
+.sp-modal .modal-head .mh-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.sp-modal .modal-head .mh-icon{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:19px;
+    background:linear-gradient(135deg,#6366f1,#d946ef);
+}
+
+.sp-modal .modal-head h2{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+}
+
+.sp-modal .type-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.sp-modal .type-opt{
+    position:relative;
+    padding:13px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.05);
+    color:#fff;
+    text-align:left;
+    font-family:inherit;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.sp-modal .type-opt:hover{
+    background:rgba(255,255,255,.1);
+}
+
+.sp-modal .type-opt.active{
+    border-color:rgba(129,140,248,.75);
+    background:rgba(99,102,241,.18);
+}
+
+.sp-modal .type-opt .to-name{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+}
+
+.sp-modal .type-opt .to-detail{
+    display:block;
+    margin-top:3px;
+    font-size:11px;
+    color:rgba(255,255,255,.5);
+}
+
+.sp-modal .type-opt .to-check{
+    position:absolute;
+    top:8px;
+    right:8px;
+    width:17px;
+    height:17px;
+    border-radius:50%;
+    background:#6366f1;
+    color:#fff;
+    font-size:10px;
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+
+.sp-modal .type-opt.active .to-check{
+    display:flex;
+}
+
+.sp-modal .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.sp-modal .vac-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.sp-modal .vac-head span{
+    font-size:12px;
+    font-weight:500;
+    color:rgba(255,255,255,.6);
+}
+
+.sp-modal .vac-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    padding:11px;
+    border-radius:12px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.13);
+    margin-bottom:9px;
+}
+
+.sp-modal .vac-row input{
+    flex:1;
+    min-width:110px;
+    padding:8px 10px;
+    border-radius:9px;
+    border:none;
+    background:rgba(255,255,255,.07);
+    color:#fff;
+    font-family:inherit;
+    font-size:12px;
+}
+
+.sp-modal .vac-row input[type="date"]{
+    color-scheme:dark;
+    flex:0 0 auto;
+}
+
+.sp-modal .vac-row input::placeholder{
+    color:rgba(255,255,255,.4);
+}
+
+.sp-modal .modal-err{
+    margin:14px 0 0;
+    padding:11px 14px;
+    border-radius:11px;
+    background:rgba(244,63,94,.16);
+    border:1px solid rgba(251,113,133,.35);
+    color:#fecdd3;
+    font-size:12.5px;
+    line-height:1.6;
+}
+
+/* ================= PREVIEW / PRINT ================= */
+
+.sp-app .paper{
+    background:#fff;
+    color:#0f172a;
+    border-radius:26px;
+    padding:38px;
+}
+
+.sp-app .paper-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:32px;
+}
+
+.sp-app .paper-head .ph-kicker{
+    margin:0;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#4f46e5;
+}
+
+.sp-app .paper-head h1{
+    margin:5px 0 0;
+    font-size:32px;
+    font-weight:800;
+    color:#0f172a;
+    letter-spacing:-.6px;
+}
+
+.sp-app .paper-head .ph-address{
+    margin:7px 0 0;
+    font-size:14px;
+    color:#64748b;
+}
+
+.sp-app .paper-head img{
+    width:96px;
+    height:96px;
+    border-radius:18px;
+    object-fit:cover;
+    box-shadow:0 0 0 4px #fff, 0 10px 25px rgba(0,0,0,.12);
+}
+
+.sp-app .term-block{
+    border:1px solid #e2e8f0;
+    border-radius:18px;
+    overflow:hidden;
+    margin-bottom:26px;
+}
+
+.sp-app .term-block-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    padding:14px 20px;
+    background:linear-gradient(to right,#0f172a,#312e81);
+    color:#fff;
+}
+
+.sp-app .term-block-head h2{
+    margin:0;
+    font-size:17px;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.sp-app .term-block-head .tb-pill{
+    padding:3px 9px;
+    border-radius:40px;
+    background:rgba(255,255,255,.16);
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+}
+
+.sp-app .term-block-head .tb-dates{
+    font-size:13px;
+    color:rgba(255,255,255,.75);
+}
+
+.sp-app .seg-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:11px;
+    padding:20px;
+}
+
+.sp-app .pseg{
+    padding:13px 15px;
+    border:1px solid;
+    border-radius:13px;
+    font-size:13.5px;
+}
+
+.sp-app .pseg .ps-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.sp-app .pseg .ps-name{
+    font-weight:600;
+}
+
+.sp-app .pseg .ps-date{
+    font-size:12px;
+    opacity:.85;
+}
+
+.sp-app .pseg.syllabus{ background:#ecfdf5; border-color:#a7f3d0; color:#065f46; }
+.sp-app .pseg.formative{ background:#f0f9ff; border-color:#bae6fd; color:#075985; }
+.sp-app .pseg.summative{ background:#fff7ed; border-color:#fed7aa; color:#9a3412; }
+.sp-app .pseg.termend{  background:#fff1f2; border-color:#fecdd3; color:#9f1239; }
+.sp-app .pseg.vacation{ background:#fffbeb; border-color:#fde68a; color:#92400e; }
+
+.sp-app .paper-empty{
+    padding:60px 20px;
+    border:1px dashed #cbd5e1;
+    border-radius:18px;
+    text-align:center;
+    color:#94a3b8;
+    font-size:15px;
+}
+
+/* TRIAL BANNER ON PREVIEW */
+
+.sp-app .trial-banner{
+    margin-top:26px;
+    padding:30px 24px;
+    border-radius:22px;
+    text-align:center;
+    background:linear-gradient(135deg,#6366f1,#d946ef);
+}
+
+.sp-app .trial-banner h3{
+    margin:0 0 9px;
+    font-size:23px;
+    font-weight:700;
+}
+
+.sp-app .trial-banner p{
+    margin:0 auto 20px;
+    max-width:560px;
+    font-size:14.5px;
+    line-height:1.7;
+    color:rgba(255,255,255,.92);
+}
+
+.sp-app .trial-banner a{
+    display:inline-block;
+    padding:13px 32px;
+    border-radius:12px;
+    background:#fff;
+    color:#4f46e5;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:700;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:640px){
+
+    .sp-app .card{
+        padding:28px 20px;
+    }
+
+    .sp-app .step-head h1{
+        font-size:26px;
+    }
+
+    .sp-app .paper{
+        padding:24px 18px;
+    }
+
+    .sp-app .paper-head h1{
+        font-size:24px;
+    }
+
+    .sp-modal .two-col,
+    .sp-modal .type-grid{
+        grid-template-columns:1fr;
+    }
+
+    .sp-app .float-btn{
+        right:16px;
+        bottom:16px;
+    }
+
+}
+
+/* ================= PRINT ================= */
+
+@media print{
+
+    .sp-app{
+        min-height:0;
+        padding:0;
+        background:#fff !important;
+        background-image:none !important;
+        color:#000;
+    }
+
+    .sp-app .no-print,
+    .sp-app .sp-blobs,
+    .sp-app .float-btn,
+    .sp-app .sp-modal,
+    .sp-app .trial-banner{
+        display:none !important;
+    }
+
+    .sp-app .sp-step{
+        display:none !important;
+    }
+
+    .sp-app .sp-step.printing{
+        display:block !important;
+    }
+
+    .sp-app .paper{
+        padding:0;
+        border-radius:0;
+    }
+
+    .sp-app .paper-head{
+        margin-bottom:14px;
+    }
+
+    .sp-app .paper-head h1{
+        font-size:20px;
+    }
+
+    .sp-app .paper-head img{
+        width:52px;
+        height:52px;
+        box-shadow:none;
+    }
+
+    .sp-app .term-block{
+        margin-bottom:12px;
+        break-inside:avoid;
+        page-break-inside:avoid;
+    }
+
+    .sp-app .term-block-head{
+        padding:7px 12px;
+        background:#1e293b !important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+    .sp-app .term-block-head h2{
+        font-size:13px;
+    }
+
+    .sp-app .seg-grid{
+        grid-template-columns:1fr;
+        gap:5px;
+        padding:9px;
+    }
+
+    .sp-app .pseg{
+        padding:6px 10px;
+        font-size:11px;
+        break-inside:avoid;
+        page-break-inside:avoid;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+}
+
+</style>
+
+
+<div class="sp-app" id="spApp">
+
+    <div class="sp-blobs">
+        <div class="sp-blob one"></div>
+        <div class="sp-blob two"></div>
+        <div class="sp-blob three"></div>
+    </div>
+
+    <!-- ================= STEP 1 : SCHOOL INFO ================= -->
+
+    <section class="sp-step" id="stepSchool">
+
+        <div class="sp-shell sp-narrow">
+
+            <div class="trial-strip no-print">
+                <span class="trial-chip">
+                    ✨ FREE TRIAL &nbsp;·&nbsp; <span id="trialChipText">1 term included</span>
+                </span>
+            </div>
+
+            <div class="top-bar no-print">
+
+                <span></span>
+
+                <button type="button" class="ghost-btn" id="startFreshBtn" title="Clear school info and terms">
+                    ↺ Start Fresh
+                </button>
+
+            </div>
+
+            <div class="glass card">
+
+                <div class="card-icon">🏫</div>
+
+                <h1>School Information</h1>
+
+                <p class="card-sub" id="schoolCardSub">
+                    Let's set up your session planning workspace
+                </p>
+
+                <div class="field">
+                    <label for="schoolName">School Name</label>
+                    <input type="text" id="schoolName" class="text-input glass-input" placeholder="e.g. Adiuvaret Preschool">
+                    <p class="err hidden" id="errName"></p>
+                </div>
+
+                <div class="field">
+                    <label for="schoolAddress">School Address</label>
+                    <input type="text" id="schoolAddress" class="text-input glass-input" placeholder="e.g. MG Road, Pune, Maharashtra">
+                    <p class="err hidden" id="errAddress"></p>
+                </div>
+
+                <div class="field">
+
+                    <label>School Logo</label>
+
+                    <label class="dropzone" for="logoFile" id="logoDropzone">
+                        <span class="dz-icon">🖼️</span>
+                        <p><strong>Click to upload</strong> your school logo</p>
+                        <p class="dz-hint">PNG, JPG or GIF</p>
+                        <input type="file" id="logoFile" accept="image/*" class="hidden">
+                    </label>
+
+                    <div class="logo-preview glass-input hidden" id="logoPreviewBox">
+                        <img src="" alt="School Logo" id="logoPreviewImg">
+                        <div class="lp-text">
+                            <h4>Logo uploaded</h4>
+                            <p>Looks great!</p>
+                        </div>
+                        <button type="button" class="icon-btn" id="removeLogoBtn">✕</button>
+                    </div>
+
+                    <p class="err hidden" id="errLogo"></p>
+
+                </div>
+
+                <button type="button" class="primary-btn" id="continueBtn">
+                    Continue →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= STEP 2 : MANAGE TERMS ================= -->
+
+    <section class="sp-step hidden" id="stepTerms">
+
+        <div class="sp-shell">
+
+            <div class="top-bar no-print">
+
+                <button type="button" class="ghost-btn" id="backToSchoolBtn">
+                    ← Back to School Info
+                </button>
+
+                <span class="trial-chip" id="termsTrialChip">
+                    ✨ Trial · <span id="termsUsedText"></span>
+                </span>
+
+            </div>
+
+            <div class="step-head">
+
+                <img src="" alt="School Logo" class="school-logo hidden" id="termsLogo">
+
+                <div class="card-icon hidden" id="termsLogoFallback">🎓</div>
+
+                <div>
+                    <h1>Manage Terms</h1>
+                    <p class="meta" id="termsMeta"></p>
+                </div>
+
+            </div>
+
+            <div class="glass panel">
+
+                <div class="panel-head">
+
+                    <div>
+                        <h2>Terms</h2>
+                        <p class="count" id="termCount">0 terms planned</p>
+                    </div>
+
+                    <div id="addTermSlot"></div>
+
+                </div>
+
+                <div id="termsBody"></div>
+
+            </div>
+
+        </div>
+
+        <button type="button" class="float-btn no-print" id="gotoPreviewBtn">
+            👁 Preview &amp; Print
+        </button>
+
+    </section>
+
+    <!-- ================= STEP 3 : PREVIEW & PRINT ================= -->
+
+    <section class="sp-step hidden" id="stepPreview">
+
+        <div class="sp-shell">
+
+            <div class="top-bar no-print">
+
+                <button type="button" class="ghost-btn" id="backToTermsBtn">
+                    ← Back
+                </button>
+
+                <button type="button" class="add-btn" id="printBtn" style="background:linear-gradient(to right,#10b981,#14b8a6)">
+                    🖨 Print
+                </button>
+
+            </div>
+
+            <div class="paper" id="paper"></div>
+
+            <div class="trial-banner no-print" id="previewTrialBanner">
+
+                <h3>You're using the free trial</h3>
+
+                <p>
+                    The trial lets you build and print <span id="bannerLimitText">1 term</span>.
+                    Subscribe to plan unlimited terms for every class, plus all worksheets,
+                    curriculum PDFs and online activities.
+                </p>
+
+                <a href="https://worksheets.adiuvaretfoundation.com" target="_blank">
+                    Subscribe Now
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ADD TERM MODAL ================= -->
+
+    <div class="sp-modal hidden" id="termModal">
+
+    <div class="modal-box" id="modalBox">
+
+        <div class="modal-head">
+
+            <div class="mh-left">
+                <div class="mh-icon">📘</div>
+                <h2>Add Term</h2>
+            </div>
+
+            <button type="button" class="icon-btn" id="closeModalBtn">✕</button>
+
+        </div>
+
+        <div class="field">
+
+            <label>Term Type</label>
+
+            <div class="type-grid">
+
+                <button type="button" class="type-opt active" data-type="term1">
+                    <span class="to-check">✓</span>
+                    <span class="to-name">Term 1</span>
+                    <span class="to-detail">Formative I + Mid Term Exam</span>
+                </button>
+
+                <button type="button" class="type-opt" data-type="term2">
+                    <span class="to-check">✓</span>
+                    <span class="to-name">Term 2</span>
+                    <span class="to-detail">Formative II + Term End Exam</span>
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="field">
+            <label for="termName">Term Name</label>
+            <input type="text" id="termName" class="text-input glass-input" placeholder="e.g. Term 1 (Apr - Sep 2026)">
+        </div>
+
+        <div class="two-col">
+
+            <div class="field">
+                <label for="termStart">Start Date</label>
+                <input type="date" id="termStart" class="text-input glass-input">
+            </div>
+
+            <div class="field">
+                <label for="termEnd">End Date</label>
+                <input type="date" id="termEnd" class="text-input glass-input">
+            </div>
+
+        </div>
+
+        <div class="field">
+
+            <div class="vac-head">
+
+                <span>🌴 Vacations</span>
+
+                <button type="button" class="ghost-btn" id="addVacationBtn">
+                    + Add Vacation
+                </button>
+
+            </div>
+
+            <div id="vacationList"></div>
+
+        </div>
+
+        <p class="modal-err hidden" id="modalErr"></p>
+
+        <button type="button" class="primary-btn" id="generateBtn" style="margin-top:14px">
+            Generate Term Plan
+        </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+(function(){
+
+    "use strict";
+
+    var TRIAL = {
+        maxTerms: 1,
+        subscribeUrl: "https://worksheets.adiuvaretfoundation.com"
+    };
+
+    /* ===== PLANNING RULES (same as the LEM Core session planner) ===== */
+
+    var DAYS_PER_MONTH             = 25;   
+    var FORMATIVE_ASSESSMENT_DAYS  = 3;
+    var MID_TERM_EXAM_DAYS         = 7;
+    var TERM_END_EXAM_DAYS         = 10;   
+
+    var TERM_CONFIG = {
+        term1: {
+            formativeLabel: "📝 Formative Assessment - I",
+            summativeLabel: "🎯 Summative Assessment - I (Mid Term Exam)",
+            summativeDays:  MID_TERM_EXAM_DAYS
+        },
+        term2: {
+            formativeLabel: "📝 Formative Assessment - II",
+            summativeLabel: "🏆 Summative Assessment - II (Term End Exam + PTM)",
+            summativeDays:  TERM_END_EXAM_DAYS
+        }
+    };
+
+    var HOLIDAYS = [
+        "2025-01-26", // Republic Day
+        "2025-08-15", // Independence Day
+        "2025-10-02", // Gandhi Jayanti
+        "2025-11-01", // Diwali
+        "2025-12-25", // Christmas
+        "2026-01-26", // Republic Day
+        "2026-08-15", // Independence Day
+        "2026-10-02", // Gandhi Jayanti
+        "2026-12-25"  // Christmas
+    ];
+
+    var STORAGE_KEY = "adiuvaret:sessionPlan:trial";
+
+    /* ===== STATE ===== */
+
+    var state = {
+        schoolInfo: { name:"", address:"", logo:"" },
+        selectedClass: "",
+        tasks: []
+    };
+
+    var draftVacations = [];
+    var draftTermType  = "term1";
+
+    /* ===== HELPERS ===== */
+
+    function $(id){
+        return document.getElementById(id);
+    }
+
+    function escapeHtml(text){
+        return String(text == null ? "" : text)
+            .replace(/&/g,"&amp;")
+            .replace(/</g,"&lt;")
+            .replace(/>/g,"&gt;")
+            .replace(/"/g,"&quot;");
+    }
+
+    function parseDate(iso){
+        var p = String(iso).split("-");
+        return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+    }
+
+    function toISO(date){
+        var m = date.getMonth() + 1;
+        var d = date.getDate();
+        return date.getFullYear() + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d);
+    }
+
+    function isWeekend(date){
+        var day = date.getDay();
+        return day === 0 || day === 6;
+    }
+
+    function formatDate(iso, longMonth){
+        if(!iso || iso === "-") return "-";
+
+        var date = parseDate(iso);
+
+        if(isNaN(date.getTime())) return iso;
+
+        return date.toLocaleDateString("en-GB", {
+            day:   "2-digit",
+            month: longMonth ? "long" : "short",
+            year:  "numeric"
+        });
+    }
+
+    /* ===== WORKING DAYS ===== */
+
+    function getWorkingDays(startDate, endDate, vacations){
+
+        var current  = parseDate(startDate);
+        var last     = parseDate(endDate);
+        var workingDays = [];
+
+        while(current <= last){
+
+            var iso = toISO(current);
+
+            var isVacationDay = vacations.some(function(vac){
+                return vac.start && vac.end && iso >= vac.start && iso <= vac.end;
+            });
+
+            if(!isWeekend(current) && HOLIDAYS.indexOf(iso) === -1 && !isVacationDay){
+                workingDays.push(iso);
+            }
+
+            current.setDate(current.getDate() + 1);
+        }
+
+        return workingDays;
+    }
+
+    /* ===== SYLLABUS GENERATOR ===== */
+
+    function generateSyllabus(startDate, endDate, vacations, termType){
+
+        var syllabus    = [];
+        var workingDays = getWorkingDays(startDate, endDate, vacations);
+        var config      = TERM_CONFIG[termType] || TERM_CONFIG.term1;
+
+        var totalDaysRequired =
+            DAYS_PER_MONTH * 4 + FORMATIVE_ASSESSMENT_DAYS + config.summativeDays;
+
+        if(workingDays.length < totalDaysRequired){
+            return {
+                error: "Insufficient days! You need at least " + totalDaysRequired +
+                       " working days for this term (4 months + Formative + Summative assessments). " +
+                       "This date range only has " + workingDays.length + "."
+            };
+        }
+
+        var monthCounter = 1;
+
+        function take(label, days, isAssessment){
+
+            var block = workingDays.splice(0, days);
+
+            return {
+                month:           label,
+                syllabusStart:   block[0],
+                syllabusEnd:     block[block.length - 1],
+                evaluationStart: isAssessment ? block[0] : "-",
+                evaluationEnd:   isAssessment ? block[block.length - 1] : "-"
+            };
+        }
+
+        function takeMonths(count){
+            for(var i = 0; i < count; i++){
+                syllabus.push(take("📚 Month " + monthCounter + " Syllabus", DAYS_PER_MONTH, false));
+                monthCounter++;
+            }
+        }
+
+        // Month 1-2 -> Formative Assessment
+        takeMonths(2);
+        syllabus.push(take(config.formativeLabel, FORMATIVE_ASSESSMENT_DAYS, true));
+
+        // Month 3-4 -> Summative Assessment
+        takeMonths(2);
+        syllabus.push(take(config.summativeLabel, config.summativeDays, true));
+
+        // Vacations, wherever the user placed them
+        vacations.forEach(function(vac){
+            if(!vac.start || !vac.end) return;
+
+            syllabus.push({
+                month:           "🌴 Vacation: " + (vac.name || "Break"),
+                syllabusStart:   vac.start,
+                syllabusEnd:     vac.end,
+                evaluationStart: "-",
+                evaluationEnd:   "-"
+            });
+        });
+
+        // Always show in real chronological order
+        syllabus.sort(function(a, b){
+            return parseDate(a.syllabusStart) - parseDate(b.syllabusStart);
+        });
+
+        return { syllabus: syllabus };
+    }
+
+    /* ===== SEGMENT STYLING ===== */
+
+    function segmentClass(label){
+
+        var m = String(label).toLowerCase();
+
+        if(m.indexOf("vacation") !== -1)  return "vacation";
+        if(m.indexOf("term end") !== -1)  return "termend";
+        if(m.indexOf("mid term") !== -1 || m.indexOf("summative") !== -1) return "summative";
+        if(m.indexOf("formative") !== -1) return "formative";
+
+        return "syllabus";
+    }
+
+    /* ===== PERSISTENCE ===== */
+
+    function save(){
+        try{
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }catch(e){ /* storage full or blocked - keep working in memory */ }
+    }
+
+    function load(){
+        try{
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if(!raw) return;
+
+            var parsed = JSON.parse(raw);
+
+            if(parsed && typeof parsed === "object"){
+                state.schoolInfo    = parsed.schoolInfo || state.schoolInfo;
+                state.selectedClass = parsed.selectedClass || "";
+                state.tasks         = Array.isArray(parsed.tasks) ? parsed.tasks : [];
+            }
+        }catch(e){ /* ignore corrupt storage */ }
+    }
+
+    /* ===== STEP NAVIGATION ===== */
+
+    var steps = {
+        school:  $("stepSchool"),
+        terms:   $("stepTerms"),
+        preview: $("stepPreview")
+    };
+
+    function showStep(name){
+
+        Object.keys(steps).forEach(function(key){
+            steps[key].classList.toggle("hidden", key !== name);
+            steps[key].classList.remove("printing");
+        });
+
+        if(name === "terms")   renderTerms();
+        if(name === "preview") renderPreview();
+
+        window.scrollTo({ top:0, behavior:"smooth" });
+    }
+
+    /* ===== TRIAL HELPERS ===== */
+
+    function trialLabel(){
+        return TRIAL.maxTerms + " term" + (TRIAL.maxTerms === 1 ? "" : "s");
+    }
+
+    function trialExhausted(){
+        return state.tasks.length >= TRIAL.maxTerms;
+    }
+
+    /* ===== STEP 1 : SCHOOL INFO ===== */
+
+    function fillSchoolForm(){
+
+        $("schoolName").value    = state.schoolInfo.name || "";
+        $("schoolAddress").value = state.schoolInfo.address || "";
+
+        if(state.schoolInfo.logo){
+            $("logoPreviewImg").src = state.schoolInfo.logo;
+            $("logoPreviewBox").classList.remove("hidden");
+            $("logoDropzone").classList.add("hidden");
+        }else{
+            $("logoPreviewBox").classList.add("hidden");
+            $("logoDropzone").classList.remove("hidden");
+        }
+
+        $("schoolCardSub").innerText = state.selectedClass
+            ? "Let's set up the session plan for " + state.selectedClass
+            : "Let's set up your session planning workspace";
+
+        $("trialChipText").innerText = trialLabel() + " included";
+        $("bannerLimitText").innerText = trialLabel();
+    }
+
+    function setError(id, message){
+
+        var el = $(id);
+
+        if(message){
+            el.innerText = message;
+            el.classList.remove("hidden");
+        }else{
+            el.classList.add("hidden");
+        }
+    }
+
+    function validateSchool(){
+
+        var ok = true;
+
+        var name    = $("schoolName").value.trim();
+        var address = $("schoolAddress").value.trim();
+
+        if(name.length < 3){
+            setError("errName", "School name must be at least 3 characters long.");
+            ok = false;
+        }else{
+            setError("errName", "");
+        }
+
+        if(address.length < 5){
+            setError("errAddress", "Please enter a valid address.");
+            ok = false;
+        }else{
+            setError("errAddress", "");
+        }
+
+        if(!state.schoolInfo.logo){
+            setError("errLogo", "Please upload a valid logo.");
+            ok = false;
+        }else{
+            setError("errLogo", "");
+        }
+
+        if(ok){
+            state.schoolInfo.name    = name;
+            state.schoolInfo.address = address;
+            save();
+        }
+
+        return ok;
+    }
+
+    $("logoFile").addEventListener("change", function(e){
+
+        var file = e.target.files && e.target.files[0];
+        if(!file) return;
+
+        if(file.type.indexOf("image/") !== 0){
+            setError("errLogo", "Only image files (PNG, JPG, JPEG, GIF) are allowed.");
+            return;
+        }
+
+        var reader = new FileReader();
+
+        reader.onload = function(){
+            state.schoolInfo.logo = reader.result;
+            setError("errLogo", "");
+            fillSchoolForm();
+            save();
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    $("removeLogoBtn").addEventListener("click", function(){
+        state.schoolInfo.logo = "";
+        $("logoFile").value = "";
+        fillSchoolForm();
+        save();
+    });
+
+    $("continueBtn").addEventListener("click", function(){
+        if(validateSchool()) showStep("terms");
+    });
+
+    $("startFreshBtn").addEventListener("click", function(){
+
+        var confirmed = window.confirm(
+            "Start a new session plan? This clears the school info and every term you've added so far."
+        );
+
+        if(!confirmed) return;
+
+        state.schoolInfo = { name:"", address:"", logo:"" };
+        state.tasks = [];
+
+        $("logoFile").value = "";
+
+        setError("errName", "");
+        setError("errAddress", "");
+        setError("errLogo", "");
+
+        fillSchoolForm();
+        save();
+    });
+
+    /* ===== STEP 2 : MANAGE TERMS ===== */
+
+    function renderTerms(){
+
+        var tasks = state.tasks;
+
+        // header
+        if(state.schoolInfo.logo){
+            $("termsLogo").src = state.schoolInfo.logo;
+            $("termsLogo").classList.remove("hidden");
+            $("termsLogoFallback").classList.add("hidden");
+        }else{
+            $("termsLogo").classList.add("hidden");
+            $("termsLogoFallback").classList.remove("hidden");
+        }
+
+        var metaParts = [state.schoolInfo.name, state.selectedClass].filter(Boolean);
+        $("termsMeta").innerText = metaParts.join(" · ");
+
+        $("termCount").innerText =
+            tasks.length + " term" + (tasks.length !== 1 ? "s" : "") + " planned";
+
+        $("termsUsedText").innerText =
+            tasks.length + " / " + TRIAL.maxTerms + " terms used";
+
+        // add button (or subscribe lock)
+        $("addTermSlot").innerHTML = trialExhausted()
+            ? '<a href="' + TRIAL.subscribeUrl + '" target="_blank" class="add-btn locked">🔒 Subscribe to Add More Terms</a>'
+            : '<button type="button" class="add-btn" id="openModalBtn">＋ Add Term</button>';
+
+        // body
+        if(tasks.length === 0){
+
+            $("termsBody").innerHTML = ''
+                + '<div class="empty">'
+                +   '<div class="em-icon">🗓️</div>'
+                +   '<p>No terms added yet</p>'
+                +   '<p class="em-hint">Click "Add Term" to generate your first session plan</p>'
+                + '</div>';
+
+            return;
+        }
+
+        var html = '<div class="term-grid">';
+
+        tasks.forEach(function(task){
+
+            html += ''
+                + '<div class="glass-input term-card">'
+                +   '<div class="term-card-head">'
+                +     '<div>'
+                +       '<h3>' + escapeHtml(task.term)
+                +         '<span class="term-pill">' + (task.termType === "term2" ? "Term 2" : "Term 1") + '</span>'
+                +       '</h3>'
+                +       '<p class="term-dates">' + formatDate(task.from) + ' — ' + formatDate(task.to) + '</p>'
+                +     '</div>'
+                +     '<button type="button" class="icon-btn" data-delete="' + task.id + '" title="Delete term">🗑</button>'
+                +   '</div>'
+                +   '<div class="seg-list">';
+
+            task.syllabus.forEach(function(segment){
+                html += ''
+                    + '<div class="seg ' + segmentClass(segment.month) + '">'
+                    +   '<span class="seg-name">' + escapeHtml(segment.month) + '</span>'
+                    +   '<span class="seg-date">'
+                    +     formatDate(segment.syllabusStart) + ' – ' + formatDate(segment.syllabusEnd)
+                    +   '</span>'
+                    + '</div>';
+            });
+
+            html += '</div></div>';
+        });
+
+        // locked placeholder once the trial is used up
+        if(trialExhausted()){
+            html += ''
+                + '<div class="glass-input term-card locked-card">'
+                +   '<div class="lock-ico">🔒</div>'
+                +   '<h3>Add another term</h3>'
+                +   '<p>The free trial covers ' + trialLabel() + '. Subscribe to plan unlimited terms for every class.</p>'
+                +   '<a href="' + TRIAL.subscribeUrl + '" target="_blank" class="unlock-link">Subscribe to Unlock</a>'
+                + '</div>';
+        }
+
+        html += '</div>';
+
+        $("termsBody").innerHTML = html;
+    }
+
+    $("backToSchoolBtn").addEventListener("click", function(){
+        showStep("school");
+    });
+
+    $("gotoPreviewBtn").addEventListener("click", function(){
+        showStep("preview");
+    });
+
+    // delegated: open modal + delete term
+    steps.terms.addEventListener("click", function(e){
+
+        if(e.target.closest("#openModalBtn")){
+            openModal();
+            return;
+        }
+
+        var del = e.target.closest("[data-delete]");
+
+        if(del){
+            var id = Number(del.getAttribute("data-delete"));
+
+            state.tasks = state.tasks.filter(function(task){
+                return task.id !== id;
+            });
+
+            save();
+            renderTerms();
+        }
+    });
+
+    /* ===== ADD TERM MODAL ===== */
+
+    function renderVacations(){
+
+        var html = "";
+
+        draftVacations.forEach(function(vac, index){
+            html += ''
+                + '<div class="vac-row">'
+                +   '<input type="text" placeholder="Vacation Name" value="' + escapeHtml(vac.name) + '" data-vac="name" data-index="' + index + '">'
+                +   '<input type="date" value="' + escapeHtml(vac.start) + '" data-vac="start" data-index="' + index + '">'
+                +   '<input type="date" value="' + escapeHtml(vac.end) + '" data-vac="end" data-index="' + index + '">'
+                +   '<button type="button" class="icon-btn" data-vac-remove="' + index + '">🗑</button>'
+                + '</div>';
+        });
+
+        $("vacationList").innerHTML = html;
+    }
+
+    function openModal(){
+
+        if(trialExhausted()){
+            window.open(TRIAL.subscribeUrl, "_blank");
+            return;
+        }
+
+        draftVacations = [];
+        draftTermType  = "term1";
+
+        $("termName").value  = "";
+        $("termStart").value = "";
+        $("termEnd").value   = "";
+
+        $("modalErr").classList.add("hidden");
+
+        Array.prototype.forEach.call(document.querySelectorAll("#termModal .type-opt"), function(btn){
+            btn.classList.toggle("active", btn.getAttribute("data-type") === "term1");
+        });
+
+        renderVacations();
+
+        $("termModal").classList.remove("hidden");
+    }
+
+    function closeModal(){
+        $("termModal").classList.add("hidden");
+    }
+
+    $("closeModalBtn").addEventListener("click", closeModal);
+
+    $("termModal").addEventListener("click", function(e){
+        if(e.target === $("termModal")) closeModal();
+    });
+
+    $("addVacationBtn").addEventListener("click", function(){
+        draftVacations.push({ name:"", start:"", end:"" });
+        renderVacations();
+    });
+
+    $("vacationList").addEventListener("input", function(e){
+
+        var field = e.target.getAttribute("data-vac");
+        if(!field) return;
+
+        var index = Number(e.target.getAttribute("data-index"));
+
+        if(draftVacations[index]){
+            draftVacations[index][field] = e.target.value;
+        }
+    });
+
+    $("vacationList").addEventListener("click", function(e){
+
+        var btn = e.target.closest("[data-vac-remove]");
+        if(!btn) return;
+
+        draftVacations.splice(Number(btn.getAttribute("data-vac-remove")), 1);
+        renderVacations();
+    });
+
+    $("modalBox").addEventListener("click", function(e){
+
+        var typeBtn = e.target.closest(".type-opt");
+        if(!typeBtn) return;
+
+        draftTermType = typeBtn.getAttribute("data-type");
+
+        Array.prototype.forEach.call(document.querySelectorAll("#termModal .type-opt"), function(btn){
+            btn.classList.toggle("active", btn === typeBtn);
+        });
+    });
+
+    $("generateBtn").addEventListener("click", function(){
+
+        var term  = $("termName").value.trim();
+        var start = $("termStart").value;
+        var end   = $("termEnd").value;
+
+        function fail(message){
+            $("modalErr").innerText = message;
+            $("modalErr").classList.remove("hidden");
+        }
+
+        if(!term || !start || !end){
+            fail("Please enter the term name, start date and end date.");
+            return;
+        }
+
+        if(parseDate(end) <= parseDate(start)){
+            fail("The end date must be after the start date.");
+            return;
+        }
+
+        var result = generateSyllabus(start, end, draftVacations, draftTermType);
+
+        if(result.error){
+            fail(result.error);
+            return;
+        }
+
+        var nextId = state.tasks.reduce(function(max, task){
+            return Math.max(max, task.id);
+        }, 0) + 1;
+
+        state.tasks.push({
+            id:        nextId,
+            term:      term,
+            termType:  draftTermType,
+            from:      start,
+            to:        end,
+            syllabus:  result.syllabus,
+            vacations: draftVacations.slice()
+        });
+
+        save();
+        closeModal();
+        renderTerms();
+    });
+
+    /* ===== STEP 3 : PREVIEW & PRINT ===== */
+
+    function renderPreview(){
+
+        var html = ''
+            + '<div class="paper-head">'
+            +   '<div>'
+            +     '<p class="ph-kicker">Session Planning</p>'
+            +     '<h1>' + escapeHtml(state.schoolInfo.name) + '</h1>'
+            +     '<p class="ph-address">' + escapeHtml(state.schoolInfo.address) + '</p>'
+            +   '</div>'
+            +   (state.schoolInfo.logo
+                    ? '<img src="' + state.schoolInfo.logo + '" alt="School logo">'
+                    : '')
+            + '</div>';
+
+        if(state.tasks.length === 0){
+
+            html += '<div class="paper-empty">No terms have been added yet.</div>';
+
+        }else{
+
+            state.tasks.forEach(function(task){
+
+                html += ''
+                    + '<div class="term-block">'
+                    +   '<div class="term-block-head">'
+                    +     '<h2>' + escapeHtml(task.term)
+                    +       '<span class="tb-pill">' + (task.termType === "term2" ? "Term 2" : "Term 1") + '</span>'
+                    +     '</h2>'
+                    +     '<span class="tb-dates">'
+                    +       formatDate(task.from, true) + ' — ' + formatDate(task.to, true)
+                    +     '</span>'
+                    +   '</div>'
+                    +   '<div class="seg-grid">';
+
+                task.syllabus.forEach(function(segment){
+                    html += ''
+                        + '<div class="pseg ' + segmentClass(segment.month) + '">'
+                        +   '<div class="ps-top">'
+                        +     '<span class="ps-name">' + escapeHtml(segment.month) + '</span>'
+                        +     '<span class="ps-date">'
+                        +       formatDate(segment.syllabusStart, true) + ' to ' + formatDate(segment.syllabusEnd, true)
+                        +     '</span>'
+                        +   '</div>'
+                        + '</div>';
+                });
+
+                html += '</div></div>';
+            });
+        }
+
+        $("paper").innerHTML = html;
+    }
+
+    $("backToTermsBtn").addEventListener("click", function(){
+        showStep("terms");
+    });
+
+    $("printBtn").addEventListener("click", function(){
+
+        steps.preview.classList.add("printing");
+
+        window.print();
+
+        setTimeout(function(){
+            steps.preview.classList.remove("printing");
+        }, 500);
+    });
+
+    /* ===== INIT ===== */
+
+    function init(){
+
+        load();
+
+        // ?class=Nursery keeps parity with the curriculum links
+        try{
+            var params = new URLSearchParams(window.location.search);
+            if(params.get("class")) state.selectedClass = params.get("class");
+        }catch(e){ /* older browser - skip */ }
+
+        fillSchoolForm();
+
+        // returning visitor with a saved plan lands straight on their terms
+        if(state.schoolInfo.name && state.schoolInfo.logo && state.tasks.length){
+            showStep("terms");
+        }else{
+            showStep("school");
+        }
+    }
+
+    init();
+
+})();
+</script>

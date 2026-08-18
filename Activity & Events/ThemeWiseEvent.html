@@ -1,0 +1,911 @@
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+
+.theme-activities{
+    background:#f5f7ff;
+    padding:60px 20px;
+    font-family:'Baloo 2', sans-serif;
+    color:#1f2937;
+    min-height:100vh;
+}
+
+.theme-activities *{
+    box-sizing:border-box;
+}
+
+.theme-activities .ta-wrap{
+    max-width:1250px;
+    margin:0 auto;
+}
+
+.theme-activities .hidden{
+    display:none !important;
+}
+
+/* ===== HEADINGS ===== */
+
+.theme-activities .kicker{
+    text-align:center;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#5d5be3;
+    margin:0 0 12px;
+}
+
+.theme-activities .ta-title{
+    text-align:center;
+    font-size:40px;
+    font-weight:800;
+    color:#5d5be3;
+    line-height:1.25;
+    margin:0 0 14px;
+}
+
+.theme-activities .trial-note{
+    display:block;
+    width:fit-content;
+    margin:0 auto 44px;
+    padding:10px 26px;
+    border-radius:40px;
+    background:#eef2ff;
+    color:#5d5be3;
+    font-size:16px;
+    font-weight:600;
+}
+
+/* ===== THEME CARDS ===== */
+
+.theme-activities .theme-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:26px;
+}
+
+.theme-activities .theme-card{
+    background:#fff;
+    border:1px solid #e0e7ff;
+    border-radius:26px;
+    padding:36px 28px;
+    text-align:center;
+    box-shadow:0 14px 34px rgba(15,23,42,.07);
+    transition:.3s ease;
+}
+
+.theme-activities .theme-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 22px 48px rgba(15,23,42,.12);
+}
+
+.theme-activities .theme-icon{
+    font-size:60px;
+    line-height:1;
+    display:block;
+    margin-bottom:16px;
+}
+
+.theme-activities .theme-card h2{
+    font-size:25px;
+    font-weight:700;
+    color:#1f2937;
+    margin:0 0 10px;
+}
+
+.theme-activities .theme-card p{
+    font-size:15px;
+    line-height:1.7;
+    color:#6b7280;
+    margin:0 0 14px;
+}
+
+.theme-activities .theme-meta{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:22px;
+    padding:7px 16px;
+    border-radius:30px;
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
+    color:#16a34a;
+    font-size:13px;
+    font-weight:600;
+}
+
+.theme-activities .view-btn{
+    padding:13px 44px;
+    border:none;
+    border-radius:40px;
+    background:#6f6cf8;
+    color:#fff;
+    font-family:inherit;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.theme-activities .view-btn:hover{
+    background:#514df0;
+}
+
+/* ===== GRID VIEW HEADER ===== */
+
+.theme-activities .back-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:22px;
+    padding:0;
+    border:none;
+    background:none;
+    color:#5d5be3;
+    font-family:inherit;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.theme-activities .back-btn:hover{
+    color:#3f3ccc;
+}
+
+.theme-activities .grid-head{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:26px;
+}
+
+.theme-activities .grid-head h1{
+    margin:0;
+    font-size:34px;
+    font-weight:800;
+    color:#5d5be3;
+}
+
+.theme-activities .grid-head .count{
+    margin:5px 0 0;
+    color:#6b7280;
+    font-size:15px;
+}
+
+.theme-activities .all-btn{
+    padding:14px 26px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(to right,#f59e0b,#f97316);
+    color:#fff;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:700;
+    text-decoration:none;
+    cursor:pointer;
+    display:inline-block;
+}
+
+.theme-activities .all-btn:hover{
+    filter:brightness(1.08);
+    color:#fff;
+}
+
+/* ===== NOTES ===== */
+
+.theme-activities .note{
+    margin:0 0 22px;
+    padding:13px 18px;
+    border-radius:14px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.theme-activities .note.info{
+    background:#eef2ff;
+    border:1px solid #c7d2fe;
+    color:#5d5be3;
+}
+
+.theme-activities .note.warn{
+    background:#fffbeb;
+    border:1px solid #fde68a;
+    color:#92400e;
+    font-weight:500;
+}
+
+/* ===== WORKSHEET GRID ===== */
+
+.theme-activities .sheet-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:22px;
+}
+
+.theme-activities .sheet-card{
+    display:flex;
+    flex-direction:column;
+    background:#fff;
+    border:1px solid #e0e7ff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(15,23,42,.06);
+    transition:.3s ease;
+}
+
+.theme-activities .sheet-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 16px 34px rgba(15,23,42,.12);
+}
+
+.theme-activities .sheet-thumb{
+    position:relative;
+    height:230px;
+    background:#fff;
+}
+
+.theme-activities .sheet-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:8px;
+    display:block;
+}
+
+.theme-activities .free-badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:2;
+    background:#16a34a;
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.8px;
+    padding:5px 12px;
+    border-radius:30px;
+}
+
+/* LOCKED TILE */
+
+.theme-activities .sheet-card.locked .sheet-thumb{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:repeating-linear-gradient(
+        45deg,
+        #f1f5f9,
+        #f1f5f9 12px,
+        #e9eef5 12px,
+        #e9eef5 24px
+    );
+    color:#94a3b8;
+}
+
+.theme-activities .sheet-card.locked .lock-ico{
+    font-size:38px;
+    line-height:1;
+}
+
+.theme-activities .sheet-card.locked .lock-word{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+}
+
+.theme-activities .sheet-body{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    flex:1;
+    padding:16px;
+    border-top:1px solid #eef2ff;
+}
+
+.theme-activities .sheet-body .sheet-name{
+    flex:1;
+    margin:0;
+    font-size:15px;
+    font-weight:700;
+    color:#374151;
+    text-transform:capitalize;
+}
+
+.theme-activities .sheet-card.locked .sheet-name{
+    color:#94a3b8;
+}
+
+/* ===== ROW BUTTONS ===== */
+
+.theme-activities .dl-btn{
+    width:100%;
+    padding:11px;
+    border:none;
+    border-radius:12px;
+    background:#6f6cf8;
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.theme-activities .dl-btn:hover{
+    background:#514df0;
+}
+
+.theme-activities .dl-btn:disabled{
+    opacity:.6;
+    cursor:wait;
+}
+
+.theme-activities .tab-btn{
+    display:block;
+    width:100%;
+    padding:11px;
+    border-radius:12px;
+    background:#f59e0b;
+    color:#fff;
+    text-align:center;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+}
+
+.theme-activities .tab-btn:hover{
+    background:#d97706;
+    color:#fff;
+}
+
+.theme-activities .lock-btn{
+    display:block;
+    width:100%;
+    padding:11px;
+    border-radius:12px;
+    background:linear-gradient(to right,#f59e0b,#f97316);
+    color:#fff;
+    text-align:center;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+}
+
+.theme-activities .lock-btn:hover{
+    filter:brightness(1.08);
+    color:#fff;
+}
+
+/* ===== SUBSCRIBE BANNER ===== */
+
+.theme-activities .subscribe-banner{
+    margin-top:44px;
+    padding:40px 26px;
+    border-radius:26px;
+    text-align:center;
+    background:linear-gradient(135deg,#6f6cf8,#514df0);
+    color:#fff;
+}
+
+.theme-activities .subscribe-banner h3{
+    margin:0 0 12px;
+    font-size:29px;
+    font-weight:700;
+}
+
+.theme-activities .subscribe-banner p{
+    max-width:640px;
+    margin:0 auto 24px;
+    font-size:16px;
+    line-height:1.7;
+    color:rgba(255,255,255,.95);
+}
+
+.theme-activities .subscribe-cta{
+    display:inline-block;
+    padding:14px 36px;
+    border-radius:14px;
+    background:#fff;
+    color:#514df0;
+    text-decoration:none;
+    font-size:17px;
+    font-weight:700;
+}
+
+.theme-activities .subscribe-cta:hover{
+    background:#eef2ff;
+    color:#3f3ccc;
+}
+
+@media(max-width:768px){
+
+    .theme-activities .ta-title{
+        font-size:27px;
+    }
+
+    .theme-activities .grid-head h1{
+        font-size:26px;
+    }
+
+    .theme-activities .all-btn{
+        width:100%;
+        text-align:center;
+    }
+
+    .theme-activities .subscribe-banner h3{
+        font-size:23px;
+    }
+
+}
+
+</style>
+
+
+<section class="theme-activities">
+
+    <div class="ta-wrap">
+
+        <!-- ================= THEME PICKER ================= -->
+
+        <div id="themeView">
+
+            <p class="kicker">Classroom Activity</p>
+
+            <h1 class="ta-title">
+                Theme based colouring Worksheets for Your School
+            </h1>
+
+            <span class="trial-note">
+                2 worksheets per theme are free to download. Subscribe to unlock them all.
+            </span>
+
+            <div class="theme-grid" id="themeGrid"></div>
+
+        </div>
+
+        <!-- ================= WORKSHEET GRID ================= -->
+
+        <div id="sheetView" class="hidden">
+
+            <button type="button" class="back-btn" id="backBtn">
+                ← Back to themes
+            </button>
+
+            <div class="grid-head">
+
+                <div>
+                    <h1 id="groupTitle"></h1>
+                    <p class="count" id="groupCount"></p>
+                </div>
+
+                <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="all-btn">
+                    🔒 Subscribe to Download All as one PDF
+                </a>
+
+            </div>
+
+            <p class="note info hidden" id="infoNote"></p>
+            <p class="note warn hidden" id="warnNote"></p>
+
+            <div class="sheet-grid" id="sheetGrid"></div>
+
+            <div class="subscribe-banner">
+
+                <h3>Unlock every colouring worksheet</h3>
+
+                <p>
+                    2 worksheets in each theme are free to try. Subscribe to download all
+                    the fruit and vegetable sheets as one PDF, plus every other worksheet,
+                    curriculum PDF, session plan and online activity.
+                </p>
+
+                <a href="https://worksheets.adiuvaretfoundation.com" target="_blank" class="subscribe-cta">
+                    Subscribe Now
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+(function(){
+
+    "use strict";
+
+    var SUBSCRIBE_URL = "https://worksheets.adiuvaretfoundation.com";
+
+    /* =====================================================================
+       WORKSHEET DATA
+
+       Only the FREE trial worksheets carry an image URL. The locked ones
+       keep their title (so teachers see what they'd be getting) but their
+       file URLs are deliberately left out - anything in this file can be
+       read from the page source.
+
+       To free another worksheet: add  pdf:"<url>", free:true  to its entry.
+       ===================================================================== */
+
+    var groups = {
+
+        fruit: {
+            title: "Fruit Worksheets",
+            icon: "🍎",
+            description: "Colour fruits, match the names, and enjoy fun fruit-based learning activities.",
+            items: [
+                { title:"Apple Colouring",  free:true, pdf:"https://cdn.shopify.com/s/files/1/0632/7307/4847/files/fruit-apple.jpg?v=1786521675" },
+                { title:"Banana Colouring", free:true, pdf:"https://cdn.shopify.com/s/files/1/0632/7307/4847/files/fruit-banana.jpg?v=1786521676" },
+                { title:"Grapes Colouring" },
+                { title:"Strawberry Colouring" },
+                { title:"Papaya Colouring" },
+                { title:"Blueberry Colouring" },
+                { title:"Pomegranate Colouring" },
+                { title:"Watermelon Colouring" },
+                { title:"Litchi Colouring" },
+                { title:"Cherry Colouring" },
+                { title:"Guava Colouring" },
+                { title:"Orange Colouring" },
+                { title:"Mango Colouring" },
+                { title:"Dragon Fruit Colouring" },
+                { title:"Muskmelon Colouring" },
+                { title:"Coconut Colouring" },
+                { title:"Kiwi Colouring" },
+                { title:"Ash Gourd Colouring" },
+                { title:"Apricot Colouring" },
+                { title:"Adzuki Bean Colouring" },
+                { title:"Blackberry Colouring" },
+                { title:"Plum Colouring" },
+                { title:"Amla Colouring" },
+                { title:"Raspberry Colouring" }
+            ]
+        },
+
+        vegetable: {
+            title: "Vegetable Worksheets",
+            icon: "🥕",
+            description: "Explore vegetable colouring sheets and practice identifying healthy vegetables.",
+            items: [
+                { title:"Carrot Colouring", free:true, pdf:"https://cdn.shopify.com/s/files/1/0632/7307/4847/files/fruit-carrot.jpg?v=1786520203" },
+                { title:"Tomato Colouring", free:true, pdf:"https://cdn.shopify.com/s/files/1/0632/7307/4847/files/veg-tomato.jpg?v=1786520183" },
+                { title:"Turnip Colouring" },
+                { title:"Spring Onion Colouring" },
+                { title:"Yam Colouring" },
+                { title:"Potato Colouring" },
+                { title:"Peas Colouring" },
+                { title:"Lettuce Colouring" },
+                { title:"Pumpkin Colouring" },
+                { title:"Spinach Colouring" },
+                { title:"Radish Colouring" },
+                { title:"Taro Root (Arbi) Colouring" },
+                { title:"Ginger Colouring" },
+                { title:"Sweet Potato Colouring" },
+                { title:"Mustard Greens Colouring" },
+                { title:"Kale Colouring" },
+                { title:"Ridge Gourd Colouring" },
+                { title:"Lady Finger Colouring" },
+                { title:"Cabbage Colouring" },
+                { title:"Pointed Gourd Colouring" },
+                { title:"Snake Gourd Colouring" },
+                { title:"Capsicum Colouring" },
+                { title:"Broccoli Colouring" },
+                { title:"Bitter Gourd Colouring" },
+                { title:"Bottle Gourd Colouring" },
+                { title:"Brinjal Colouring" },
+                { title:"Corn Colouring" },
+                { title:"Cucumber Colouring" },
+                { title:"French Beans Colouring" }
+            ]
+        }
+
+    };
+
+    /* ===== HELPERS (same rules as the React version) ===== */
+
+    function getExtension(url){
+        var ext = url.split("?")[0].split(".").pop().toLowerCase();
+        return /^(jpg|jpeg|png|webp|gif|pdf)$/.test(ext) ? ext : "pdf";
+    }
+
+    function isPdf(url){
+        return getExtension(url) === "pdf";
+    }
+
+    function slugify(title){
+        return title.trim().replace(/\s+/g, "-").toLowerCase();
+    }
+
+    function escapeHtml(text){
+        return String(text == null ? "" : text)
+            .replace(/&/g,"&amp;")
+            .replace(/</g,"&lt;")
+            .replace(/>/g,"&gt;")
+            .replace(/"/g,"&quot;");
+    }
+
+    function readAsDataUrl(blob){
+        return new Promise(function(resolve, reject){
+            var reader = new FileReader();
+            reader.onload  = function(){ resolve(reader.result); };
+            reader.onerror = function(){ reject(new Error("Could not read file")); };
+            reader.readAsDataURL(blob);
+        });
+    }
+
+    function loadImage(dataUrl){
+        return new Promise(function(resolve, reject){
+            var image = new Image();
+            image.onload  = function(){ resolve(image); };
+            image.onerror = function(){ reject(new Error("Could not decode image")); };
+            image.src = dataUrl;
+        });
+    }
+
+    /* ===== BUILD A PDF FROM WORKSHEET IMAGES ===== */
+
+    function buildWorksheetPdf(items){
+
+        if(!window.jspdf || !window.jspdf.jsPDF){
+            return Promise.resolve({ doc:null, failed:items.map(function(i){ return i.title; }) });
+        }
+
+        var doc        = new window.jspdf.jsPDF({ unit:"pt", format:"a4" });
+        var pageWidth  = doc.internal.pageSize.getWidth();
+        var pageHeight = doc.internal.pageSize.getHeight();
+        var margin     = 32;
+
+        var failed  = [];
+        var hasPage = false;
+
+        // one worksheet at a time, so a failure never breaks the rest
+        return items.reduce(function(chain, worksheet){
+
+            return chain.then(function(){
+
+                if(isPdf(worksheet.pdf)) throw new Error("Not an image");
+
+                return fetch(worksheet.pdf, { mode:"cors" })
+                    .then(function(response){
+                        if(!response.ok) throw new Error("Request failed (" + response.status + ")");
+                        return response.blob();
+                    })
+                    .then(readAsDataUrl)
+                    .then(function(dataUrl){
+                        return loadImage(dataUrl).then(function(image){
+
+                            var scale = Math.min(
+                                (pageWidth  - margin * 2) / image.naturalWidth,
+                                (pageHeight - margin * 2) / image.naturalHeight
+                            );
+
+                            var width  = image.naturalWidth  * scale;
+                            var height = image.naturalHeight * scale;
+
+                            if(hasPage) doc.addPage();
+
+                            doc.addImage(
+                                dataUrl,
+                                getExtension(worksheet.pdf) === "png" ? "PNG" : "JPEG",
+                                (pageWidth  - width)  / 2,
+                                (pageHeight - height) / 2,
+                                width,
+                                height
+                            );
+
+                            hasPage = true;
+                        });
+                    })
+                    .catch(function(error){
+                        console.error('Skipped "' + worksheet.title + '" (' + worksheet.pdf + ')', error);
+                        failed.push(worksheet.title);
+                    });
+            });
+
+        }, Promise.resolve()).then(function(){
+            return { doc: hasPage ? doc : null, failed: failed };
+        });
+    }
+
+    /* ===== STATE ===== */
+
+    var activeKey     = null;
+    var failedIndexes = [];
+    var busyIndex     = null;
+
+    function $(id){ return document.getElementById(id); }
+
+    /* ===== THEME CARDS ===== */
+
+    function renderThemes(){
+
+        var html = "";
+
+        Object.keys(groups).forEach(function(key){
+
+            var group = groups[key];
+            var freeCount = group.items.filter(function(item){ return item.free; }).length;
+
+            html += ''
+                + '<div class="theme-card">'
+                +   '<span class="theme-icon">' + group.icon + '</span>'
+                +   '<h2>' + escapeHtml(group.title) + '</h2>'
+                +   '<p>' + escapeHtml(group.description) + '</p>'
+                +   '<span class="theme-meta">'
+                +     '✅ ' + freeCount + ' free of ' + group.items.length + ' worksheets'
+                +   '</span>'
+                +   '<div>'
+                +     '<button type="button" class="view-btn" data-group="' + key + '">View</button>'
+                +   '</div>'
+                + '</div>';
+        });
+
+        $("themeGrid").innerHTML = html;
+    }
+
+    /* ===== WORKSHEET GRID ===== */
+
+    function renderSheets(){
+
+        var group = groups[activeKey];
+        if(!group) return;
+
+        var freeCount = group.items.filter(function(item){ return item.free; }).length;
+
+        $("groupTitle").innerText = group.title;
+        $("groupCount").innerText =
+            group.items.length + " worksheets · " + freeCount + " free to download";
+
+        var html = "";
+
+        group.items.forEach(function(worksheet, index){
+
+            if(!worksheet.free){
+
+                html += ''
+                    + '<div class="sheet-card locked">'
+                    +   '<div class="sheet-thumb">'
+                    +     '<span class="lock-ico">&#128274;</span>'
+                    +     '<span class="lock-word">Locked</span>'
+                    +   '</div>'
+                    +   '<div class="sheet-body">'
+                    +     '<p class="sheet-name">' + escapeHtml(worksheet.title) + '</p>'
+                    +     '<a href="' + SUBSCRIBE_URL + '" target="_blank" class="lock-btn">Subscribe Now</a>'
+                    +   '</div>'
+                    + '</div>';
+
+                return;
+            }
+
+            var action = failedIndexes.indexOf(index) !== -1
+                ? '<a href="' + worksheet.pdf + '" target="_blank" rel="noopener noreferrer" class="tab-btn">Open in new tab</a>'
+                : '<button type="button" class="dl-btn" data-download="' + index + '"' +
+                  (busyIndex === index ? ' disabled' : '') + '>' +
+                  (busyIndex === index ? 'Preparing...' : 'Download PDF') +
+                  '</button>';
+
+            html += ''
+                + '<div class="sheet-card">'
+                +   '<div class="sheet-thumb">'
+                +     '<span class="free-badge">FREE</span>'
+                +     '<img src="' + worksheet.pdf + '" alt="' + escapeHtml(worksheet.title) + '" loading="lazy">'
+                +   '</div>'
+                +   '<div class="sheet-body">'
+                +     '<p class="sheet-name">' + escapeHtml(worksheet.title) + '</p>'
+                +     action
+                +   '</div>'
+                + '</div>';
+        });
+
+        $("sheetGrid").innerHTML = html;
+
+        // warning note for anything that could not be turned into a PDF
+        if(failedIndexes.length){
+            $("warnNote").innerText =
+                failedIndexes.length + " worksheet(s) could not be turned into a PDF. " +
+                "Use “Open in new tab” to save those directly.";
+            $("warnNote").classList.remove("hidden");
+        }else{
+            $("warnNote").classList.add("hidden");
+        }
+    }
+
+    function setInfo(message){
+
+        if(message){
+            $("infoNote").innerText = message;
+            $("infoNote").classList.remove("hidden");
+        }else{
+            $("infoNote").classList.add("hidden");
+        }
+    }
+
+    /* ===== NAVIGATION ===== */
+
+    function openGroup(key){
+
+        activeKey     = key;
+        failedIndexes = [];
+        busyIndex     = null;
+
+        setInfo(null);
+        renderSheets();
+
+        $("themeView").classList.add("hidden");
+        $("sheetView").classList.remove("hidden");
+
+        window.scrollTo({ top:0, behavior:"smooth" });
+    }
+
+    function backToThemes(){
+
+        activeKey = null;
+
+        $("sheetView").classList.add("hidden");
+        $("themeView").classList.remove("hidden");
+
+        window.scrollTo({ top:0, behavior:"smooth" });
+    }
+
+    /* ===== DOWNLOAD ONE ===== */
+
+    function downloadOne(index){
+
+        var group     = groups[activeKey];
+        var worksheet = group.items[index];
+
+        if(!worksheet || !worksheet.free) return;
+
+        busyIndex = index;
+        setInfo(null);
+        renderSheets();
+
+        buildWorksheetPdf([worksheet]).then(function(result){
+
+            if(result.doc){
+
+                result.doc.save(slugify(worksheet.title) + ".pdf");
+
+                failedIndexes = failedIndexes.filter(function(item){
+                    return item !== index;
+                });
+
+            }else if(failedIndexes.indexOf(index) === -1){
+                failedIndexes.push(index);
+            }
+
+            busyIndex = null;
+            renderSheets();
+        });
+    }
+
+    /* ===== EVENTS ===== */
+
+    $("themeGrid").addEventListener("click", function(e){
+
+        var btn = e.target.closest("[data-group]");
+        if(btn) openGroup(btn.getAttribute("data-group"));
+    });
+
+    $("backBtn").addEventListener("click", backToThemes);
+
+    $("sheetGrid").addEventListener("click", function(e){
+
+        var btn = e.target.closest("[data-download]");
+        if(btn) downloadOne(Number(btn.getAttribute("data-download")));
+    });
+
+    /* ===== INIT ===== */
+
+    renderThemes();
+
+})();
+</script>
