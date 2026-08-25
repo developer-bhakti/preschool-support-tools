@@ -1,0 +1,376 @@
+<p><meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
+<!-- Google Font -->
+<p> </p>
+<!-- Font Awesome -->
+<p> </p>
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Baloo 2', sans-serif;
+}
+
+body{
+    background:#ffffff;
+}
+
+/* =========================
+SECTION
+========================= */
+
+.preschool-subscription{
+    width:100%;
+    padding:70px 18px;
+    background:linear-gradient(135deg,#6f6cf8,#6d63da);
+    position:relative;
+    overflow:hidden;
+}
+
+.preschool-subscription::before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:rgba(255,255,255,0.08);
+    border-radius:50%;
+    top:-100px;
+    left:-100px;
+}
+
+.preschool-subscription::after{
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+    background:rgba(255,255,255,0.05);
+    border-radius:50%;
+    bottom:-150px;
+    right:-100px;
+}
+
+/* =========================
+HEADING
+========================= */
+
+.subscription-heading{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.subscription-heading h2{
+    color:#fff;
+    font-size:42px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.subscription-heading p{
+    color:#f2f2f2;
+    font-size:20px;
+    font-weight:500;
+}
+
+/* =========================
+GRID
+========================= */
+
+.subscription-grid{
+    max-width:1280px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+/* =========================
+CARD
+========================= */
+
+.subscription-card{
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    transition:0.4s ease;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    position:relative;
+}
+
+.subscription-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,0.18);
+}
+
+/* TOP BORDER */
+
+.card1{ border-top:8px solid #ff8fa3; }
+.card2{ border-top:8px solid #5ac8fa; }
+.card3{ border-top:8px solid #ffc857; }
+.card4{ border-top:8px solid #ff7b7b; }
+.card5{ border-top:8px solid #b784ff; }
+.card6{ border-top:8px solid #4ade80; }
+.card7{ border-top:8px solid #22d3ee; }
+.card8{ border-top:8px solid #fb923c; }
+
+/* =========================
+IMAGE
+========================= */
+
+.card-image{
+    width:100%;
+    height:190px;
+    overflow:hidden;
+    position:relative;
+}
+
+.card-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.5s ease;
+}
+
+.subscription-card:hover .card-image img{
+    transform:scale(1.08);
+}
+
+/* ICON */
+
+.card-icon{
+    position:absolute;
+    bottom:-28px;
+    left:50%;
+    transform:translateX(-50%);
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-icon i{
+    font-size:30px;
+    color:#5d5be3;
+}
+
+/* =========================
+CONTENT
+========================= */
+
+.card-content{
+    padding:50px 22px 28px;
+    text-align:center;
+}
+
+.card-content h3{
+    font-size:24px;
+    line-height:1.4;
+    color:#1f2937;
+    margin-bottom:15px;
+    font-weight:800;
+    min-height:100px;
+}
+
+.card-content p{
+    font-size:16px;
+    line-height:1.7;
+    color:#667085;
+    margin-bottom:22px;
+    font-weight:500;
+}
+
+/* =========================
+BUTTON
+========================= */
+
+.tap-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    width:100%;
+    padding:14px 18px;
+    border-radius:14px;
+    text-decoration:none;
+    background:linear-gradient(90deg,#6270ff,#8b4bd8);
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
+    transition:0.3s ease;
+}
+
+.tap-btn:hover{
+    color:#fff;
+    transform:scale(1.02);
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    .subscription-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:768px){
+
+    .preschool-subscription{
+        padding:60px 15px;
+    }
+
+    .subscription-heading h2{
+        font-size:30px;
+    }
+
+    .subscription-heading p{
+        font-size:17px;
+    }
+
+    .subscription-grid{
+        grid-template-columns:1fr;
+        gap:22px;
+    }
+
+    .card-content h3{
+        min-height:auto;
+        font-size:22px;
+    }
+
+}
+
+</style>
+<section class="preschool-subscription"><!-- HEADING -->
+<div class="subscription-heading">
+<h2>Complete Preschool Subscription</h2>
+<p>Everything Your Preschool Needs In One Smart Platform ✨</p>
+</div>
+<!-- GRID -->
+<div class="subscription-grid">
+<!-- CARD 1 -->
+<div class="subscription-card card1">
+<div class="card-image">
+<img alt="Curriculum" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+<div class="card-icon">
+<i class="fa-solid fa-book-open"></i><br>
+</div>
+</div>
+<div class="card-content">
+<h3>Curriculum And Academic Resources</h3>
+<p>Complete preschool curriculum, lesson plans and learning resources.</p>
+<a class="tap-btn" href="/pages/curriculum-and-academic-resources"> Explore Now <i class="fa-solid fa-arrow-right"></i> </a>
+</div>
+</div>
+<!-- CARD 2 -->
+<div class="subscription-card card2">
+<div class="card-image">
+<img alt="Activities" src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+<div class="card-icon">
+<i class="fa-solid fa-puzzle-piece"></i><br>
+</div>
+</div>
+<div class="card-content">
+<h3>Classroom Activity And Worksheet Library</h3>
+<p>Fun worksheets, preschool games and engaging classroom activities.</p>
+<a class="tap-btn" href="/pages/classroom-activity-and-worksheet-library-1">
+    Explore Now <i class="fa-solid fa-arrow-right"></i>
+</a>
+</div>
+</div>
+<!-- CARD 3 -->
+<div class="subscription-card card3">
+<div class="card-image">
+<img alt="Tracking" src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+<div class="card-icon">
+<i class="fa-solid fa-chart-line"></i><br>
+</div>
+</div>
+<div class="card-content">
+<h3>Assessment And Progress Tracking Tools</h3>
+<p>Smart tracking tools to monitor child learning and progress easily.</p>
+<a class="tap-btn" href="/pages/Assessment-And-Progress-Tracking-Tools"> Explore Now <i class="fa-solid fa-arrow-right"></i> </a>
+</div>
+</div>
+<!-- CARD 4 -->
+<div class="subscription-card card4">
+<div class="card-image">
+<img alt="Teacher" src="https://images.unsplash.com/photo-1529390079861-591de354faf5?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+<div class="card-icon">
+<i class="fa-solid fa-users"></i><br>
+</div>
+</div>
+<div class="card-content">
+<h3>Teacher Support And Training</h3>
+<p>Teacher training programs, support tools and professional guidance.</p>
+<a class="tap-btn" href="/pages/teacher-support-and-training">
+    Explore Now <i class="fa-solid fa-arrow-right"></i>
+</a>
+</div>
+</div>
+<!-- CARD 5 -->
+<div class="subscription-card card5">
+<div class="card-image">
+<img alt="Management" src="https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+<div class="card-icon">
+<i class="fa-solid fa-school"></i><br>
+</div>
+</div>
+<div class="card-content">
+<h3>School Operation And Management Tools</h3>
+<p>Manage admissions, attendance and preschool operations smoothly.</p>
+<a class="tap-btn" href="/pages/school-operations-management-tools">
+    Explore Now <i class="fa-solid fa-arrow-right"></i>
+</a>
+</div>
+</div>
+<!-- CARD 6 -->
+<div class="subscription-card card6">
+<div class="card-image">
+<img alt="Marketing" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+<div class="card-icon">
+<i class="fa-solid fa-bullhorn"></i><br>
+</div>
+</div>
+<div class="card-content">
+<h3>Marketing And Parent Engagement Toolkit</h3>
+<p>Marketing templates and parent engagement tools for preschool growth.</p>
+<a class="tap-btn" href="/pages/Marketing-And-Parent-Engagement-Toolkit"> Explore Now <i class="fa-solid fa-arrow-right"></i> </a>
+</div>
+</div>
+<!-- CARD 7 -->
+<div class="subscription-card card7">
+<div class="card-image">
+<img alt="Online Tools" src="https://images.unsplash.com/photo-1587616211892-f743fcca64f9?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+<div class="card-icon">
+<i class="fa-solid fa-laptop-code"></i><br>
+</div>
+</div>
+<div class="card-content">
+<h3>Online Tools For Skill Development</h3>
+<p>Interactive online tools that build early skills through digital learning.</p>
+<a class="tap-btn" href="/pages/online-tools-for-skill-development"> Explore Now <i class="fa-solid fa-arrow-right"></i> </a>
+</div>
+</div>
+<!-- CARD 8 -->
+<div class="subscription-card card8">
+<div class="card-image">
+<img alt="Newsletter" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+<div class="card-icon">
+<i class="fa-solid fa-newspaper"></i><br>
+</div>
+</div>
+<div class="card-content">
+<h3>School Newsletter<br> App</h3>
+<p>Create and share school newsletters with parents in just a few taps.</p>
+<a class="tap-btn" href="https://worksheets.adiuvaretfoundation.com/"> Explore Now <i class="fa-solid fa-arrow-right"></i> </a>
+</div>
+</div>
+</div>
+</section>
