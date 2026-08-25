@@ -525,17 +525,6 @@
 
     var SUBSCRIBE_URL = "https://worksheets.adiuvaretfoundation.com";
 
-    /* =====================================================================
-       WORKSHEET DATA
-
-       Only the FREE trial worksheets carry an image URL. The locked ones
-       keep their title (so teachers see what they'd be getting) but their
-       file URLs are deliberately left out - anything in this file can be
-       read from the page source.
-
-       To free another worksheet: add  pdf:"<url>", free:true  to its entry.
-       ===================================================================== */
-
     var groups = {
 
         fruit: {
@@ -947,7 +936,7 @@
                 +     '✅ ' + freeCount + ' free of ' + group.items.length + ' worksheets'
                 +   '</span>'
                 +   '<div>'
-                +     '<button type="button" class="view-btn" data-group="' + key + '">View</button>'
+                +     '<button type="button" class="view-btn" data-group="' + key + '">Explore</button>'
                 +   '</div>'
                 + '</div>';
         });
