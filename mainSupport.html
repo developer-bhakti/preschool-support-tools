@@ -1,0 +1,306 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap');
+
+.pst-section {
+  --pst-ink: #232750;
+  --pst-muted: #5f6480;
+
+  position: relative;
+  padding: 70px 20px 84px;
+  overflow: hidden;
+
+  font-family: 'Nunito', 'Segoe UI', Tahoma, sans-serif;
+  color: var(--pst-ink);
+
+  /* Bright blue wash - soft colour pools over a light base */
+  background:
+    radial-gradient(1000px 520px at 10% -12%, #d8e6ff 0%, rgba(216,230,255,0) 62%),
+    radial-gradient(900px 480px at 90% -6%,  #cdf3fb 0%, rgba(205,243,251,0) 62%),
+    radial-gradient(820px 520px at 50% 112%, #dfe4ff 0%, rgba(223,228,255,0) 62%),
+    linear-gradient(180deg, #f9fbff 0%, #e7effe 100%);
+}
+
+.pst-section * { box-sizing: border-box; }
+
+/* Floating decorative bubbles */
+.pst-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: .5;
+  pointer-events: none;
+}
+.pst-blob.b1 { width: 130px; height: 130px; top: 8%;  left: 4%;  background: #8ec5ff; }
+.pst-blob.b2 { width: 90px;  height: 90px;  top: 68%; left: 2%;  background: #6fe3f2; }
+.pst-blob.b3 { width: 110px; height: 110px; top: 14%; right: 5%; background: #a5b4fc; }
+.pst-blob.b4 { width: 70px;  height: 70px;  top: 76%; right: 8%; background: #7dd3fc; }
+
+.pst-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* ---------- Heading ---------- */
+.pst-head { text-align: center; margin-bottom: 54px; }
+
+.pst-eyebrow {
+  display: inline-block;
+  padding: 8px 20px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(35,39,80,.10);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #2563eb;
+}
+
+.pst-title {
+  margin: 0 0 14px;
+  font-family: 'Baloo 2', 'Segoe UI', sans-serif;
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 800;
+  line-height: 1.12;
+  background: linear-gradient(100deg, #4338ca 0%, #2563eb 45%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pst-sub {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.65;
+  color: var(--pst-muted);
+}
+
+/* ---------- Card grid ---------- */
+.pst-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 32px;
+}
+
+.pst-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  padding: 44px 30px 36px;
+  border-radius: 28px;
+  border: 1px solid rgba(35,39,80,.06);
+  background: #ffffff;
+  overflow: hidden;
+
+  box-shadow: 0 12px 32px rgba(35,39,80,.09);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1),
+              box-shadow .35s ease;
+}
+
+/* Colour band across the top of every card */
+.pst-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 7px;
+  background: linear-gradient(90deg, var(--c), var(--c2));
+}
+
+/* Soft tinted glow that grows on hover */
+.pst-card::after {
+  content: "";
+  position: absolute;
+  top: -70px; right: -70px;
+  width: 190px; height: 190px;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: .07;
+  transition: transform .45s ease, opacity .45s ease;
+}
+
+.pst-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 26px 52px var(--glow);
+}
+
+.pst-card:hover::after { transform: scale(1.5); opacity: .13; }
+
+/* ---------- Icon bubble ---------- */
+.pst-icon {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 46px;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--c), var(--c2));
+  box-shadow: 0 14px 28px var(--glow);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.pst-card:hover .pst-icon { transform: scale(1.09) rotate(-6deg); }
+
+/* ---------- Card text ---------- */
+.pst-card h3 {
+  margin: 0 0 12px;
+  font-family: 'Baloo 2', 'Segoe UI', sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--pst-ink);
+}
+
+.pst-card p {
+  margin: 0 0 26px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--pst-muted);
+  flex-grow: 1;
+}
+
+/* ---------- Button ---------- */
+.pst-btn {
+  display: inline-block;
+  padding: 14px 34px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--c), var(--c2));
+  box-shadow: 0 10px 24px var(--glow);
+
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  cursor: pointer;
+
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+.pst-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  filter: brightness(1.07);
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+  .pst-section { padding: 52px 16px 62px; }
+  .pst-grid    { grid-template-columns: 1fr; gap: 24px; }
+  .pst-head    { margin-bottom: 38px; }
+  .pst-card    { padding: 38px 24px 32px; }
+  .pst-icon    { width: 84px; height: 84px; font-size: 40px; }
+  .pst-blob    { display: none; }
+}
+</style>
+
+<section class="pst-section">
+
+  <span class="pst-blob b1"></span>
+  <span class="pst-blob b2"></span>
+  <span class="pst-blob b3"></span>
+  <span class="pst-blob b4"></span>
+
+  <div class="pst-inner">
+
+    <div class="pst-head">
+      <span class="pst-eyebrow">Subscription</span>
+      <h2 class="pst-title">Complete Preschool Subscription</h2>
+      <p class="pst-sub">Everything Your Preschool Needs In One Smart Platform ✨</p>
+    </div>
+
+    <!-- Each card sets its own colours with --c, --c2 and --glow.
+         Swap the href on a card to point it at the right page. -->
+    <div class="pst-grid">
+
+      <!-- CARD 1 -->
+      <article class="pst-card" style="--c:#4338ca; --c2:#7c73ff; --glow:rgba(67,56,202,.34)">
+        <div class="pst-icon">📚</div>
+        <h3>Curriculum And Academic Resources</h3>
+        <p>Complete preschool curriculum, lesson plans and learning resources.</p>
+        <a class="pst-btn" href="/pages/curriculum-and-academic-resources">Explore Now</a>
+      </article>
+
+      <!-- CARD 2 -->
+      <article class="pst-card" style="--c:#1d4ed8; --c2:#5b8cff; --glow:rgba(29,78,216,.34)">
+        <div class="pst-icon">🧩</div>
+        <h3>Classroom Activity And Worksheet Library</h3>
+        <p>Fun worksheets, preschool games and engaging classroom activities.</p>
+        <a class="pst-btn" href="/pages/classroom-activity-and-worksheet-library-1">Explore Now</a>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="pst-card" style="--c:#0284c7; --c2:#4cb8f5; --glow:rgba(2,132,199,.34)">
+        <div class="pst-icon">📊</div>
+        <h3>Assessment And Progress Tracking Tools</h3>
+        <p>Smart tracking tools to monitor child learning and progress easily.</p>
+        <a class="pst-btn" href="/pages/Assessment-And-Progress-Tracking-Tools">Explore Now</a>
+      </article>
+
+      <!-- CARD 4 -->
+      <article class="pst-card" style="--c:#0ea5e9; --c2:#7dd3fc; --glow:rgba(14,165,233,.34)">
+        <div class="pst-icon">🎓</div>
+        <h3>Teacher Support And Training</h3>
+        <p>Teacher training programs, support tools and professional guidance.</p>
+        <a class="pst-btn" href="/pages/teacher-support-and-training">Explore Now</a>
+      </article>
+
+      <!-- CARD 5 -->
+      <article class="pst-card" style="--c:#0891b2; --c2:#4dd8e8; --glow:rgba(8,145,178,.34)">
+        <div class="pst-icon">🏫</div>
+        <h3>School Operation And Management Tools</h3>
+        <p>Manage admissions, attendance and preschool operations smoothly.</p>
+        <a class="pst-btn" href="/pages/school-operations-management-tools">Explore Now</a>
+      </article>
+
+      <!-- CARD 6 -->
+      <article class="pst-card" style="--c:#0d9488; --c2:#52d6c0; --glow:rgba(13,148,136,.34)">
+        <div class="pst-icon">📣</div>
+        <h3>Marketing And Parent Engagement Toolkit</h3>
+        <p>Marketing templates and parent engagement tools for preschool growth.</p>
+        <a class="pst-btn" href="/pages/Marketing-And-Parent-Engagement-Toolkit">Explore Now</a>
+      </article>
+
+      <!-- CARD 7 -->
+      <article class="pst-card" style="--c:#6366f1; --c2:#a5b4fc; --glow:rgba(99,102,241,.34)">
+        <div class="pst-icon">💻</div>
+        <h3>Online Tools For Skill Development</h3>
+        <p>Interactive online tools that build early skills through digital learning.</p>
+        <a class="pst-btn" href="/pages/online-tools-for-skill-development">Explore Now</a>
+      </article>
+
+      <!-- CARD 8 -->
+      <article class="pst-card" style="--c:#7c3aed; --c2:#c084fc; --glow:rgba(124,58,237,.34)">
+        <div class="pst-icon">📰</div>
+        <h3>School Newsletter App</h3>
+        <p>Create and share school newsletters with parents in just a few taps.</p>
+        <a class="pst-btn" href="https://worksheets.adiuvaretfoundation.com/">Explore Now</a>
+      </article>
+
+      <!-- CARD 9 -->
+      <article class="pst-card" style="--c:#9333ea; --c2:#d8b4fe; --glow:rgba(147,51,234,.34)">
+        <div class="pst-icon">📅</div>
+        <h3>Session Plan For Your Curriculum</h3>
+        <p>Ready-made session plans that organise daily classroom teaching with ease.</p>
+        <a class="pst-btn" href="/pages/session-plan-for-your-curriculum">Explore Now</a>
+      </article>
+
+    </div>
+  </div>
+</section>

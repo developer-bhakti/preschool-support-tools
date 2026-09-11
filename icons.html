@@ -1,0 +1,729 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    background:#ffffff;
+}
+
+.curriculum-box{
+    max-width:940px;
+    margin:auto;
+    padding:56px 20px;
+    font-family:'Nunito', 'Baloo 2', sans-serif;
+}
+
+/* ---------- HEADER ---------- */
+.section-eyebrow{
+    display:block;
+    width:fit-content;
+    margin:0 auto 16px;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+    color:#6f6cf8;
+    background:#eeedff;
+    border:1px solid #e0dfff;
+    padding:7px 16px;
+    border-radius:999px;
+}
+
+.curriculum-box h2{
+    font-family:'Baloo 2', sans-serif;
+    font-size:42px;
+    line-height:1.25;
+    margin:0 0 16px;
+    text-align:center;
+    font-weight:800;
+    color:#5d5be3;
+    background:linear-gradient(100deg,#5d5be3 0%,#8b5cf6 45%,#17b3a3 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.section-divider{
+    width:96px;
+    height:6px;
+    margin:0 auto 40px;
+    border-radius:999px;
+    background:linear-gradient(90deg,#6f6cf8,#f2803c,#17b3a3);
+}
+
+/* ---------- LIST ---------- */
+.curriculum-list{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.curriculum-item{
+    --accent:#6f6cf8;
+    --accent-2:#a78bfa;
+    --accent-soft:#eeedff;
+    --accent-line:#e0dfff;
+    --accent-glow:rgba(111,108,248,.22);
+    --media-1:#f4f3ff;
+    --media-2:#ded9ff;
+
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:stretch;
+    gap:0;
+    min-height:290px;
+
+    background:#ffffff;
+    border:1px solid var(--accent-line);
+    border-radius:26px;
+    box-shadow:0 10px 30px rgba(17,24,39,0.06);
+    transition:transform .35s ease, box-shadow .35s ease;
+}
+
+/* soft decorative glow behind the text */
+.curriculum-item::after{
+    content:"";
+    position:absolute;
+    right:-90px;
+    top:-110px;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:radial-gradient(circle,var(--accent) 0%,rgba(255,255,255,0) 68%);
+    opacity:.16;
+}
+
+.curriculum-item:hover{
+    transform:translateY(-7px);
+    box-shadow:0 22px 46px var(--accent-glow);
+}
+
+/* ---------- LEFT: ARTWORK ---------- */
+.item-media{
+    position:relative;
+    z-index:2;
+    flex:0 0 40%;
+    max-width:340px;
+    min-width:168px;
+    background:
+        radial-gradient(circle at 20% 14%, rgba(255,255,255,.92), rgba(255,255,255,0) 50%),
+        linear-gradient(155deg, var(--media-1) 0%, var(--media-2) 100%);
+}
+
+.item-illus{
+    position:absolute;
+    inset:0;
+}
+
+.item-illus svg{
+    width:100%;
+    height:100%;
+    display:block;
+    transition:transform .45s ease;
+}
+
+.curriculum-item:hover .item-illus svg{
+    transform:scale(1.05);
+}
+
+/* icon badge sitting on the seam */
+.item-icon{
+    position:absolute;
+    z-index:3;
+    right:-26px;
+    bottom:28px;
+    width:54px;
+    height:54px;
+    border-radius:17px;
+    background:#ffffff;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 20px var(--accent-glow), inset 0 0 0 1.5px var(--accent-line);
+    transition:transform .35s ease;
+}
+
+.item-icon svg{
+    width:31px;
+    height:31px;
+    display:block;
+}
+
+.curriculum-item:hover .item-icon{
+    transform:rotate(-7deg) scale(1.08);
+}
+
+/* ---------- RIGHT: TEXT ---------- */
+.item-body{
+    position:relative;
+    z-index:1;
+    flex:1 1 auto;
+    min-width:0;
+    align-self:center;
+    padding:32px 34px 32px 44px;
+}
+
+.curriculum-item h3{
+    display:flex;
+    align-items:center;
+    font-family:'Baloo 2', sans-serif;
+    font-size:25px;
+    color:#111827;
+    margin:0 0 12px;
+    font-weight:800;
+    letter-spacing:.2px;
+}
+
+.item-num{
+    flex:0 0 auto;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:36px;
+    height:36px;
+    margin-right:12px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#ffffff;
+    font-size:17px;
+    font-weight:800;
+    box-shadow:0 6px 14px var(--accent-glow);
+}
+
+.curriculum-item p{
+    font-size:17px;
+    color:#5b6478;
+    line-height:1.7;
+    margin:0 0 18px;
+    max-width:46ch;
+}
+
+.item-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:0 0 22px;
+}
+
+.item-tags span{
+    font-size:13px;
+    font-weight:700;
+    color:var(--accent);
+    background:var(--accent-soft);
+    border:1px solid var(--accent-line);
+    padding:6px 13px;
+    border-radius:999px;
+}
+
+/* ---------- BUTTON ---------- */
+.view-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#fff;
+    text-decoration:none;
+    padding:13px 26px;
+    border-radius:999px;
+    font-size:15px;
+    font-weight:800;
+    box-shadow:0 8px 18px var(--accent-glow);
+    transition:transform .3s ease, box-shadow .3s ease;
+}
+
+.view-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 26px var(--accent-glow);
+    color:#fff;
+}
+
+.view-btn svg{
+    width:16px;
+    height:16px;
+    transition:transform .3s ease;
+}
+
+.view-btn:hover svg{
+    transform:translateX(4px);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:768px){
+
+    .curriculum-box{
+        padding:40px 16px;
+    }
+
+    .curriculum-box h2{
+        font-size:30px;
+    }
+
+    .section-divider{
+        margin-bottom:28px;
+    }
+
+    .curriculum-list{
+        gap:22px;
+    }
+
+    .curriculum-item{
+        border-radius:20px;
+        min-height:250px;
+    }
+
+    .item-media{
+        flex:0 0 38%;
+        min-width:150px;
+    }
+
+    .item-body{
+        padding:24px 20px 24px 30px;
+    }
+
+    .curriculum-item h3{
+        font-size:21px;
+    }
+
+    .item-num{
+        width:31px;
+        height:31px;
+        font-size:15px;
+        margin-right:10px;
+    }
+
+    .curriculum-item p{
+        font-size:16px;
+    }
+
+    .item-icon{
+        width:46px;
+        height:46px;
+        border-radius:14px;
+        right:-23px;
+        bottom:22px;
+    }
+
+    .item-icon svg{
+        width:26px;
+        height:26px;
+    }
+
+    .item-tags span{
+        font-size:12px;
+        padding:5px 11px;
+    }
+
+}
+
+@media(max-width:560px){
+
+    .curriculum-item{
+        flex-direction:column;
+        min-height:0;
+    }
+
+    .item-media{
+        flex:0 0 auto;
+        width:100%;
+        max-width:none;
+        height:250px;
+    }
+
+    .item-body{
+        padding:32px 22px 26px;
+    }
+
+    .item-icon{
+        left:auto;
+        right:22px;
+        bottom:-24px;
+    }
+
+}
+</style>
+
+<div class="curriculum-box">
+
+    <span class="section-eyebrow">Teaching Resources</span>
+
+    <h2>Curriculum &amp; Academic Resources</h2>
+
+    <div class="section-divider"></div>
+
+    <div class="curriculum-list">
+
+        <!-- ITEM 1 -->
+        <div class="curriculum-item"
+             style="--accent:#6f6cf8; --accent-2:#a78bfa; --accent-soft:#eeedff; --accent-line:#e0dfff; --accent-glow:rgba(111,108,248,.22); --media-1:#f4f3ff; --media-2:#ded9ff;">
+
+            <div class="item-media">
+                <div class="item-illus">
+                    <!-- Session plan: a planner calendar above a daily checklist -->
+                    <svg viewBox="0 0 400 430" preserveAspectRatio="xMidYMid meet" role="img"
+                         aria-label="A planner calendar above a checklist of daily classroom activities">
+
+                        <path d="M30 32Q32.5 41.5 42 44Q32.5 46.5 30 56Q27.5 46.5 18 44Q27.5 41.5 30 32Z"
+                              fill="#a78bfa" opacity=".55"/>
+                        <path d="M368 380Q370.5 389.5 380 392Q370.5 394.5 368 404Q365.5 394.5 356 392Q365.5 389.5 368 380Z"
+                              fill="#6f6cf8" opacity=".4"/>
+                        <circle cx="372" cy="40" r="6" fill="#a78bfa" opacity=".45"/>
+                        <circle cx="32" cy="390" r="7" fill="#6f6cf8" opacity=".3"/>
+
+                        <rect x="132" y="28" width="12" height="28" rx="6" fill="#6f6cf8"/>
+                        <rect x="256" y="28" width="12" height="28" rx="6" fill="#6f6cf8"/>
+                        <rect x="98" y="42" width="204" height="146" rx="22" fill="#ffffff"/>
+                        <path d="M98 64a22 22 0 0 1 22-22h160a22 22 0 0 1 22 22v18H98z" fill="#6f6cf8"/>
+
+                        <circle cx="134" cy="114" r="10" fill="#6f6cf8" opacity=".22"/>
+                        <circle cx="178" cy="114" r="10" fill="#6f6cf8" opacity=".22"/>
+                        <circle cx="222" cy="114" r="10" fill="#6f6cf8"/>
+                        <circle cx="266" cy="114" r="10" fill="#6f6cf8" opacity=".22"/>
+                        <circle cx="134" cy="154" r="10" fill="#6f6cf8" opacity=".22"/>
+                        <circle cx="178" cy="154" r="10" fill="#6f6cf8" opacity=".22"/>
+                        <circle cx="222" cy="154" r="10" fill="#6f6cf8" opacity=".22"/>
+                        <circle cx="266" cy="154" r="10" fill="#6f6cf8" opacity=".22"/>
+
+                        <rect x="58" y="228" width="284" height="158" rx="30" fill="#ffffff" opacity=".92"/>
+
+                        <rect x="88" y="256" width="26" height="26" rx="8" fill="#6f6cf8"/>
+                        <path d="M94 269l5 5 9-10" stroke="#fff" stroke-width="3.2" fill="none"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="128" y="262" width="150" height="14" rx="7" fill="#6f6cf8" opacity=".2"/>
+
+                        <rect x="88" y="300" width="26" height="26" rx="8" fill="#6f6cf8"/>
+                        <path d="M94 313l5 5 9-10" stroke="#fff" stroke-width="3.2" fill="none"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="128" y="306" width="118" height="14" rx="7" fill="#6f6cf8" opacity=".2"/>
+
+                        <rect x="88" y="344" width="26" height="26" rx="8" fill="none"
+                              stroke="#a78bfa" stroke-width="3"/>
+                        <rect x="128" y="350" width="136" height="14" rx="7" fill="#6f6cf8" opacity=".2"/>
+                    </svg>
+                </div>
+
+                <div class="item-icon">
+                    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                        <rect x="6" y="10" width="36" height="32" rx="6" fill="#fff"
+                              stroke="currentColor" stroke-width="3"/>
+                        <path d="M6 21h36" stroke="currentColor" stroke-width="3"/>
+                        <path d="M16 5v9M32 5v9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="16" cy="29" r="2.6" fill="currentColor"/>
+                        <circle cx="24" cy="29" r="2.6" fill="currentColor"/>
+                        <circle cx="32" cy="29" r="2.6" fill="currentColor"/>
+                        <circle cx="16" cy="36" r="2.6" fill="currentColor"/>
+                        <circle cx="24" cy="36" r="2.6" fill="currentColor"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="item-body">
+                <h3><span class="item-num">1</span>Session Plan For Your Curriculum</h3>
+
+                <p>
+                    Structured session plans that help teachers run daily classroom
+                    activities smoothly.
+                </p>
+
+                <div class="item-tags">
+                    <span>Daily Planning</span>
+                    <span>Classroom Flow</span>
+                    <span>Teacher Ready</span>
+                </div>
+
+                <a class="view-btn" href="/pages/session-plan-for-your-curriculum">
+                    View Resources
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="curriculum-item"
+             style="--accent:#f2803c; --accent-2:#fbbf5c; --accent-soft:#fff3e9; --accent-line:#ffe2cd; --accent-glow:rgba(242,128,60,.22); --media-1:#fff7f0; --media-2:#ffdfc6;">
+
+            <div class="item-media">
+                <div class="item-illus">
+                    <!-- ACT curriculum: a curriculum book above activity shapes -->
+                    <svg viewBox="0 0 400 430" preserveAspectRatio="xMidYMid meet" role="img"
+                         aria-label="A curriculum book above circle, triangle and square activity shapes">
+
+                        <path d="M30 32Q32.5 41.5 42 44Q32.5 46.5 30 56Q27.5 46.5 18 44Q27.5 41.5 30 32Z"
+                              fill="#fbbf5c" opacity=".7"/>
+                        <path d="M368 380Q370.5 389.5 380 392Q370.5 394.5 368 404Q365.5 394.5 356 392Q365.5 389.5 368 380Z"
+                              fill="#f2803c" opacity=".4"/>
+                        <circle cx="372" cy="40" r="6" fill="#fbbf5c" opacity=".6"/>
+                        <circle cx="32" cy="390" r="7" fill="#f2803c" opacity=".3"/>
+
+                        <rect x="104" y="62" width="200" height="150" rx="20" fill="#fbbf5c"
+                              opacity=".45" transform="rotate(7 204 137)"/>
+                        <rect x="96" y="54" width="200" height="150" rx="20" fill="#ffffff"
+                              opacity=".8" transform="rotate(3 196 129)"/>
+
+                        <rect x="86" y="44" width="212" height="156" rx="22" fill="#ffffff"
+                              stroke="#f2803c" stroke-width="4"/>
+                        <path d="M86 66a22 22 0 0 1 22-22h20v156h-20a22 22 0 0 1-22-22z" fill="#f2803c"/>
+                        <rect x="146" y="80" width="126" height="13" rx="6.5" fill="#f2803c" opacity=".3"/>
+                        <rect x="146" y="106" width="100" height="13" rx="6.5" fill="#f2803c" opacity=".3"/>
+                        <rect x="146" y="132" width="118" height="13" rx="6.5" fill="#f2803c" opacity=".3"/>
+
+                        <circle cx="112" cy="300" r="34" fill="#ffffff" stroke="#f2803c" stroke-width="4"/>
+                        <path d="M200 264l34 62h-68z" fill="#ffffff" stroke="#fbbf5c" stroke-width="4"
+                              stroke-linejoin="round"/>
+                        <rect x="256" y="266" width="66" height="66" rx="14" fill="#ffffff"
+                              stroke="#f2803c" stroke-width="4"/>
+                    </svg>
+                </div>
+
+                <div class="item-icon">
+                    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                        <rect x="9" y="6" width="30" height="36" rx="5" fill="#fff"
+                              stroke="currentColor" stroke-width="3"/>
+                        <path d="M9 11a5 5 0 0 1 5-5h4v36h-4a5 5 0 0 1-5-5z" fill="currentColor"/>
+                        <path d="M25 16h9M25 24h9M25 32h6" stroke="currentColor" stroke-width="3"
+                              stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="item-body">
+                <h3><span class="item-num">2</span>ACT Curriculum</h3>
+
+                <p>
+                    An activity-based preschool curriculum built around skill development
+                    and holistic growth.
+                </p>
+
+                <div class="item-tags">
+                    <span>Activity-Based</span>
+                    <span>Skill Development</span>
+                    <span>Holistic Growth</span>
+                </div>
+
+                <a class="view-btn" href="/pages/act-curriculum-1">
+                    View Resources
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="curriculum-item"
+             style="--accent:#17b3a3; --accent-2:#5fd6c0; --accent-soft:#e4f8f5; --accent-line:#c9efe9; --accent-glow:rgba(23,179,163,.22); --media-1:#f0fdfa; --media-2:#c8f0e8;">
+
+            <div class="item-media">
+                <div class="item-illus">
+                    <!-- Resources: a fan of worksheets with a download badge -->
+                    <svg viewBox="0 0 400 430" preserveAspectRatio="xMidYMid meet" role="img"
+                         aria-label="A fanned stack of worksheets with a download badge">
+
+                        <path d="M30 32Q32.5 41.5 42 44Q32.5 46.5 30 56Q27.5 46.5 18 44Q27.5 41.5 30 32Z"
+                              fill="#5fd6c0" opacity=".7"/>
+                        <path d="M368 380Q370.5 389.5 380 392Q370.5 394.5 368 404Q365.5 394.5 356 392Q365.5 389.5 368 380Z"
+                              fill="#17b3a3" opacity=".4"/>
+                        <circle cx="372" cy="40" r="6" fill="#5fd6c0" opacity=".65"/>
+                        <circle cx="32" cy="390" r="7" fill="#17b3a3" opacity=".3"/>
+
+                        <g transform="rotate(-11 200 200)">
+                            <rect x="112" y="72" width="176" height="220" rx="20" fill="#ffffff"
+                                  opacity=".7" stroke="#5fd6c0" stroke-width="3"/>
+                        </g>
+                        <g transform="rotate(-3 200 200)">
+                            <rect x="118" y="66" width="176" height="220" rx="20" fill="#ffffff"
+                                  opacity=".85" stroke="#5fd6c0" stroke-width="3"/>
+                        </g>
+                        <g transform="rotate(7 200 200)">
+                            <rect x="124" y="60" width="176" height="220" rx="20" fill="#ffffff"
+                                  stroke="#17b3a3" stroke-width="3.5"/>
+                            <rect x="148" y="94" width="128" height="13" rx="6.5" fill="#17b3a3" opacity=".3"/>
+                            <rect x="148" y="122" width="100" height="13" rx="6.5" fill="#17b3a3" opacity=".3"/>
+                            <rect x="148" y="150" width="118" height="13" rx="6.5" fill="#17b3a3" opacity=".3"/>
+                            <rect x="148" y="178" width="86" height="13" rx="6.5" fill="#17b3a3" opacity=".3"/>
+                            <circle cx="212" cy="232" r="27" fill="#17b3a3"/>
+                            <path d="M212 220v20M203 232l9 9 9-9" stroke="#fff" stroke-width="3.4"
+                                  fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="item-icon">
+                    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                        <path d="M16 6h18a4 4 0 0 1 4 4v25" stroke="currentColor" stroke-width="3"
+                              fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="8" y="12" width="24" height="30" rx="5" fill="#fff"
+                              stroke="currentColor" stroke-width="3"/>
+                        <path d="M14 22h12M14 29h12M14 36h8" stroke="currentColor" stroke-width="3"
+                              stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="item-body">
+                <h3><span class="item-num">3</span>ACT Curriculum Resources</h3>
+
+                <p>
+                    Worksheets, activity plans and teaching aids aligned to the ACT
+                    Curriculum framework.
+                </p>
+
+                <div class="item-tags">
+                    <span>Worksheets</span>
+                    <span>Activity Plans</span>
+                    <span>Teaching Aids</span>
+                </div>
+
+                <a class="view-btn" href="/pages/act-curriculum">
+                    View Resources
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="curriculum-item"
+             style="--accent:#e2589b; --accent-2:#f59ec5; --accent-soft:#fdeef5; --accent-line:#fbd9e8; --accent-glow:rgba(226,88,155,.22); --media-1:#fff2f8; --media-2:#fbd7e8;">
+
+            <div class="item-media">
+                <div class="item-illus">
+                    <!-- LEMcore: a core hub linked to four learning areas -->
+                    <svg viewBox="0 0 400 430" preserveAspectRatio="xMidYMid meet" role="img"
+                         aria-label="A central learning core linked to four surrounding skill areas">
+
+                        <path d="M30 32Q32.5 41.5 42 44Q32.5 46.5 30 56Q27.5 46.5 18 44Q27.5 41.5 30 32Z"
+                              fill="#f59ec5" opacity=".7"/>
+                        <path d="M368 380Q370.5 389.5 380 392Q370.5 394.5 368 404Q365.5 394.5 356 392Q365.5 389.5 368 380Z"
+                              fill="#e2589b" opacity=".4"/>
+                        <circle cx="372" cy="40" r="6" fill="#f59ec5" opacity=".65"/>
+                        <circle cx="32" cy="390" r="7" fill="#e2589b" opacity=".3"/>
+
+                        <path d="M200 200V96M200 200h104M200 200v104M200 200H96" stroke="#e2589b"
+                              stroke-width="3" stroke-dasharray="8 8" opacity=".45"/>
+
+                        <circle cx="200" cy="88" r="34" fill="#ffffff" stroke="#f59ec5" stroke-width="4"/>
+                        <circle cx="312" cy="200" r="34" fill="#ffffff" stroke="#f59ec5" stroke-width="4"/>
+                        <circle cx="200" cy="312" r="34" fill="#ffffff" stroke="#f59ec5" stroke-width="4"/>
+                        <circle cx="88" cy="200" r="34" fill="#ffffff" stroke="#f59ec5" stroke-width="4"/>
+
+                        <circle cx="200" cy="88" r="11" fill="#e2589b"/>
+                        <path d="M312 188l12 22h-24z" fill="#e2589b"/>
+                        <rect x="190" y="302" width="20" height="20" rx="5" fill="#e2589b"/>
+                        <path d="M88 188Q90.5 197.5 100 200Q90.5 202.5 88 212Q85.5 202.5 76 200Q85.5 197.5 88 188Z"
+                              fill="#e2589b"/>
+
+                        <circle cx="200" cy="200" r="60" fill="#e2589b"/>
+                        <path d="M200 168Q205 195 232 200Q205 205 200 232Q195 205 168 200Q195 195 200 168Z"
+                              fill="#ffffff"/>
+                    </svg>
+                </div>
+
+                <div class="item-icon">
+                    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                        <circle cx="24" cy="24" r="16" fill="#fff" stroke="currentColor" stroke-width="3"/>
+                        <path d="M24 13q3 8 11 11q-8 3-11 11q-3-8-11-11q8-3 11-11z" fill="currentColor"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="item-body">
+                <h3><span class="item-num">4</span>LEMcore Curriculum</h3>
+
+                <p>
+                    Curriculum resources that strengthen foundational learning, creativity
+                    and communication.
+                </p>
+
+                <div class="item-tags">
+                    <span>Foundational Learning</span>
+                    <span>Creativity</span>
+                    <span>Communication</span>
+                </div>
+
+                <a class="view-btn" href="/pages/lemcore-curriculum">
+                    View Resources
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- ITEM 5 -->
+        <div class="curriculum-item"
+             style="--accent:#3d86e0; --accent-2:#7cb6f0; --accent-soft:#eaf3fd; --accent-line:#cfe4fa; --accent-glow:rgba(61,134,224,.22); --media-1:#f1f7fe; --media-2:#cfe3fa;">
+
+            <div class="item-media">
+                <div class="item-illus">
+                    <!-- Counselling: a parent and child with a heart -->
+                    <svg viewBox="0 0 400 430" preserveAspectRatio="xMidYMid meet" role="img"
+                         aria-label="A parent and child side by side beneath a heart">
+
+                        <path d="M30 32Q32.5 41.5 42 44Q32.5 46.5 30 56Q27.5 46.5 18 44Q27.5 41.5 30 32Z"
+                              fill="#7cb6f0" opacity=".7"/>
+                        <path d="M368 380Q370.5 389.5 380 392Q370.5 394.5 368 404Q365.5 394.5 356 392Q365.5 389.5 368 380Z"
+                              fill="#3d86e0" opacity=".4"/>
+                        <circle cx="372" cy="40" r="6" fill="#7cb6f0" opacity=".65"/>
+                        <circle cx="32" cy="390" r="7" fill="#3d86e0" opacity=".3"/>
+
+                        <rect x="62" y="104" width="276" height="228" rx="34" fill="#ffffff" opacity=".92"/>
+
+                        <path d="M200 190C162 158 178 130 200 149C222 130 238 158 200 190Z" fill="#3d86e0"/>
+
+                        <circle cx="150" cy="232" r="38" fill="#3d86e0"/>
+                        <path d="M100 316q0-52 50-52q50 0 50 52z" fill="#3d86e0"/>
+
+                        <circle cx="262" cy="252" r="28" fill="#7cb6f0"/>
+                        <path d="M231 316q0-36 31-36q31 0 31 36z" fill="#7cb6f0"/>
+                    </svg>
+                </div>
+
+                <div class="item-icon">
+                    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                        <path d="M24 40C10 30 6 23 6 17a9 9 0 0 1 18-3 9 9 0 0 1 18 3c0 6-4 13-18 23z"
+                              fill="#fff" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="item-body">
+                <h3><span class="item-num">5</span>Parent Counselling Tool</h3>
+
+                <p>
+                    Guidance tools that help parents understand and nurture early
+                    childhood development.
+                </p>
+
+                <div class="item-tags">
+                    <span>Parent Guidance</span>
+                    <span>Early Development</span>
+                    <span>Counselling</span>
+                </div>
+
+                <a class="view-btn" href="/pages/parent-counselling-tool-for-early-child-development">
+                    View Resources
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
